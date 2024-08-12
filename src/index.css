@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -12,10 +12,10 @@
 :root {
   --color-bg: #0e0e11;
   --color-bg-variant: #020e80;
-  --color-primary:#ffffff;
+  --color-primary: #ffffff;
   --color-primary-variant: rgba(17, 0, 252, 0.932);
   --color-white: #fff;
-  --color-light: rgba(255,255,255,0.6);
+  --color-light: rgba(255, 255, 255, 0.6);
   --container-width-lg: 75%;
   --container-width-md: 86%;
   --container-width-sm: 90%;
@@ -31,8 +31,8 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background:  var(--color-bg);
+  font-family: "Poppins", sans-serif;
+  background: var(--color-bg);
   color: var(--color-white);
   line-height: 1.7;
   background-image: url(../src/assets/bg-texture.png);
@@ -40,15 +40,19 @@ body {
 
 /* ====== General Style=======*/
 .container {
-  width:var(--container-width-lg);
+  width: var(--container-width-lg);
   margin: 0 auto;
 }
 
-h1,h2,h3,h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: 500;
 }
 
-h1{
+h1 {
   font-size: 2.5rem;
 }
 
@@ -56,7 +60,8 @@ section {
   margin-top: 8rem;
 }
 
-section >h2, section > h5 {
+section > h2,
+section > h5 {
   text-align: center;
   color: var(--color-light);
 }
@@ -81,7 +86,7 @@ a:hover {
 
 .btn {
   width: max-content;
-  display:inline-block;
+  display: inline-block;
   color: var(--color-primary);
   padding: 0.75rem 1.2rem;
   border-radius: 0.4rem;
@@ -91,7 +96,7 @@ a:hover {
 }
 
 .btn:hover {
-  background:var(--color-white);
+  background: var(--color-white);
   color: var(--color-bg);
   border-color: var(--color-bg);
 }
@@ -108,7 +113,7 @@ img {
 }
 
 /*===== Media Query(Tablet)===*/
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
   .container {
     width: var(--container-width-md);
   }
@@ -119,7 +124,7 @@ img {
 }
 
 /*===== Media Query(Mobile)===*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .container {
     width: var(--container-width-sm);
   }
