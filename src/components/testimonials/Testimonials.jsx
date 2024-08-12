@@ -20,6 +20,12 @@ const peers = [
     review:
       "I had the chance to work with Andrew on different projects. His technical skills were always impressive. He constantly showed professional behavior and high level of problem-solving skills. Based on that, I would gladly recommend him as a software developer with his technical and soft skills.",
   },
+  {
+    avatar: AVTR2,
+    name: "Mahdy Ferdaos",
+    review:
+      "Working alongside Andrew has been one of the...",
+  },
 ];
 
 const Testimonials = () => {
