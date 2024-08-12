@@ -18,7 +18,9 @@ const Footer = () => {
       <div className="footer_socials">
         <a href="https://www.linkedin.com/in/andrewsaifnoorian/"><FaLinkedin /></a>
         <a href="https://github.com/andrewsafe"><FaGithub /></a>  
-        <a href="/Resume.pdf"><FaFileAlt /></a>
+        <a href="https://andrewsafe.github.io/andrews-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <FaFileAlt className='contact_option-icon'/>
+            </a>
       </div>
       <div className="footer_copyright">
         <small>That's all folks!</small>
