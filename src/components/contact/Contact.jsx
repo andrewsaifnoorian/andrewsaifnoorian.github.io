@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import emailjs from 'emailjs-com';
 import './contact.css'
 import {FaFileAlt, FaLinkedin} from 'react-icons/fa'
-// import Pdf from '../../../public/resume.pdf';
+// import Pdf from './resume.pdf';
 import pdf from './resume.pdf'
 
 const Contact = () => {
