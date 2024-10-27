@@ -1,9 +1,9 @@
 import React from "react";
 import "./project.css";
-import IMG1 from "../../assets/heroesmovementpic.png";
+import IMG1 from "../../assets/heroesLLCpic.png";
 import IMG2 from "../../assets/CarM.png";
-import IMG3 from "../../assets/qa.png"
-
+import IMG3 from "../../assets/tasksapp.png";
+// import IMG4 from "../../assets/qa.png";
 
 const projects = [
   {
@@ -23,9 +23,16 @@ const projects = [
   {
     id: 3,
     image: IMG3,
-    title: "Quasar App",
+    title: "Tasks Web App",
+    github: "https://github.com/andrewsafe/tasks-app",
     demo: "",
   },
+  // {
+  //   id: 4,
+  //   image: IMG4,
+  //   title: "Quasar App",
+  //   demo: "",
+  // },
 ];
 const Projects = () => {
   return (
