@@ -1,13 +1,13 @@
 import React from "react";
 import "./about.css";
 import Me from "../../assets/me.png";
-import { FaAward, FaCertificate, FaFolder} from "react-icons/fa";
+import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
 
 const About = () => {
   return (
     <section id="about">
       <h5>Hey I'm</h5>
-        <h2>Andrew Saifnoorian</h2>
+      <h2>Andrew Saifnoorian</h2>
       <div className="container about_container">
         <div className="about_me">
           <div className="about_me-image">
@@ -32,15 +32,16 @@ const About = () => {
               <small>10+ projects completed</small>
             </article>
           </div>
-          <p>Full Stack Developer with comprehensive knowledge in a wide range of programming languages, 
-            including Java, Python, Angular, and JavaScript. Proficient in web development using React.js, 
-            Node.js and experienced in database management with SQL. Well-versed in version control (Git) 
-            and DevOps tools (Docker). Created automated testing scripts with Maven/Selenium.
-            Adept at implementing the dynamics of scripting languages and constructing foundational frameworks 
-            to derive insightful analyses. Passionate about leveraging advanced coding skills to drive innovative 
-            solutions and make meaningful contributions to technology-driven projects. 
+          <p>
+            Full Stack Developer with comprehensive knowledge in a wide range of
+            programming languages. Passionate about leveraging advanced coding
+            skills to drive innovative solutions and make meaningful
+            contributions to technology-driven projects.
           </p>
-          <a href="#project" className="btn btn-primary"> See my projects</a>
+          <a href="#project" className="btn btn-primary">
+            {" "}
+            See my projects
+          </a>
         </div>
       </div>
     </section>

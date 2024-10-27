@@ -2,6 +2,8 @@ import React from "react";
 import "./testimonials.css";
 import AVTR1 from "../../assets/psmelvinson.png";
 import AVTR2 from "../../assets/amavs.png";
+import AVTR3 from "../../assets/mahdyf.jpg";
+import AVTR4 from "../../assets/tnoble.jpg";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -21,10 +23,15 @@ const peers = [
       "I had the chance to work with Andrew on different projects. His technical skills were always impressive. He constantly showed professional behavior and high level of problem-solving skills. Based on that, I would gladly recommend him as a software developer with his technical and soft skills.",
   },
   {
-    avatar: AVTR2,
+    avatar: AVTR3,
     name: "Mahdy Ferdaos",
     review:
-      "Working alongside Andrew has been one of the...",
+      "Working alongside Andrew has been great. His learning is exponential.",
+  },
+  {
+    avatar: AVTR4,
+    name: "Tyler Noble",
+    review: "Andrew is next up in cyber.",
   },
 ];
 
