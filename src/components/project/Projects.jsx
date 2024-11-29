@@ -1,9 +1,9 @@
 import React from "react";
 import "./project.css";
 import IMG1 from "../../assets/heroesLLCpic.png";
-import IMG2 from "../../assets/CarM.png";
-import IMG3 from "../../assets/tasksapp.png";
-// import IMG4 from "../../assets/qa.png";
+import IMG2 from "../../assets/underMSRP.png";
+import IMG3 from "../../assets/CarM.png";
+import IMG4 from "../../assets/tasksapp.png";
 
 const projects = [
   {
@@ -16,23 +16,24 @@ const projects = [
   {
     id: 2,
     image: IMG2,
+    title: "Under MSRP App",
+    github: "https://github.com/andrewsafe/BulkEmails",
+    demo: "https://undermsrp.netlify.app/",
+  },
+  {
+    id: 3,
+    image: IMG3,
     title: "Car Maintenance App",
     github: "https://github.com/SKhan2001/CarTracker",
     demo: "",
   },
   {
-    id: 3,
-    image: IMG3,
+    id: 4,
+    image: IMG4,
     title: "Tasks Web App",
     github: "https://github.com/andrewsafe/tasks-app",
     demo: "",
   },
-  // {
-  //   id: 4,
-  //   image: IMG4,
-  //   title: "Quasar App",
-  //   demo: "",
-  // },
 ];
 const Projects = () => {
   return (
