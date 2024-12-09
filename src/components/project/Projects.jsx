@@ -19,7 +19,7 @@ const projects = [
     image: IMG2,
     title: "Clue Game",
     github: "https://github.com/andrewsafe/clue-game",
-    demo: "https://peppy-empanada-ec068d.netlify.app/",
+    demo: "https://67565c59e06325000836e7ec--clue-game.netlify.app/",
   },
   {
     id: 3,
