@@ -18,7 +18,7 @@ const Services = () => {
               <p>
                 Refactoring PDF batch processing algorithms to enhance
                 scalability and efficiency across diverse file structures and
-                organizational hierarchies with Java Springboot and SQL 19.
+                organizational hierarchies with Java Springboot and SQL 20.
               </p>
             </li>
             <li>
