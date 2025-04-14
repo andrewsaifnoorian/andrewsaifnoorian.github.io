@@ -38,7 +38,11 @@ const Contact = () => {
       <div className="container contact_container">
         <div className="contact_options">
           <article className="contact_option">
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://andrewsafe.github.io/andrews-portfolio/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFileAlt className="contact_option-icon" />
               <h4>Check out my resume!</h4>
             </a>
