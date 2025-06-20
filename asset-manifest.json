@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/andrews-portfolio/static/css/main.9fc3365b.css",
-    "main.js": "/andrews-portfolio/static/js/main.59b835ec.js",
-    "static/media/heroesLLCpic.png": "/andrews-portfolio/static/media/heroesLLCpic.4ae1cd766f083e409315.png",
-    "static/media/cluegame.png": "/andrews-portfolio/static/media/cluegame.2230927a31b7f02c6469.png",
-    "static/media/psmelvinson.png": "/andrews-portfolio/static/media/psmelvinson.191c0d1303b7066a2693.png",
-    "static/media/CarM.png": "/andrews-portfolio/static/media/CarM.e43eecb0fc0c824bece3.png",
-    "static/media/tasksapp.png": "/andrews-portfolio/static/media/tasksapp.d4d27302e8631e0bfa65.png",
-    "static/media/amavs.png": "/andrews-portfolio/static/media/amavs.0d54bd791648a29dd2be.png",
-    "static/media/underMSRP.png": "/andrews-portfolio/static/media/underMSRP.0b11ea3be8b53aaf9888.png",
-    "static/media/mahdyf.jpg": "/andrews-portfolio/static/media/mahdyf.035171322e7968cca597.jpg",
-    "static/media/sql.png": "/andrews-portfolio/static/media/sql.aa95c2d653ff2aa6e90a.png",
-    "static/media/me.png": "/andrews-portfolio/static/media/me.329a10ce36a1e05f3fd5.png",
-    "static/media/tnoble.jpg": "/andrews-portfolio/static/media/tnoble.5e7d642bba294d21f2f1.jpg",
-    "static/media/java.png": "/andrews-portfolio/static/media/java.dfbc7b3cfa00014f15af.png",
-    "static/media/node.jpg": "/andrews-portfolio/static/media/node.17aff3218b3ce956a5b2.jpg",
-    "static/media/ng.png": "/andrews-portfolio/static/media/ng.eb61c8fa009d1215b265.png",
-    "index.html": "/andrews-portfolio/index.html",
-    "main.9fc3365b.css.map": "/andrews-portfolio/static/css/main.9fc3365b.css.map",
-    "main.59b835ec.js.map": "/andrews-portfolio/static/js/main.59b835ec.js.map"
+    "main.css": "/static/css/main.9fc3365b.css",
+    "main.js": "/static/js/main.ccc29ae6.js",
+    "static/media/heroesLLCpic.png": "/static/media/heroesLLCpic.4ae1cd766f083e409315.png",
+    "static/media/cluegame.png": "/static/media/cluegame.2230927a31b7f02c6469.png",
+    "static/media/psmelvinson.png": "/static/media/psmelvinson.191c0d1303b7066a2693.png",
+    "static/media/CarM.png": "/static/media/CarM.e43eecb0fc0c824bece3.png",
+    "static/media/tasksapp.png": "/static/media/tasksapp.d4d27302e8631e0bfa65.png",
+    "static/media/amavs.png": "/static/media/amavs.0d54bd791648a29dd2be.png",
+    "static/media/underMSRP.png": "/static/media/underMSRP.0b11ea3be8b53aaf9888.png",
+    "static/media/mahdyf.jpg": "/static/media/mahdyf.035171322e7968cca597.jpg",
+    "static/media/sql.png": "/static/media/sql.aa95c2d653ff2aa6e90a.png",
+    "static/media/me.png": "/static/media/me.329a10ce36a1e05f3fd5.png",
+    "static/media/tnoble.jpg": "/static/media/tnoble.5e7d642bba294d21f2f1.jpg",
+    "static/media/java.png": "/static/media/java.dfbc7b3cfa00014f15af.png",
+    "static/media/node.jpg": "/static/media/node.17aff3218b3ce956a5b2.jpg",
+    "static/media/ng.png": "/static/media/ng.eb61c8fa009d1215b265.png",
+    "index.html": "/index.html",
+    "main.9fc3365b.css.map": "/static/css/main.9fc3365b.css.map",
+    "main.ccc29ae6.js.map": "/static/js/main.ccc29ae6.js.map"
   },
   "entrypoints": [
     "static/css/main.9fc3365b.css",
-    "static/js/main.59b835ec.js"
+    "static/js/main.ccc29ae6.js"
   ]
 }
