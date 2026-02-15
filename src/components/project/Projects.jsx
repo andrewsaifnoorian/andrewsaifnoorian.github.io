@@ -37,7 +37,7 @@ const projects = [
     image: IMG4,
     title: "Heroes Movement LLC",
     github: "",
-    demo: "https://theheromovement.org/",
+    demo: "",
   },
   {
     id: 5,
