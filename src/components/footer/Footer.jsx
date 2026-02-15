@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { Link } from "react-router-dom";
 import "./footer.css";
 import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
 
@@ -39,13 +40,9 @@ const Footer = () => {
         <a href="https://github.com/andrewsafe">
           <FaGithub />
         </a>
-        <a
-          href="https://andrewsafe.github.io/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to="/resume">
           <FaFileAlt />
-        </a>
+        </Link>
       </div>
       <div className="footer_copyright">
         <small>That's all folks!</small>

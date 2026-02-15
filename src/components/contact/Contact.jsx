@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
 import "./contact.css";
 import { FaFileAlt, FaLinkedin } from "react-icons/fa";
@@ -38,14 +39,10 @@ const Contact = () => {
       <div className="container contact_container">
         <div className="contact_options">
           <article className="contact_option">
-            <a
-              href="https://andrewsafe.github.io/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link to="/resume">
               <FaFileAlt className="contact_option-icon" />
               <h4>Check out my resume!</h4>
-            </a>
+            </Link>
           </article>
           <article className="contact_option">
             <a
