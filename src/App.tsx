@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/nav/Nav";
 import About from "./components/about/About";
@@ -9,8 +10,28 @@ import Contact from "./components/contact/Contact";
 import Footer from "./components/footer/Footer";
 import Resume from "./components/resume/Resume";
 
+const ScrollProgress = () => {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      setWidth(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return <div className="scroll-progress" style={{ width: `${width}%` }} />;
+};
+
 const Home = () => (
   <>
+    <ScrollProgress />
     <About />
     <Projects />
     <Nav />
