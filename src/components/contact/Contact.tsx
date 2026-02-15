@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
 import "./contact.css";
@@ -6,16 +6,16 @@ import { FaFileAlt, FaLinkedin } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 
 const Contact = () => {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
         "service_xdthdyk",
         "template_xi8zwe7",
-        form.current,
+        form.current!,
         "cTGWawCLI7aVlwsN2"
       )
       .then(
@@ -28,7 +28,7 @@ const Contact = () => {
           toast.error("Failed to send the message. Please try again.");
         }
       );
-    e.target.reset();
+    e.currentTarget.reset();
   };
 
   return (
@@ -59,7 +59,7 @@ const Contact = () => {
         <form ref={form} onSubmit={sendEmail}>
           <textarea
             name="message"
-            rows="9"
+            rows={9}
             placeholder="Please include your full name, contact, and message here!"
             required
           ></textarea>

@@ -1,4 +1,3 @@
-import React from "react";
 import "./project.css";
 import IMG1 from "../../assets/primedtNJ.png";
 import IMG2 from "../../assets/NN-Final-Project.png";
