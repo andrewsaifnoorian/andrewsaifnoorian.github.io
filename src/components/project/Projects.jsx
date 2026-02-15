@@ -13,17 +13,17 @@ import IMG9 from "../../assets/tasksapp.png";
 const projects = [
   {
     id: 1,
-    image: IMG1,
-    title: "Prime Detailing NJ",
-    github: "",
-    demo: "https://primedetailing.biz/",
-  },
-  {
-    id: 2,
     image: IMG2,
     title: "Targeted Advertising ROI Classification Using Neural Networks",
     github: "",
-    demo: "https://www.linkedin.com/in/andrewsaifnoorian/overlay/1765563886158/single-media-viewer?type=DOCUMENT&profileId=ACoAACgPUV8BK03EPpwlXxmLS4F0QPrg6X4E83w&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bnc6uSRWKRRW5rZp8o2R%2F%2Fg%3D%3D",
+    demo: "/nn-final-project.pdf",
+  },
+  {
+    id: 2,
+    image: IMG8,
+    title: "Car Maintenance App",
+    github: "https://github.com/SKhan2001/CarTracker",
+    demo: "",
   },
   {
     id: 3,
@@ -41,31 +41,31 @@ const projects = [
   },
   {
     id: 5,
+    image: IMG1,
+    title: "Prime Detailing NJ",
+    github: "",
+    demo: "",
+  },
+  {
+    id: 6,
     image: IMG5,
     title: "Clue Game",
     github: "https://github.com/andrewsafe/clue-game",
     demo: "https://67565c59e06325000836e7ec--clue-game.netlify.app/",
   },
   {
-    id: 6,
+    id: 7,
     image: IMG6,
     title: "5 Hand Poker",
     github: "https://github.com/andrewsafe/project2_asaifnoorian",
     demo: "",
   },
   {
-    id: 7,
+    id: 8,
     image: IMG7,
     title: "Under MSRP App",
     github: "https://github.com/andrewsafe/BulkEmails",
     demo: "https://undermsrp.netlify.app/",
-  },
-  {
-    id: 8,
-    image: IMG8,
-    title: "Car Maintenance App",
-    github: "https://github.com/SKhan2001/CarTracker",
-    demo: "",
   },
   {
     id: 9,
