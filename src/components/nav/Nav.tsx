@@ -1,9 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import { useState } from "react";
 import "./nav.css";
 import { FaHome, FaUser, FaBook, FaProjectDiagram } from "react-icons/fa";
-import { MdContactMail } from 'react-icons/md'
-import { useState } from "react";
+import { MdContactMail } from "react-icons/md";
 
 const Nav = () => {
   const [activeNav, setActiveNav] = useState('#');

@@ -1,4 +1,3 @@
-import React from "react";
 import "./about.css";
 import Me from "../../assets/me.png";
 import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";

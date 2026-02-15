@@ -1,4 +1,3 @@
-import React from "react";
 import "./experience.css";
 import css3 from "../../assets/css3.png";
 import html from "../../assets/html-5.png";
