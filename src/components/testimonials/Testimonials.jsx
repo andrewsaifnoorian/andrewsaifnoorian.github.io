@@ -4,7 +4,7 @@ import AVTR1 from "../../assets/psmelvinson.png";
 import AVTR2 from "../../assets/mahdyf.jpg";
 import AVTR3 from "../../assets/tnoble.jpg";
 import AVTR4 from "../../assets/shorrigan.png";
-import { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
