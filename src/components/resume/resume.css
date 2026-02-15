@@ -1,0 +1,24 @@
+.resume_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+  gap: 1.5rem;
+}
+
+.resume_page h1 {
+  font-size: 3rem;
+}
+
+.resume_page p {
+  font-size: 1.2rem;
+  max-width: 500px;
+  color: var(--color-light);
+}
+
+.resume_page a:not(.btn) {
+  color: var(--color-primary-variant);
+}
