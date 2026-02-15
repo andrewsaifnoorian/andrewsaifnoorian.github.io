@@ -1,4 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--color-primary-variant);
+  z-index: 9999;
+  transition: width 50ms linear;
+}
+
 * {
   margin: 0;
   padding: 0;
