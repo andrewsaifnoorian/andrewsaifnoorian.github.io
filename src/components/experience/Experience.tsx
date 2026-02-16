@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import "./experience.css";
 import { motion } from "framer-motion";
 import AnimatedSection from "../animated-section/AnimatedSection";
@@ -89,7 +90,7 @@ const IconSkillCard = ({
   level,
   index,
 }: {
-  Icon: React.ComponentType<{ className?: string }>;
+  Icon: ComponentType<{ className?: string }>;
   name: string;
   level: string;
   index: number;

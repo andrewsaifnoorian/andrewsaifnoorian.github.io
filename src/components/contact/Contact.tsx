@@ -20,12 +20,10 @@ const Contact = () => {
         "cTGWawCLI7aVlwsN2"
       )
       .then(
-        (result) => {
-          console.log(result.text);
+        () => {
           toast.success("Message sent successfully!");
         },
-        (error) => {
-          console.log(error.text);
+        () => {
           toast.error("Failed to send the message. Please try again.");
         }
       );

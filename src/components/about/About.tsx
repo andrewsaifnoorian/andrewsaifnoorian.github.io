@@ -11,6 +11,7 @@ import {
   useInView,
   animate,
 } from "framer-motion";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const useTypewriter = (text: string, speed = 80) => {
   const [displayed, setDisplayed] = useState("");
@@ -70,19 +71,6 @@ const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
       {suffix} {label}
     </small>
   );
-};
-
-const useIsMobile = (bp: number) => {
-  const [mobile, setMobile] = useState(
-    () => window.matchMedia(`(max-width: ${bp}px)`).matches
-  );
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${bp}px)`);
-    const h = () => setMobile(mql.matches);
-    mql.addEventListener("change", h);
-    return () => mql.removeEventListener("change", h);
-  }, [bp]);
-  return mobile;
 };
 
 /* ── Feature 4: Word-by-Word Reveal ── */

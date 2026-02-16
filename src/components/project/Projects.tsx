@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./project.css";
 import IMG1 from "../../assets/primedtNJ.png";
 import IMG2 from "../../assets/NN-Final-Project.png";
@@ -11,24 +11,7 @@ import IMG8 from "../../assets/CarM.png";
 import IMG9 from "../../assets/tasksapp.png";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import { motion, useScroll, useTransform } from "framer-motion";
-
-const useIsMobile = (breakpoint: number) => {
-  const query = `(max-width: ${breakpoint}px)`;
-  const getMatch = useCallback(
-    () => window.matchMedia(query).matches,
-    [query]
-  );
-  const [mobile, setMobile] = useState(getMatch);
-
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    const handler = () => setMobile(mql.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, [query]);
-
-  return mobile;
-};
+import useIsMobile from "../../hooks/useIsMobile";
 
 const projects = [
   {
