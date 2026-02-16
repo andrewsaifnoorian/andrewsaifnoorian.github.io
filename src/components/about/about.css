@@ -38,7 +38,7 @@
 }
 
 [data-theme="light"] .hero_name--gradient {
-  background: linear-gradient(90deg, #0a0078, #1100fc, #4facfe, #0a0078);
+  background: linear-gradient(90deg, #6b4226, #8b6a4a, #c49a6c, #6b4226);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;

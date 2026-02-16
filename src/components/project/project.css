@@ -48,6 +48,10 @@
   box-shadow: 0 8px 30px rgba(17, 0, 252, 0.2);
 }
 
+[data-theme="light"] .project_item:hover {
+  box-shadow: 0 8px 30px rgba(139, 106, 74, 0.18);
+}
+
 .project_item-image {
   border-radius: 0.5rem;
   overflow: hidden;
