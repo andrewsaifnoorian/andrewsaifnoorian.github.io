@@ -1,3 +1,32 @@
+/* ── Horizontal scroll (desktop) ── */
+.horizontal-scroll_outer {
+  height: 400vh;
+  position: relative;
+}
+
+.horizontal-scroll_sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-scroll_track {
+  display: flex;
+  gap: 2.5rem;
+  padding: 0 2rem;
+  will-change: transform;
+}
+
+.horizontal-scroll_track .project_item {
+  min-width: 350px;
+  max-width: 400px;
+  flex-shrink: 0;
+}
+
+/* ── Vertical grid (mobile fallback + shared card styles) ── */
 .project_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
