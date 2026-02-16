@@ -110,23 +110,6 @@ const Projects = () => {
                   </div>
                 </div>
                 <h3>{title}</h3>
-                <div className="project-item-cta">
-                  {github && (
-                    <a href={github} className="btn">
-                      Github
-                    </a>
-                  )}
-                  {demo && (
-                    <a
-                      href={demo}
-                      className="btn btn-primary"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Live Demo
-                    </a>
-                  )}
-                </div>
               </article>
             );
           })}
