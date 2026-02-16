@@ -65,10 +65,10 @@ export const tabs: TabData[] = [
     shortLabel: "Enterprise",
     icon: FaBuilding,
     timeline: [
-      { year: "2023", text: "Joined JPMC — Full-Stack Engineering", linkedCardId: "ent-tech" },
-      { year: "2023", text: "Spring Boot Batch Overhaul — 4x Throughput", linkedCardId: "ent-throughput" },
       { year: "2024", text: "Angular v8 → v19 Migration", linkedCardId: "ent-paint" },
-      { year: "2024", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-showcase" },
+      { year: "2025", text: "Spring Boot Batch Overhaul — 4x Throughput", linkedCardId: "ent-throughput" },
+      { year: "2025", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-showcase" },
+      { year: "2026", text: "Joined JPMC — Full-Stack Engineering", linkedCardId: "ent-tech" },
     ],
     bento: [
       { id: "ent-throughput", type: "metric", size: "lg", value: "4x", label: "Throughput Improvement" },
@@ -101,10 +101,10 @@ export const tabs: TabData[] = [
     shortLabel: "AI Research",
     icon: FaFlask,
     timeline: [
-      { year: "2022", text: "Started MS at Johns Hopkins", linkedCardId: "acad-dnn" },
-      { year: "2023", text: "Neural Network ROI Research", linkedCardId: "acad-dnn" },
-      { year: "2024", text: "Anthropic Claude AI Courses", linkedCardId: "acad-ai" },
-      { year: "2025", text: "AWS Solutions Architect Prep", linkedCardId: "acad-certs" },
+      { year: "2019", text: "Rutgers Honors College — Presidential Scholar", linkedCardId: "acad-certs" },
+      { year: "2024", text: "Started MS at Johns Hopkins", linkedCardId: "acad-dnn" },
+      { year: "2024", text: "Neural Network ROI Research", linkedCardId: "acad-dnn" },
+      { year: "2025", text: "Anthropic Claude AI Courses", linkedCardId: "acad-ai" },
     ],
     bento: [
       {
