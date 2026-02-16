@@ -1,5 +1,6 @@
 import { useRef, type ReactNode } from "react";
 import { motion, useInView } from "framer-motion";
+import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -14,6 +15,11 @@ const AnimatedSection = ({
 }: AnimatedSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div

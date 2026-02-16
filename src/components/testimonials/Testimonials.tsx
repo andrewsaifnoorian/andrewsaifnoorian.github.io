@@ -1,8 +1,8 @@
 import "./testimonials.css";
-import AVTR1 from "../../assets/psmelvinson.png";
-import AVTR2 from "../../assets/mahdyf.jpg";
-import AVTR3 from "../../assets/tnoble.jpg";
-import AVTR4 from "../../assets/shorrigan.png";
+import AVTR1 from "../../assets/psmelvinson.webp";
+import AVTR2 from "../../assets/mahdyf.webp";
+import AVTR3 from "../../assets/tnoble.webp";
+import AVTR4 from "../../assets/shorrigan.webp";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
