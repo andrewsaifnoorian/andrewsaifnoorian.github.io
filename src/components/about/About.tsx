@@ -72,6 +72,19 @@ const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
   );
 };
 
+const useIsMobile = (bp: number) => {
+  const [mobile, setMobile] = useState(
+    () => window.matchMedia(`(max-width: ${bp}px)`).matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${bp}px)`);
+    const h = () => setMobile(mql.matches);
+    mql.addEventListener("change", h);
+    return () => mql.removeEventListener("change", h);
+  }, [bp]);
+  return mobile;
+};
+
 /* ── Feature 4: Word-by-Word Reveal ── */
 interface WordProps {
   children: string;
@@ -90,12 +103,17 @@ const Word = ({ children, range, progress }: WordProps) => {
 
 const WordReveal = ({ text }: { text: string }) => {
   const containerRef = useRef<HTMLParagraphElement>(null);
+  const isMobile = useIsMobile(1024);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.9", "start 0.2"],
   });
 
   const words = text.split(" ");
+
+  if (isMobile) {
+    return <p>{text}</p>;
+  }
 
   return (
     <p ref={containerRef} className="word-reveal">
@@ -110,19 +128,6 @@ const WordReveal = ({ text }: { text: string }) => {
       })}
     </p>
   );
-};
-
-const useIsMobile = (bp: number) => {
-  const [mobile, setMobile] = useState(
-    () => window.matchMedia(`(max-width: ${bp}px)`).matches
-  );
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${bp}px)`);
-    const h = () => setMobile(mql.matches);
-    mql.addEventListener("change", h);
-    return () => mql.removeEventListener("change", h);
-  }, [bp]);
-  return mobile;
 };
 
 const About = () => {

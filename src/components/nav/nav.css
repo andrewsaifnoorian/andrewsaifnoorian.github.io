@@ -13,6 +13,10 @@ nav {
   backdrop-filter: blur(15px);
 }
 
+[data-theme="light"] nav {
+  background: rgba(255,255,255,0.6);
+}
+
 nav a {
   background: transparent;
   padding: 0.9rem;
@@ -22,8 +26,16 @@ nav a {
   font-size: 1.1rem;
 }
 
+[data-theme="light"] nav a {
+  color: var(--color-primary);
+}
+
 nav a:hover {
   background: rgba(0,0,0,0.3);
+}
+
+[data-theme="light"] nav a:hover {
+  background: rgba(0,0,0,0.08);
 }
 
 nav a.active {
