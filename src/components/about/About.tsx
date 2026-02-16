@@ -92,7 +92,7 @@ const WordReveal = ({ text }: { text: string }) => {
   const containerRef = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "end 0.4"],
+    offset: ["start 0.9", "start 0.2"],
   });
 
   const words = text.split(" ");
@@ -112,9 +112,23 @@ const WordReveal = ({ text }: { text: string }) => {
   );
 };
 
+const useIsMobile = (bp: number) => {
+  const [mobile, setMobile] = useState(
+    () => window.matchMedia(`(max-width: ${bp}px)`).matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${bp}px)`);
+    const h = () => setMobile(mql.matches);
+    mql.addEventListener("change", h);
+    return () => mql.removeEventListener("change", h);
+  }, [bp]);
+  return mobile;
+};
+
 const About = () => {
   const { displayed, done } = useTypewriter("Andrew Saifnoorian", 90);
   const heroWrapperRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile(600);
 
   const { scrollYProgress } = useScroll({
     target: heroWrapperRef,
@@ -129,7 +143,7 @@ const About = () => {
       <div className="hero_wrapper" ref={heroWrapperRef}>
         <motion.div
           className="hero"
-          style={{ opacity: heroOpacity, scale: heroScale }}
+          style={isMobile ? { opacity: heroOpacity } : { opacity: heroOpacity, scale: heroScale }}
         >
           <h5 className="hero_greeting">Hey I'm</h5>
           <h1 className="hero_name">
