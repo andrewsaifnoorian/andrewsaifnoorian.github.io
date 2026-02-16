@@ -110,8 +110,8 @@ const WordReveal = ({ text }: { text: string }) => {
   return (
     <p ref={containerRef} className="word-reveal">
       {words.map((word, i) => {
-        const start = i / words.length;
-        const end = (i + 1) / words.length;
+        const start = (i / words.length) * 0.75;
+        const end = ((i + 1) / words.length) * 0.75;
         return (
           <Word key={i} range={[start, end]} progress={scrollYProgress}>
             {word}
