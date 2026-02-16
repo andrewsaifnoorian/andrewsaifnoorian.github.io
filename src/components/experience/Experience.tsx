@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import "./experience.css";
 import { motion } from "framer-motion";
 import AnimatedSection from "../animated-section/AnimatedSection";
+import ScrambleText from "../scramble-text/ScrambleText";
 import {
   SiAnthropic,
   SiOpenai,
@@ -79,7 +80,7 @@ const Experience = () => {
   return (
     <section id="experience">
       <h5>What I use</h5>
-      <h2>My Skills</h2>
+      <ScrambleText text="My Skills" />
       <AnimatedSection>
         <div className="container experience_container">
           <div className="experience_ai-cloud experience_full-width">

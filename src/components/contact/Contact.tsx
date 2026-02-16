@@ -5,6 +5,8 @@ import "./contact.css";
 import { FaFileAlt, FaLinkedin } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import AnimatedSection from "../animated-section/AnimatedSection";
+import MagneticButton from "../magnetic-button/MagneticButton";
+import ScrambleText from "../scramble-text/ScrambleText";
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -34,7 +36,7 @@ const Contact = () => {
     <section id="contact">
       <Toaster />
       <h5>Get in Touch</h5>
-      <h2>Contact Me</h2>
+      <ScrambleText text="Contact Me" />
       <AnimatedSection>
         <div className="container contact_container">
           <div className="contact_options">
@@ -63,9 +65,11 @@ const Contact = () => {
               placeholder="Please include your full name, contact, and message here!"
               required
             ></textarea>
-            <button type="submit" className="btn btn-primary">
-              Send Message
-            </button>
+            <MagneticButton>
+              <button type="submit" className="btn btn-primary">
+                Send Message
+              </button>
+            </MagneticButton>
           </form>
         </div>
       </AnimatedSection>

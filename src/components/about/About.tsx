@@ -3,6 +3,8 @@ import "./about.css";
 import Me from "../../assets/me.webp";
 import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
 import AnimatedSection from "../animated-section/AnimatedSection";
+import MagneticButton from "../magnetic-button/MagneticButton";
+import BlurImage from "../blur-image/BlurImage";
 import {
   motion,
   useScroll,
@@ -156,7 +158,7 @@ const About = () => {
         <div className="container about_container">
           <div className="about_me">
             <div className="about_me-image">
-              <img src={Me} alt="About me" />
+              <BlurImage src={Me} alt="About me" />
             </div>
           </div>
           <div className="about_content">
@@ -178,10 +180,12 @@ const About = () => {
               </article>
             </div>
             <WordReveal text="Full-stack software engineer focused on building secure, scalable applications using React + TypeScript, Java/Spring Boot, and AWS (Aurora/Postgres). Strong interest in neural networks and machine learning, currently preparing for the AWS Solutions Architect - Associate certification and completing Anthropic's Claude training courses on applied AI and model capability." />
-            <a href="#project" className="btn btn-primary">
-              {" "}
-              See my projects
-            </a>
+            <MagneticButton>
+              <a href="#project" className="btn btn-primary">
+                {" "}
+                See my projects
+              </a>
+            </MagneticButton>
           </div>
         </div>
       </AnimatedSection>

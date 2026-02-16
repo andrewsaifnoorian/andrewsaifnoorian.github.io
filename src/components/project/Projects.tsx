@@ -13,6 +13,9 @@ import AnimatedSection from "../animated-section/AnimatedSection";
 import { motion, useScroll, useTransform } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 import ProjectModal, { type ProjectData } from "./ProjectModal";
+import TiltCard from "../tilt-card/TiltCard";
+import ScrambleText from "../scramble-text/ScrambleText";
+import BlurImage from "../blur-image/BlurImage";
 
 const projects: ProjectData[] = [
   {
@@ -107,6 +110,12 @@ const projects: ProjectData[] = [
   },
 ];
 
+const handleSpotlight = (e: React.MouseEvent<HTMLElement>) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--spotlight-x", `${e.clientX - rect.left}px`);
+  e.currentTarget.style.setProperty("--spotlight-y", `${e.clientY - rect.top}px`);
+};
+
 const ProjectCard = ({
   image,
   title,
@@ -120,37 +129,39 @@ const ProjectCard = ({
   demo: string;
   onClick: () => void;
 }) => (
-  <article className="project_item" onClick={onClick}>
-    <div className="project_item-image">
-      <img src={image} alt={title} loading="lazy" />
-      <div className="project_item-overlay">
-        <h3>{title}</h3>
-        <div className="project_item-overlay-cta">
-          {github && (
-            <a
-              href={github}
-              className="btn"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Github
-            </a>
-          )}
-          {demo && (
-            <a
-              href={demo}
-              className="btn btn-primary"
-              target="_blank"
-              rel="noreferrer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Live Demo
-            </a>
-          )}
+  <TiltCard>
+    <article className="project_item" onClick={onClick} onMouseMove={handleSpotlight}>
+      <div className="project_item-image">
+        <BlurImage src={image} alt={title} loading="lazy" />
+        <div className="project_item-overlay">
+          <h3>{title}</h3>
+          <div className="project_item-overlay-cta">
+            {github && (
+              <a
+                href={github}
+                className="btn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Github
+              </a>
+            )}
+            {demo && (
+              <a
+                href={demo}
+                className="btn btn-primary"
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Live Demo
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-    <h3>{title}</h3>
-  </article>
+      <h3>{title}</h3>
+    </article>
+  </TiltCard>
 );
 
 const HorizontalScroll = ({ onSelectProject }: { onSelectProject: (p: ProjectData) => void }) => {
