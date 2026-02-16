@@ -69,7 +69,7 @@ const projects: ProjectData[] = [
     id: 6,
     image: IMG5,
     title: "Clue Game",
-    github: "https://github.com/andrewsafe/clue-game",
+    github: "https://github.com/andrewsaifnoorian/clue-game",
     demo: "https://67565c59e06325000836e7ec--clue-game.netlify.app/",
     description:
       "Interactive web-based version of the classic Clue board game. Players can make accusations, track clues, and solve the mystery through a clean, intuitive UI.",
@@ -79,7 +79,7 @@ const projects: ProjectData[] = [
     id: 7,
     image: IMG6,
     title: "5 Hand Poker",
-    github: "https://github.com/andrewsafe/project2_asaifnoorian",
+    github: "https://github.com/andrewsaifnoorian/project2_asaifnoorian",
     demo: "",
     description:
       "Poker hand evaluator that analyzes five-card hands, determines hand rankings, and compares multiple hands to find the winner using classic poker rules.",
@@ -89,7 +89,7 @@ const projects: ProjectData[] = [
     id: 8,
     image: IMG7,
     title: "Under MSRP App",
-    github: "https://github.com/andrewsafe/BulkEmails",
+    github: "https://github.com/andrewsaifnoorian/BulkEmails",
     demo: "https://undermsrp.netlify.app/",
     description:
       "Automated bulk email tool for vehicle dealerships, helping them reach potential customers with under-MSRP offers. Includes template management and email tracking.",
@@ -99,7 +99,7 @@ const projects: ProjectData[] = [
     id: 9,
     image: IMG9,
     title: "Tasks Web App",
-    github: "https://github.com/andrewsafe/tasks-app",
+    github: "https://github.com/andrewsaifnoorian/tasks-app",
     demo: "",
     description:
       "A clean, minimalist task management application with CRUD operations, task categorization, and persistent storage for organizing daily workflows.",
