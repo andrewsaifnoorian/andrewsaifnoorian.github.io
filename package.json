@@ -2,7 +2,7 @@
   "name": "andrews-port",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://andrewsafe.github.io",
+  "homepage": "https://andrewsaifnoorian.github.io",
   "dependencies": {
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.34.0",

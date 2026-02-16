@@ -1,10 +1,10 @@
 <div align="center">
 
-# andrewsafe.github.io
+# andrewsaifnoorian.github.io
 
 **My personal portfolio — built to feel like an Apple product page.**
 
-[View Live](https://andrewsafe.github.io) &nbsp;&middot;&nbsp; [LinkedIn](https://www.linkedin.com/in/andrewsaifnoorian/)
+[View Live](https://andrewsaifnoorian.github.io) &nbsp;&middot;&nbsp; [LinkedIn](https://www.linkedin.com/in/andrewsaifnoorian/)
 
 </div>
 
