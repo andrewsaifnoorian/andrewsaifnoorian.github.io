@@ -4,6 +4,7 @@ import emailjs from "emailjs-com";
 import "./contact.css";
 import { FaFileAlt, FaLinkedin } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
+import AnimatedSection from "../animated-section/AnimatedSection";
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -36,38 +37,40 @@ const Contact = () => {
       <Toaster />
       <h5>Get in Touch</h5>
       <h2>Contact Me</h2>
-      <div className="container contact_container">
-        <div className="contact_options">
-          <article className="contact_option">
-            <Link to="/resume">
-              <FaFileAlt className="contact_option-icon" />
-              <h4>Check out my resume!</h4>
-            </Link>
-          </article>
-          <article className="contact_option">
-            <a
-              href="https://www.linkedin.com/in/andrewsaifnoorian/"
-              target="_blank"
-              rel="noreferrer"
-              className="contact_option-link"
-            >
-              <FaLinkedin className="contact_option-icon" />
-              <h4>Send a message to my LinkedIn!</h4>
-            </a>
-          </article>
+      <AnimatedSection>
+        <div className="container contact_container">
+          <div className="contact_options">
+            <article className="contact_option">
+              <Link to="/resume">
+                <FaFileAlt className="contact_option-icon" />
+                <h4>Check out my resume!</h4>
+              </Link>
+            </article>
+            <article className="contact_option">
+              <a
+                href="https://www.linkedin.com/in/andrewsaifnoorian/"
+                target="_blank"
+                rel="noreferrer"
+                className="contact_option-link"
+              >
+                <FaLinkedin className="contact_option-icon" />
+                <h4>Send a message to my LinkedIn!</h4>
+              </a>
+            </article>
+          </div>
+          <form ref={form} onSubmit={sendEmail}>
+            <textarea
+              name="message"
+              rows={9}
+              placeholder="Please include your full name, contact, and message here!"
+              required
+            ></textarea>
+            <button type="submit" className="btn btn-primary">
+              Send Message
+            </button>
+          </form>
         </div>
-        <form ref={form} onSubmit={sendEmail}>
-          <textarea
-            name="message"
-            rows={9}
-            placeholder="Please include your full name, contact, and message here!"
-            required
-          ></textarea>
-          <button type="submit" className="btn btn-primary">
-            Send Message
-          </button>
-        </form>
-      </div>
+      </AnimatedSection>
     </section>
   );
 };

@@ -15,11 +15,61 @@
 .project_item:hover {
   border-color: var(--color-primary-variant);
   background: transparent;
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(17, 0, 252, 0.2);
 }
 
 .project_item-image {
   border-radius: 0.5rem;
   overflow: hidden;
+  position: relative;
+}
+
+.project_item-image img {
+  transition: transform 0.4s ease;
+}
+
+.project_item:hover .project_item-image img {
+  transform: scale(1.08);
+}
+
+.project_item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.project_item-overlay h3 {
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.project_item-overlay-cta {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.project_item-overlay-cta .btn {
+  color: #fff;
+  border-color: #fff;
+}
+
+.project_item-overlay-cta .btn-primary {
+  background: #fff;
+  color: #0e0e11;
+}
+
+.project_item-image:hover .project_item-overlay {
+  opacity: 1;
 }
 
 .project_item h3 {

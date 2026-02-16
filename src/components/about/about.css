@@ -1,3 +1,38 @@
+.hero {
+  text-align: center;
+  padding: 4rem 0 2rem;
+}
+
+.hero_greeting {
+  color: var(--color-light);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero_name {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.hero_caret {
+  font-weight: 200;
+  opacity: 1;
+}
+
+.hero_caret.blink {
+  animation: caretBlink 1s step-end infinite;
+}
+
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero_subtitle {
+  font-size: 1.2rem;
+}
+
 .about_container {
   display: grid;
   grid-template-columns: 35% 50%;
@@ -55,7 +90,7 @@
 
 .about_content p {
   margin: 2rem 0 2.6rem;
-  color: var(--color-white); 
+  color: var(--color-white);
 }
 
 @media screen and (max-width: 1024px){
@@ -71,6 +106,10 @@
 
   .about_content p {
     margin: 1rem 0 1.5rem;
+  }
+
+  .hero_name {
+    font-size: 2.5rem;
   }
 }
 
@@ -94,4 +133,7 @@
     margin: 1.5rem 0;
   }
 
+  .hero_name {
+    font-size: 2rem;
+  }
 }
