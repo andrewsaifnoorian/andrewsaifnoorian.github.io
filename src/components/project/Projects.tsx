@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect, useCallback } from "react";
 import "./project.css";
 import IMG1 from "../../assets/primedtNJ.png";
 import IMG2 from "../../assets/NN-Final-Project.png";
@@ -9,6 +10,25 @@ import IMG7 from "../../assets/underMSRP.png";
 import IMG8 from "../../assets/CarM.png";
 import IMG9 from "../../assets/tasksapp.png";
 import AnimatedSection from "../animated-section/AnimatedSection";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const useIsMobile = (breakpoint: number) => {
+  const query = `(max-width: ${breakpoint}px)`;
+  const getMatch = useCallback(
+    () => window.matchMedia(query).matches,
+    [query]
+  );
+  const [mobile, setMobile] = useState(getMatch);
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const handler = () => setMobile(mql.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, [query]);
+
+  return mobile;
+};
 
 const projects = [
   {
@@ -76,45 +96,119 @@ const projects = [
   },
 ];
 
+const ProjectCard = ({
+  image,
+  title,
+  github,
+  demo,
+}: {
+  image: string;
+  title: string;
+  github: string;
+  demo: string;
+}) => (
+  <article className="project_item">
+    <div className="project_item-image">
+      <img src={image} alt={title} loading="lazy" />
+      <div className="project_item-overlay">
+        <h3>{title}</h3>
+        <div className="project_item-overlay-cta">
+          {github && (
+            <a href={github} className="btn">
+              Github
+            </a>
+          )}
+          {demo && (
+            <a
+              href={demo}
+              className="btn btn-primary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Live Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+    <h3>{title}</h3>
+  </article>
+);
+
+const HorizontalScroll = () => {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [trackWidth, setTrackWidth] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      if (trackRef.current) {
+        setTrackWidth(trackRef.current.scrollWidth);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: outerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, -(trackWidth - window.innerWidth + 40)]
+  );
+
+  return (
+    <div className="horizontal-scroll_outer" ref={outerRef}>
+      <div className="horizontal-scroll_sticky">
+        <motion.div
+          className="horizontal-scroll_track"
+          ref={trackRef}
+          style={{ x }}
+        >
+          {projects.map(({ id, image, title, github, demo }) => (
+            <ProjectCard
+              key={id}
+              image={image}
+              title={title}
+              github={github}
+              demo={demo}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
 const Projects = () => {
+  const isMobile = useIsMobile(1024);
+
   return (
     <section id="project">
       <h5>My Recent Work</h5>
       <h2>Portfolio</h2>
-      <AnimatedSection>
-        <div className="container project_container">
-          {projects.map(({ id, image, title, github, demo }) => {
-            return (
-              <article key={id} className="project_item">
-                <div className="project_item-image">
-                  <img src={image} alt={title} loading="lazy" />
-                  <div className="project_item-overlay">
-                    <h3>{title}</h3>
-                    <div className="project_item-overlay-cta">
-                      {github && (
-                        <a href={github} className="btn">
-                          Github
-                        </a>
-                      )}
-                      {demo && (
-                        <a
-                          href={demo}
-                          className="btn btn-primary"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Live Demo
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <h3>{title}</h3>
-              </article>
-            );
-          })}
-        </div>
-      </AnimatedSection>
+      {isMobile ? (
+        <AnimatedSection>
+          <div className="container project_container">
+            {projects.map(({ id, image, title, github, demo }) => (
+              <ProjectCard
+                key={id}
+                image={image}
+                title={title}
+                github={github}
+                demo={demo}
+              />
+            ))}
+          </div>
+        </AnimatedSection>
+      ) : (
+        <HorizontalScroll />
+      )}
     </section>
   );
 };

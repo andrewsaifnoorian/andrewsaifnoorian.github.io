@@ -83,6 +83,10 @@ section {
   margin-top: 8rem;
 }
 
+#about {
+  margin-top: 0;
+}
+
 section > h2,
 section > h5 {
   text-align: center;

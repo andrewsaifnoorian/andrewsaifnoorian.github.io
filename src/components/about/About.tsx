@@ -1,8 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import "./about.css";
 import Me from "../../assets/me.png";
 import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
 import AnimatedSection from "../animated-section/AnimatedSection";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useInView,
+  animate,
+} from "framer-motion";
 
 const useTypewriter = (text: string, speed = 80) => {
   const [displayed, setDisplayed] = useState("");
@@ -28,20 +36,110 @@ const useTypewriter = (text: string, speed = 80) => {
   return { displayed, done };
 };
 
+/* ── Feature 3: Counting Stat ── */
+interface CountingStatProps {
+  target: number;
+  suffix: string;
+  label: string;
+}
+
+const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const count = useMotionValue(0);
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(count, target, {
+      duration: 2,
+      ease: "easeOut",
+    });
+    const unsubscribe = count.on("change", (v) => {
+      setDisplay(Math.round(v).toString());
+    });
+    return () => {
+      controls.stop();
+      unsubscribe();
+    };
+  }, [inView, count, target]);
+
+  return (
+    <small ref={ref}>
+      {display}
+      {suffix} {label}
+    </small>
+  );
+};
+
+/* ── Feature 4: Word-by-Word Reveal ── */
+interface WordProps {
+  children: string;
+  range: [number, number];
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+}
+
+const Word = ({ children, range, progress }: WordProps) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  return (
+    <motion.span className="word-reveal_word" style={{ opacity }}>
+      {children}
+    </motion.span>
+  );
+};
+
+const WordReveal = ({ text }: { text: string }) => {
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.9", "end 0.4"],
+  });
+
+  const words = text.split(" ");
+
+  return (
+    <p ref={containerRef} className="word-reveal">
+      {words.map((word, i) => {
+        const start = i / words.length;
+        const end = (i + 1) / words.length;
+        return (
+          <Word key={i} range={[start, end]} progress={scrollYProgress}>
+            {word}
+          </Word>
+        );
+      })}
+    </p>
+  );
+};
+
 const About = () => {
   const { displayed, done } = useTypewriter("Andrew Saifnoorian", 90);
+  const heroWrapperRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroWrapperRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
 
   return (
     <section id="about">
-      <div className="hero">
-        <h5 className="hero_greeting">Hey I'm</h5>
-        <h1 className="hero_name">
-          {displayed}
-          <span className={`hero_caret ${done ? "blink" : ""}`}>|</span>
-        </h1>
-        <p className="hero_subtitle text-light">
-          Full-Stack Software Engineer
-        </p>
+      <div className="hero_wrapper" ref={heroWrapperRef}>
+        <motion.div
+          className="hero"
+          style={{ opacity: heroOpacity, scale: heroScale }}
+        >
+          <h5 className="hero_greeting">Hey I'm</h5>
+          <h1 className="hero_name">
+            {displayed}
+            <span className={`hero_caret ${done ? "blink" : ""}`}>|</span>
+          </h1>
+          <p className="hero_subtitle text-light">
+            Full-Stack Software Engineer
+          </p>
+        </motion.div>
       </div>
 
       <AnimatedSection>
@@ -56,27 +154,20 @@ const About = () => {
               <article className="about_card">
                 <FaAward className="about_icon" />
                 <h5>Experience</h5>
-                <small>2+ Years Working</small>
+                <CountingStat target={2} suffix="+" label="Years Working" />
               </article>
               <article className="about_card">
                 <FaCertificate className="about_icon" />
                 <h5>Certificates</h5>
-                <small>3</small>
+                <CountingStat target={3} suffix="" label="" />
               </article>
               <article className="about_card">
                 <FaFolder className="about_icon" />
                 <h5>Projects</h5>
-                <small>10+ projects completed</small>
+                <CountingStat target={10} suffix="+" label="projects completed" />
               </article>
             </div>
-            <p>
-              Full-stack software engineer focused on building secure, scalable
-              applications using React + TypeScript, Java/Spring Boot, and AWS
-              (Aurora/Postgres). Strong interest in neural networks and machine
-              learning, currently preparing for the AWS Solutions Architect -
-              Associate certification and completing Anthropic's Claude training
-              courses on applied AI and model capability.
-            </p>
+            <WordReveal text="Full-stack software engineer focused on building secure, scalable applications using React + TypeScript, Java/Spring Boot, and AWS (Aurora/Postgres). Strong interest in neural networks and machine learning, currently preparing for the AWS Solutions Architect - Associate certification and completing Anthropic's Claude training courses on applied AI and model capability." />
             <a href="#project" className="btn btn-primary">
               {" "}
               See my projects
