@@ -10,6 +10,7 @@ import {
   SiAmazonwebservices,
   SiGooglecloud,
   SiOracle,
+  SiDatabricks,
   SiReact,
   SiAngular,
   SiHtml5,
@@ -30,6 +31,7 @@ const aiCloudSkills = [
   { Icon: FaMicrosoft, name: "Azure", level: "Proficient" },
   { Icon: SiGooglecloud, name: "GCP", level: "Proficient" },
   { Icon: SiOracle, name: "Oracle", level: "Proficient" },
+  { Icon: SiDatabricks, name: "Databricks", level: "Proficient" },
 ];
 
 const frontendSkills = [

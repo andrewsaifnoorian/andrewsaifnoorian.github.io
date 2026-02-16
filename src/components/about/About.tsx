@@ -88,7 +88,7 @@ const Word = ({ children, range, progress }: WordProps) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
   return (
     <motion.span className="word-reveal_word" style={{ opacity }}>
-      {children}
+      {children}{" "}
     </motion.span>
   );
 };
