@@ -9,21 +9,17 @@ import {
   SiAmazonwebservices,
   SiGooglecloud,
   SiOracle,
+  SiReact,
+  SiAngular,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiPython,
+  SiNodedotjs,
+  SiPostgresql,
+  SiApachemaven,
 } from "react-icons/si";
-import { FaMicrosoft } from "react-icons/fa";
-
-import css3 from "../../assets/css3.png";
-import html from "../../assets/html-5.png";
-import js from "../../assets/javascript.png";
-import react from "../../assets/react.png";
-import sn from "../../assets/sn.png";
-import node from "../../assets/node.jpg";
-import sql from "../../assets/sql.png";
-import python from "../../assets/python.png";
-import maven from "../../assets/maven.png";
-import java from "../../assets/java.png";
-import postgreSQL from "../../assets/postgresql.png";
-import ng from "../../assets/ng.png";
+import { FaMicrosoft, FaJava, FaDatabase, FaCog } from "react-icons/fa";
 
 const aiCloudSkills = [
   { Icon: SiAnthropic, name: "Claude", level: "Experienced" },
@@ -36,53 +32,22 @@ const aiCloudSkills = [
 ];
 
 const frontendSkills = [
-  { icon: react, name: "React", level: "Experienced" },
-  { icon: ng, name: "Angular", level: "Experienced" },
-  { icon: sn, name: "ServiceNow", level: "Experienced" },
-  { icon: html, name: "HTML", level: "Experienced" },
-  { icon: css3, name: "CSS", level: "Experienced" },
-  { icon: js, name: "JavaScript", level: "Experienced" },
+  { Icon: SiReact, name: "React", level: "Experienced" },
+  { Icon: SiAngular, name: "Angular", level: "Experienced" },
+  { Icon: FaCog, name: "ServiceNow", level: "Experienced" },
+  { Icon: SiHtml5, name: "HTML", level: "Experienced" },
+  { Icon: SiCss3, name: "CSS", level: "Experienced" },
+  { Icon: SiJavascript, name: "JavaScript", level: "Experienced" },
 ];
 
 const backendSkills = [
-  { icon: java, name: "Java", level: "Experienced" },
-  { icon: maven, name: "Maven", level: "Experienced" },
-  { icon: python, name: "Python", level: "Proficient" },
-  { icon: node, name: "Node.js", level: "Proficient" },
-  { icon: sql, name: "SQL", level: "Experienced" },
-  { icon: postgreSQL, name: "postgreSQL", level: "Experienced" },
+  { Icon: FaJava, name: "Java", level: "Experienced" },
+  { Icon: SiApachemaven, name: "Maven", level: "Experienced" },
+  { Icon: SiPython, name: "Python", level: "Proficient" },
+  { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" },
+  { Icon: FaDatabase, name: "SQL", level: "Experienced" },
+  { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" },
 ];
-
-const SkillCard = ({
-  icon,
-  name,
-  level,
-  index,
-}: {
-  icon: string;
-  name: string;
-  level: string;
-  index: number;
-}) => (
-  <motion.article
-    className="experience_details"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.4, delay: index * 0.1 }}
-  >
-    <img
-      src={icon}
-      className="experience_details-icon"
-      alt={name}
-      loading="lazy"
-    />
-    <div>
-      <h4>{name}</h4>
-      <small className="text-light">{level}</small>
-    </div>
-  </motion.article>
-);
 
 const IconSkillCard = ({
   Icon,
@@ -129,7 +94,7 @@ const Experience = () => {
             <h3>Frontend Development</h3>
             <div className="experience_content">
               {frontendSkills.map((skill, i) => (
-                <SkillCard key={skill.name} {...skill} index={i} />
+                <IconSkillCard key={skill.name} {...skill} index={i} />
               ))}
             </div>
           </div>
@@ -137,7 +102,7 @@ const Experience = () => {
             <h3>Backend Development</h3>
             <div className="experience_content">
               {backendSkills.map((skill, i) => (
-                <SkillCard key={skill.name} {...skill} index={i} />
+                <IconSkillCard key={skill.name} {...skill} index={i} />
               ))}
             </div>
           </div>
