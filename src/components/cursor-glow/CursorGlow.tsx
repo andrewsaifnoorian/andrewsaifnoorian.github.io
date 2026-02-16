@@ -1,17 +1,32 @@
 import { useRef, useEffect } from "react";
 import "./cursor-glow.css";
+import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 
 const CursorGlow = () => {
   const glowRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const glow = glowRef.current;
     if (!glow) return;
 
+    let frameId = 0;
+    let latestX = 0;
+    let latestY = 0;
+
     const handleMouseMove = (e: MouseEvent) => {
-      glow.style.left = `${e.clientX}px`;
-      glow.style.top = `${e.clientY}px`;
-      glow.style.opacity = "1";
+      latestX = e.clientX;
+      latestY = e.clientY;
+      if (!frameId) {
+        frameId = requestAnimationFrame(() => {
+          glow.style.left = `${latestX}px`;
+          glow.style.top = `${latestY}px`;
+          glow.style.opacity = "1";
+          frameId = 0;
+        });
+      }
     };
 
     const handleMouseLeave = () => {
@@ -24,8 +39,11 @@ const CursorGlow = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      if (frameId) cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
 
   return <div ref={glowRef} className="cursor-glow" />;
 };

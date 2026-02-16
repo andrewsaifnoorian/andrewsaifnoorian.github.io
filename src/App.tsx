@@ -18,6 +18,7 @@ import Resume from "./components/resume/Resume";
 import ThemeToggle from "./components/theme-toggle/ThemeToggle";
 import CursorGlow from "./components/cursor-glow/CursorGlow";
 import BackToTop from "./components/back-to-top/BackToTop";
+import NotFound from "./components/not-found/NotFound";
 
 const ScrollProgress = () => {
   const [width, setWidth] = useState(0);
@@ -78,6 +79,14 @@ const AnimatedRoutes = () => {
           element={
             <motion.div {...pageTransition}>
               <Resume />
+            </motion.div>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <motion.div {...pageTransition}>
+              <NotFound />
             </motion.div>
           }
         />

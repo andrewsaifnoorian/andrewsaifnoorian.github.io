@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import "./about.css";
-import Me from "../../assets/me.png";
+import Me from "../../assets/me.webp";
 import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import {
@@ -12,12 +12,14 @@ import {
   animate,
 } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
+import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 
-const useTypewriter = (text: string, speed = 80) => {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
+const useTypewriter = (text: string, speed = 80, skip = false) => {
+  const [displayed, setDisplayed] = useState(skip ? text : "");
+  const [done, setDone] = useState(skip);
 
   const type = useCallback(() => {
+    if (skip) return;
     let i = 0;
     const interval = setInterval(() => {
       setDisplayed(text.slice(0, i + 1));
@@ -28,7 +30,7 @@ const useTypewriter = (text: string, speed = 80) => {
       }
     }, speed);
     return () => clearInterval(interval);
-  }, [text, speed]);
+  }, [text, speed, skip]);
 
   useEffect(() => {
     return type();
@@ -119,7 +121,8 @@ const WordReveal = ({ text }: { text: string }) => {
 };
 
 const About = () => {
-  const { displayed, done } = useTypewriter("Andrew Saifnoorian", 90);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const { displayed, done } = useTypewriter("Andrew Saifnoorian", 90, prefersReducedMotion);
   const heroWrapperRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile(600);
 
@@ -140,7 +143,7 @@ const About = () => {
         >
           <h5 className="hero_greeting">Hey I'm</h5>
           <h1 className="hero_name">
-            {displayed}
+            <span className={done ? "hero_name--gradient" : ""}>{displayed}</span>
             <span className={`hero_caret ${done ? "blink" : ""}`}>|</span>
           </h1>
           <p className="hero_subtitle text-light">
