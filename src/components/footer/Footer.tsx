@@ -6,9 +6,6 @@ import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer>
-      <a href="#" className="footer_logo">
-        Back to the top
-      </a>
       <ul className="permalinks">
         <li>
           <a href="#">Home</a>
