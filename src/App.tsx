@@ -17,7 +17,6 @@ import Footer from "./components/footer/Footer";
 import Resume from "./components/resume/Resume";
 import ThemeToggle from "./components/theme-toggle/ThemeToggle";
 import CursorGlow from "./components/cursor-glow/CursorGlow";
-import BackToTop from "./components/back-to-top/BackToTop";
 
 const ScrollProgress = () => {
   const [width, setWidth] = useState(0);
@@ -91,7 +90,6 @@ const App = () => {
     <BrowserRouter>
       <ThemeToggle />
       <CursorGlow />
-      <BackToTop />
       <AnimatedRoutes />
     </BrowserRouter>
   );
