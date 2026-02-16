@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# andrewsafe.github.io
 
-## Available Scripts
+**My personal portfolio — built to feel like an Apple product page.**
 
-In the project directory, you can run:
+[View Live](https://andrewsafe.github.io) &nbsp;&middot;&nbsp; [LinkedIn](https://www.linkedin.com/in/andrewsaifnoorian/)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Highlights
 
-### `npm test`
+| Feature | Details |
+|---------|---------|
+| **Scroll-Pinned Hero** | Sticky hero fades and scales out as you scroll, content slides over it |
+| **Horizontal Project Scroll** | Projects scroll horizontally on desktop, vertical grid on mobile |
+| **Counting Stats** | Numbers animate from 0 when scrolled into view |
+| **Word-by-Word Reveal** | Bio text reveals progressively as you scroll through it |
+| **Typewriter Hero** | Name types out letter by letter on load |
+| **Dark / Light Mode** | Toggle with smooth transitions across the entire site |
+| **Cursor Glow** | Subtle radial glow follows the mouse on desktop |
+| **Scroll Progress Bar** | Thin gradient bar at the top tracks your scroll position |
+| **Scroll-Tracking Nav** | Bottom nav highlights the active section automatically |
+| **Page Transitions** | Animated route transitions between home and resume |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+React 19          TypeScript          Vite 7
+Framer Motion 12  React Router 7      GitHub Pages
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Zero external animation libraries** — all scroll effects use Framer Motion's `useScroll` and `useTransform` hooks for GPU-accelerated, scroll-driven animations.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Quickstart
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# install
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# dev server
+npm run dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# type-check
+npx tsc --noEmit
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# build + deploy to GitHub Pages
+npm run deploy
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Project Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+src/
+├── components/
+│   ├── about/          # Hero + bio + stats (scroll-pinned, counting, word reveal)
+│   ├── project/        # Horizontal scroll gallery with hover overlays
+│   ├── experience/     # Skills & tech stack
+│   ├── contact/        # Contact form via EmailJS
+│   ├── nav/            # Scroll-tracking bottom nav bar
+│   ├── testimonials/   # Swiper carousel
+│   ├── services/       # What I offer
+│   ├── resume/         # Resume page
+│   ├── animated-section/  # Reusable fade-in-on-scroll wrapper
+│   ├── cursor-glow/    # Mouse-following radial glow
+│   ├── theme-toggle/   # Dark/light mode switch
+│   ├── back-to-top/    # Floating scroll-to-top button
+│   └── footer/         # Links & socials
+├── assets/             # Images & textures
+├── App.tsx             # Routes & layout
+└── index.css           # Global styles & CSS variables
+```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<div align="center">
 
-### Analyzing the Bundle Size
+Built by **Andrew Saifnoorian**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+</div>
