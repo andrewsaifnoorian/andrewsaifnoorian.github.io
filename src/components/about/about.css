@@ -135,15 +135,14 @@
 
 /* ── Word Reveal ── */
 .word-reveal {
-  display: flex;
-  flex-wrap: wrap;
   margin: 2rem 0 2.6rem;
   color: var(--color-white);
+  line-height: 1.6;
 }
 
 .word-reveal_word {
-  display: inline-block;
-  margin-right: 0.3em;
+  display: inline;
+  white-space: pre-wrap;
 }
 
 @media screen and (max-width: 1024px){
@@ -193,7 +192,7 @@
   }
 
   .word-reveal {
-    justify-content: center;
+    text-align: center;
   }
 
   .hero_name {
