@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import AnimatedSection from "../animated-section/AnimatedSection";
+import ScrambleText from "../scramble-text/ScrambleText";
 
 const peers = [
   {
@@ -40,7 +41,7 @@ const Testimonials = () => {
   return (
     <section id="testimonials">
       <h5>Review from Peers</h5>
-      <h2>Testimonials</h2>
+      <ScrambleText text="Testimonials" />
       <AnimatedSection>
         <Swiper
           className="container testimonials_container"

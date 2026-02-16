@@ -39,6 +39,36 @@
   border-radius: 2rem;
   border: 1px solid transparent;
   transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.project_item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(77, 77, 255, 0.12),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="light"] .project_item::before {
+  background: radial-gradient(
+    400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(139, 106, 74, 0.1),
+    transparent 60%
+  );
+}
+
+.project_item:hover::before {
+  opacity: 1;
 }
 
 .project_item:hover {
