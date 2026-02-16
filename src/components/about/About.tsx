@@ -85,7 +85,7 @@ interface WordProps {
 }
 
 const Word = ({ children, range, progress }: WordProps) => {
-  const opacity = useTransform(progress, range, [0.15, 1]);
+  const opacity = useTransform(progress, range, [0.4, 1]);
   return (
     <motion.span className="word-reveal_word" style={{ opacity }}>
       {children}{" "}
@@ -98,7 +98,7 @@ const WordReveal = ({ text }: { text: string }) => {
   const isMobile = useIsMobile(1024);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "start 0.2"],
+    offset: ["start 0.95", "start 0.5"],
   });
 
   const words = text.split(" ");
