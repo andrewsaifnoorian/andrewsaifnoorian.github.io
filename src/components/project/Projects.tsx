@@ -8,6 +8,7 @@ import IMG6 from "../../assets/poker5hand.png";
 import IMG7 from "../../assets/underMSRP.png";
 import IMG8 from "../../assets/CarM.png";
 import IMG9 from "../../assets/tasksapp.png";
+import AnimatedSection from "../animated-section/AnimatedSection";
 
 const projects = [
   {
@@ -74,40 +75,63 @@ const projects = [
     demo: "",
   },
 ];
+
 const Projects = () => {
   return (
     <section id="project">
       <h5>My Recent Work</h5>
       <h2>Portfolio</h2>
-      <div className="container project_container">
-        {projects.map(({ id, image, title, github, demo }) => {
-          return (
-            <article key={id} className="project_item">
-              <div className="project_item-image">
-                <img src={image} alt={title} />
-              </div>
-              <h3>{title}</h3>
-              <div className="project-item-cta">
-                {github && (
-                  <a href={github} className="btn">
-                    Github
-                  </a>
-                )}
-                {demo && (
-                  <a
-                    href={demo}
-                    className="btn btn-primary"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Live Demo
-                  </a>
-                )}
-              </div>
-            </article>
-          );
-        })}
-      </div>
+      <AnimatedSection>
+        <div className="container project_container">
+          {projects.map(({ id, image, title, github, demo }) => {
+            return (
+              <article key={id} className="project_item">
+                <div className="project_item-image">
+                  <img src={image} alt={title} loading="lazy" />
+                  <div className="project_item-overlay">
+                    <h3>{title}</h3>
+                    <div className="project_item-overlay-cta">
+                      {github && (
+                        <a href={github} className="btn">
+                          Github
+                        </a>
+                      )}
+                      {demo && (
+                        <a
+                          href={demo}
+                          className="btn btn-primary"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <h3>{title}</h3>
+                <div className="project-item-cta">
+                  {github && (
+                    <a href={github} className="btn">
+                      Github
+                    </a>
+                  )}
+                  {demo && (
+                    <a
+                      href={demo}
+                      className="btn btn-primary"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </AnimatedSection>
     </section>
   );
 };

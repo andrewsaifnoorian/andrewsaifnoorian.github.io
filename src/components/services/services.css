@@ -19,14 +19,14 @@
 }
 
 .service_head {
-  background: var(--color-primary);
+  background: var(--gradient-accent);
   padding: 2rem;
   border-radius: 0 0 2rem 2rem;
   box-shadow: 0 2rem 1rem rgba(0,0,0,0.1);
 }
 
 .service_head h3 {
-  color: var(--color-bg);
+  color: #fff;
   font-size: 1rem;
   text-align: center;
 }
