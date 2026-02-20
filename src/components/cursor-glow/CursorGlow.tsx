@@ -33,7 +33,7 @@ const CursorGlow = () => {
       glow.style.opacity = "0";
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {

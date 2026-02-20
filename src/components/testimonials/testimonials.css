@@ -60,7 +60,6 @@
   border-radius: 50%;
   padding: 3px;
   background: var(--gradient-accent);
-  animation: avatar-ring-rotate 4s linear infinite;
 }
 
 .testimonial-avatar img {
@@ -69,12 +68,6 @@
   border-radius: 50%;
   object-fit: cover;
   display: block;
-}
-
-@keyframes avatar-ring-rotate {
-  to {
-    filter: hue-rotate(360deg);
-  }
 }
 
 /* ── Name ── */
@@ -111,19 +104,6 @@
   font-style: italic;
   line-height: 1.6;
   color: var(--color-light);
-}
-
-/* ══════════════════════════════════════
-   Reduced Motion
-   ══════════════════════════════════════ */
-@media (prefers-reduced-motion: reduce) {
-  .testimonial-avatar {
-    animation: none;
-  }
-
-  .testimonial-card:hover {
-    box-shadow: none;
-  }
 }
 
 /* ══════════════════════════════════════

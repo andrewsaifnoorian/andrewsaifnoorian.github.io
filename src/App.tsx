@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -25,29 +25,39 @@ import NoiseOverlay from "./components/noise-overlay/NoiseOverlay";
 import useDynamicFavicon from "./hooks/useDynamicFavicon";
 
 const ScrollProgress = () => {
-  const [width, setWidth] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let raf = 0;
     const handleScroll = () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const scrollHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      setWidth(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const el = barRef.current;
+        if (!el) return;
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        el.style.width = `${pct}%`;
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
-  return <div className="scroll-progress" style={{ width: `${width}%` }} />;
+  return <div ref={barRef} className="scroll-progress" />;
 };
 
 const pageTransition = {
-  initial: { opacity: 0, y: 30, scale: 0.98, filter: "blur(4px)" },
-  animate: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
-  exit: { opacity: 0, y: -20, scale: 0.98, filter: "blur(4px)" },
-  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -15 },
+  transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
 };
 
 const Home = () => (
