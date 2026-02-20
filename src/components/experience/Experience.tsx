@@ -23,34 +23,55 @@ import {
 } from "react-icons/si";
 import { FaMicrosoft, FaJava, FaDatabase, FaCog } from "react-icons/fa";
 
+type Level = "Experienced" | "Proficient";
+
+const LEVEL_DOTS: Record<Level, number> = {
+  Proficient: 3,
+  Experienced: 4,
+};
+
 const aiCloudSkills = [
-  { Icon: SiAnthropic, name: "Claude", level: "Experienced" },
-  { Icon: SiOpenai, name: "ChatGPT", level: "Experienced" },
-  { Icon: SiGooglegemini, name: "Gemini", level: "Proficient" },
-  { Icon: SiAmazonwebservices, name: "AWS", level: "Experienced" },
-  { Icon: FaMicrosoft, name: "Azure", level: "Proficient" },
-  { Icon: SiGooglecloud, name: "GCP", level: "Proficient" },
-  { Icon: SiOracle, name: "Oracle", level: "Proficient" },
-  { Icon: SiDatabricks, name: "Databricks", level: "Proficient" },
+  { Icon: SiAnthropic, name: "Claude", level: "Experienced" as Level },
+  { Icon: SiOpenai, name: "ChatGPT", level: "Experienced" as Level },
+  { Icon: SiGooglegemini, name: "Gemini", level: "Proficient" as Level },
+  { Icon: SiAmazonwebservices, name: "AWS", level: "Experienced" as Level },
+  { Icon: FaMicrosoft, name: "Azure", level: "Proficient" as Level },
+  { Icon: SiGooglecloud, name: "GCP", level: "Proficient" as Level },
+  { Icon: SiOracle, name: "Oracle", level: "Proficient" as Level },
+  { Icon: SiDatabricks, name: "Databricks", level: "Proficient" as Level },
 ];
 
 const frontendSkills = [
-  { Icon: SiReact, name: "React", level: "Experienced" },
-  { Icon: SiAngular, name: "Angular", level: "Experienced" },
-  { Icon: FaCog, name: "ServiceNow", level: "Experienced" },
-  { Icon: SiHtml5, name: "HTML", level: "Experienced" },
-  { Icon: SiCss3, name: "CSS", level: "Experienced" },
-  { Icon: SiJavascript, name: "JavaScript", level: "Experienced" },
+  { Icon: SiReact, name: "React", level: "Experienced" as Level },
+  { Icon: SiAngular, name: "Angular", level: "Experienced" as Level },
+  { Icon: FaCog, name: "ServiceNow", level: "Experienced" as Level },
+  { Icon: SiHtml5, name: "HTML", level: "Experienced" as Level },
+  { Icon: SiCss3, name: "CSS", level: "Experienced" as Level },
+  { Icon: SiJavascript, name: "JavaScript", level: "Experienced" as Level },
 ];
 
 const backendSkills = [
-  { Icon: FaJava, name: "Java", level: "Experienced" },
-  { Icon: SiApachemaven, name: "Maven", level: "Experienced" },
-  { Icon: SiPython, name: "Python", level: "Proficient" },
-  { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" },
-  { Icon: FaDatabase, name: "SQL", level: "Experienced" },
-  { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" },
+  { Icon: FaJava, name: "Java", level: "Experienced" as Level },
+  { Icon: SiApachemaven, name: "Maven", level: "Experienced" as Level },
+  { Icon: SiPython, name: "Python", level: "Proficient" as Level },
+  { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" as Level },
+  { Icon: FaDatabase, name: "SQL", level: "Experienced" as Level },
+  { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" as Level },
 ];
+
+const LevelDots = ({ level }: { level: Level }) => {
+  const filled = LEVEL_DOTS[level];
+  return (
+    <div className="experience_level" aria-label={level}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <span
+          key={i}
+          className={`experience_level-dot${i < filled ? " experience_level-dot--filled" : ""}`}
+        />
+      ))}
+    </div>
+  );
+};
 
 const IconSkillCard = ({
   Icon,
@@ -60,20 +81,20 @@ const IconSkillCard = ({
 }: {
   Icon: ComponentType<{ className?: string }>;
   name: string;
-  level: string;
+  level: Level;
   index: number;
 }) => (
   <motion.article
     className="experience_details"
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 16 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ duration: 0.4, delay: index * 0.1 }}
+    transition={{ duration: 0.35, delay: index * 0.06 }}
   >
     <Icon className="experience_details-svg-icon" />
     <div>
       <h4>{name}</h4>
-      <small className="text-light">{level}</small>
+      <LevelDots level={level} />
     </div>
   </motion.article>
 );
