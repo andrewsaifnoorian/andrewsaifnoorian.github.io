@@ -37,15 +37,6 @@
   animation: gradient-shift 4s ease infinite;
 }
 
-[data-theme="light"] .hero_name--gradient {
-  background: linear-gradient(90deg, #2a3eb1, #3b5afe, #4facfe, #2a3eb1);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shift 4s ease infinite;
-}
-
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

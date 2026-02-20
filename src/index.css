@@ -34,15 +34,6 @@
   --gradient-accent: linear-gradient(135deg, #1100fc, #4facfe, #00f2fe);
 }
 
-[data-theme="light"] {
-  --color-bg: #f5f7fa;
-  --color-bg-variant: #e4e9f0;
-  --color-primary: #1a1d2e;
-  --color-primary-variant: #3b5afe;
-  --color-white: #1a1d2e;
-  --color-light: rgba(26, 29, 46, 0.55);
-  --gradient-accent: linear-gradient(135deg, #3b5afe, #4facfe, #00c6fb);
-}
 
 html {
   scroll-behavior: smooth;

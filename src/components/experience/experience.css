@@ -21,16 +21,8 @@
   transition: border-color 0.3s ease;
 }
 
-[data-theme="light"] .experience_container > div {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
 .experience_container > div:hover {
   border-color: rgba(79, 172, 254, 0.2);
-}
-
-[data-theme="light"] .experience_container > div:hover {
-  border-color: rgba(59, 90, 254, 0.2);
 }
 
 .experience_container > div h3 {
@@ -65,10 +57,6 @@
 
 .experience_details:hover {
   background: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="light"] .experience_details:hover {
-  background: rgba(0, 0, 0, 0.04);
 }
 
 .experience_details-svg-icon {

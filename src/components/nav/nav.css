@@ -12,10 +12,6 @@ nav {
   border-radius: 3rem;
 }
 
-[data-theme="light"] nav {
-  background: rgba(250, 248, 245, 0.92);
-}
-
 nav a {
   background: transparent;
   padding: 0.9rem;
@@ -25,16 +21,8 @@ nav a {
   font-size: 1.1rem;
 }
 
-[data-theme="light"] nav a {
-  color: var(--color-primary);
-}
-
 nav a:hover {
   background: rgba(0,0,0,0.3);
-}
-
-[data-theme="light"] nav a:hover {
-  background: rgba(0,0,0,0.08);
 }
 
 nav a.active {

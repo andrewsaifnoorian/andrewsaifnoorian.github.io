@@ -33,25 +33,12 @@
   z-index: 1;
 }
 
-[data-theme="light"] .expertise-tab {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
 .expertise-tab:hover {
   color: var(--color-primary);
   border-color: rgba(255, 255, 255, 0.15);
 }
 
-[data-theme="light"] .expertise-tab:hover {
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
 .expertise-tab--active {
-  color: #fff;
-  border-color: transparent;
-}
-
-[data-theme="light"] .expertise-tab--active {
   color: #fff;
   border-color: transparent;
 }
@@ -129,10 +116,6 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="light"] .mini-timeline__node:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
 .mini-timeline__dot {
   position: absolute;
   left: -1.5rem;
@@ -143,10 +126,6 @@
   background: var(--gradient-accent);
   transform: translateX(-0.05rem);
   box-shadow: 0 0 8px rgba(79, 172, 254, 0.3);
-}
-
-[data-theme="light"] .mini-timeline__dot {
-  box-shadow: 0 0 8px rgba(59, 90, 254, 0.25);
 }
 
 .mini-timeline__year {
@@ -178,16 +157,8 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-[data-theme="light"] .bento-card {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
 .bento-card:hover {
   border-color: rgba(79, 172, 254, 0.2);
-}
-
-[data-theme="light"] .bento-card:hover {
-  border-color: rgba(59, 90, 254, 0.2);
 }
 
 .bento-card--sm {
@@ -205,10 +176,6 @@
 .bento-card--highlight {
   border-color: var(--color-primary-variant);
   box-shadow: 0 0 20px rgba(79, 172, 254, 0.15);
-}
-
-[data-theme="light"] .bento-card--highlight {
-  box-shadow: 0 0 20px rgba(59, 90, 254, 0.12);
 }
 
 /* ── MetricCard ── */
@@ -258,10 +225,6 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="light"] .bento-tech__item:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
 .bento-tech__icon {
   font-size: 1.6rem;
   color: var(--color-primary);
@@ -303,10 +266,6 @@
   gap: 1.5rem;
   padding: 1.75rem 0 0.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="light"] .stat-bar {
-  border-top-color: rgba(0, 0, 0, 0.08);
 }
 
 .stat-bar__item {

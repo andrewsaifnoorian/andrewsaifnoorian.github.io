@@ -15,7 +15,7 @@ import Testimonials from "./components/testimonials/Testimonials";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/footer/Footer";
 import Resume from "./components/resume/Resume";
-import ThemeToggle from "./components/theme-toggle/ThemeToggle";
+
 import CursorGlow from "./components/cursor-glow/CursorGlow";
 import BackToTop from "./components/back-to-top/BackToTop";
 import NotFound from "./components/not-found/NotFound";
@@ -114,7 +114,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <ThemeToggle />
+
       <CursorGlow />
       <BackToTop />
       <CommandPalette />

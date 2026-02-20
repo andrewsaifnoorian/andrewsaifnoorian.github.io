@@ -20,20 +20,10 @@
   transition: border-color 0.3s ease, box-shadow 0.4s ease;
 }
 
-[data-theme="light"] .testimonial-card {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
 .testimonial-card:hover {
   border-color: rgba(79, 172, 254, 0.25);
   box-shadow: 0 0 0 1px rgba(79, 172, 254, 0.08),
     0 8px 30px rgba(79, 172, 254, 0.1);
-}
-
-[data-theme="light"] .testimonial-card:hover {
-  border-color: rgba(59, 90, 254, 0.25);
-  box-shadow: 0 0 0 1px rgba(59, 90, 254, 0.08),
-    0 8px 30px rgba(59, 90, 254, 0.08);
 }
 
 /* ── Decorative Quote Mark ── */
@@ -91,11 +81,6 @@
   border-radius: 999px;
   padding: 0.2rem 0.75rem;
   margin-bottom: 1rem;
-}
-
-[data-theme="light"] .testimonial-role {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ── Review Text ── */
