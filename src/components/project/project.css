@@ -44,18 +44,9 @@
   cursor: pointer;
 }
 
-[data-theme="light"] .project_item {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
 .project_item:hover {
   border-color: rgba(79, 172, 254, 0.2);
   box-shadow: 0 0 20px rgba(79, 172, 254, 0.1);
-}
-
-[data-theme="light"] .project_item:hover {
-  border-color: rgba(59, 90, 254, 0.2);
-  box-shadow: 0 0 20px rgba(59, 90, 254, 0.1);
 }
 
 /* ── Image container ── */
@@ -144,11 +135,6 @@
   border-radius: 2rem;
   font-size: 0.65rem;
   font-weight: 500;
-}
-
-[data-theme="light"] .project_item-tech span {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ── Project Modal ── */

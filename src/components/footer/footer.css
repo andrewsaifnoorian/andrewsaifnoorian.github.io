@@ -5,10 +5,6 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="light"] footer {
-  border-top-color: rgba(0, 0, 0, 0.08);
-}
-
 footer a {
   color: var(--color-light);
 }
@@ -48,10 +44,6 @@ footer a:hover {
   color: var(--color-light);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-[data-theme="light"] .footer_socials a {
-  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .footer_socials a:hover {

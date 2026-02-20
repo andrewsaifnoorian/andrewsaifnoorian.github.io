@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaHome, FaProjectDiagram, FaBook, FaFileAlt, FaPalette } from "react-icons/fa";
+import { FaHome, FaProjectDiagram, FaBook, FaFileAlt } from "react-icons/fa";
 import { MdContactMail } from "react-icons/md";
 import type { ComponentType } from "react";
 import "./command-palette.css";
@@ -57,15 +57,6 @@ const CommandPalette = () => {
         label: "Open Resume",
         Icon: FaFileAlt,
         action: () => { navigate("/resume"); close(); },
-      },
-      {
-        id: "theme",
-        label: "Toggle Theme",
-        Icon: FaPalette,
-        action: () => {
-          (document.querySelector(".theme-toggle") as HTMLElement)?.click();
-          close();
-        },
       },
     ],
     [navigate, close]

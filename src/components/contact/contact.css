@@ -20,10 +20,6 @@
   transition: border-color 0.3s ease;
 }
 
-[data-theme="light"] .contact_option {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
 .contact_option:hover {
   border-color: var(--color-primary-variant);
 }
@@ -57,11 +53,6 @@ textarea {
   font-family: inherit;
   font-size: 0.9rem;
   transition: border-color 0.3s ease;
-}
-
-[data-theme="light"] input,
-[data-theme="light"] textarea {
-  border-color: rgba(0, 0, 0, 0.08);
 }
 
 input:focus,
