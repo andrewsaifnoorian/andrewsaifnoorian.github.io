@@ -110,27 +110,23 @@ const projects: ProjectData[] = [
   },
 ];
 
-const handleSpotlight = (e: React.MouseEvent<HTMLElement>) => {
-  const rect = e.currentTarget.getBoundingClientRect();
-  e.currentTarget.style.setProperty("--spotlight-x", `${e.clientX - rect.left}px`);
-  e.currentTarget.style.setProperty("--spotlight-y", `${e.clientY - rect.top}px`);
-};
-
 const ProjectCard = ({
   image,
   title,
   github,
   demo,
+  techStack,
   onClick,
 }: {
   image: string;
   title: string;
   github: string;
   demo: string;
+  techStack: string[];
   onClick: () => void;
 }) => (
   <TiltCard>
-    <article className="project_item" onClick={onClick} onMouseMove={handleSpotlight}>
+    <article className="project_item" onClick={onClick}>
       <div className="project_item-image">
         <BlurImage src={image} alt={title} loading="lazy" />
         <div className="project_item-overlay">
@@ -159,7 +155,14 @@ const ProjectCard = ({
           </div>
         </div>
       </div>
-      <h3>{title}</h3>
+      <div className="project_item-info">
+        <h3>{title}</h3>
+        <div className="project_item-tech">
+          {techStack.slice(0, 4).map((tech) => (
+            <span key={tech}>{tech}</span>
+          ))}
+        </div>
+      </div>
     </article>
   </TiltCard>
 );
@@ -206,6 +209,7 @@ const HorizontalScroll = ({ onSelectProject }: { onSelectProject: (p: ProjectDat
               title={project.title}
               github={project.github}
               demo={project.demo}
+              techStack={project.techStack}
               onClick={() => onSelectProject(project)}
             />
           ))}
@@ -224,7 +228,7 @@ const Projects = () => {
   return (
     <section id="project">
       <h5>My Recent Work</h5>
-      <h2>Portfolio</h2>
+      <ScrambleText text="Portfolio" />
       {isMobile ? (
         <AnimatedSection>
           <div className="container project_container">
@@ -235,6 +239,7 @@ const Projects = () => {
                 title={project.title}
                 github={project.github}
                 demo={project.demo}
+                techStack={project.techStack}
                 onClick={() => setSelectedProject(project)}
               />
             ))}

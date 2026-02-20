@@ -15,14 +15,14 @@
 
 .horizontal-scroll_track {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   padding: 0 2rem;
   will-change: transform;
 }
 
 .horizontal-scroll_track .project_item {
-  min-width: 350px;
-  max-width: 400px;
+  min-width: 320px;
+  max-width: 360px;
   flex-shrink: 0;
 }
 
@@ -35,70 +35,53 @@
 
 .project_item {
   background: var(--color-bg-variant);
-  padding: 1.3rem;
-  border-radius: 2rem;
-  border: 1px solid transparent;
-  transition: var(--transition);
+  padding: 0;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.project_item::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-    rgba(77, 77, 255, 0.12),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-
-[data-theme="light"] .project_item::before {
-  background: radial-gradient(
-    400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-    rgba(139, 106, 74, 0.1),
-    transparent 60%
-  );
-}
-
-.project_item:hover::before {
-  opacity: 1;
+[data-theme="light"] .project_item {
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .project_item:hover {
-  border-color: var(--color-primary-variant);
-  background: transparent;
-  transform: scale(1.03);
-  box-shadow: 0 8px 30px rgba(17, 0, 252, 0.2);
+  border-color: rgba(79, 172, 254, 0.2);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.1);
 }
 
 [data-theme="light"] .project_item:hover {
-  box-shadow: 0 8px 30px rgba(139, 106, 74, 0.18);
+  border-color: rgba(139, 106, 74, 0.2);
+  box-shadow: 0 0 20px rgba(139, 106, 74, 0.1);
 }
 
+/* ── Image container ── */
 .project_item-image {
-  border-radius: 0.5rem;
+  border-radius: 1rem 1rem 0 0;
   overflow: hidden;
   position: relative;
+  aspect-ratio: 16 / 9;
 }
 
 .project_item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.4s ease;
 }
 
 .project_item:hover .project_item-image img {
-  transform: scale(1.08);
+  transform: scale(1.04);
 }
 
+/* ── Overlay ── */
 .project_item-overlay {
   position: absolute;
   inset: 0;
+  border-radius: 1rem 1rem 0 0;
   background: rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
@@ -135,12 +118,37 @@
   opacity: 1;
 }
 
-.project_item {
-  cursor: pointer;
+/* ── Card info area ── */
+.project_item-info {
+  padding: 1rem 1.25rem;
 }
 
-.project_item h3 {
-  margin: 1.2rem 0 2rem;
+.project_item-info h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+}
+
+/* ── Tech pills ── */
+.project_item-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project_item-tech span {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+[data-theme="light"] .project_item-tech span {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ── Project Modal ── */
@@ -148,8 +156,7 @@
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;

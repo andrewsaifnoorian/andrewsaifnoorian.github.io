@@ -89,7 +89,7 @@ export const tabs: TabData[] = [
       {
         id: "ent-showcase",
         type: "showcase",
-        size: "md",
+        size: "lg",
         title: "Payment-Secure Systems",
         description: "RESTful APIs with enterprise auth flows",
       },
@@ -128,7 +128,7 @@ export const tabs: TabData[] = [
       {
         id: "acad-ai",
         type: "showcase",
-        size: "md",
+        size: "lg",
         title: "Applied AI",
         description: "Claude courses, prompt engineering, model evaluation",
       },
@@ -147,7 +147,7 @@ export const tabs: TabData[] = [
       { year: "2024", text: "AWS Infrastructure & Monitoring", linkedCardId: "devops-showcase" },
     ],
     bento: [
-      { id: "devops-issues", type: "metric", size: "md", value: "17+", label: "Critical Issues Caught Pre-Prod" },
+      { id: "devops-issues", type: "metric", size: "lg", value: "17+", label: "Critical Issues Caught Pre-Prod" },
       { id: "devops-saved", type: "metric", size: "sm", value: "2-3 days", label: "Regression Saved Per Cycle" },
       {
         id: "devops-tech",
