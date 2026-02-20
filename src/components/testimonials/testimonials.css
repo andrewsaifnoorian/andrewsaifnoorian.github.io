@@ -31,9 +31,9 @@
 }
 
 [data-theme="light"] .testimonial-card:hover {
-  border-color: rgba(139, 106, 74, 0.25);
-  box-shadow: 0 0 0 1px rgba(139, 106, 74, 0.08),
-    0 8px 30px rgba(139, 106, 74, 0.08);
+  border-color: rgba(59, 90, 254, 0.25);
+  box-shadow: 0 0 0 1px rgba(59, 90, 254, 0.08),
+    0 8px 30px rgba(59, 90, 254, 0.08);
 }
 
 /* ── Decorative Quote Mark ── */
