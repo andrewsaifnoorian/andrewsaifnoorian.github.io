@@ -19,8 +19,8 @@
 [data-theme="light"] .cursor-glow {
   background: radial-gradient(
     circle,
-    rgba(139, 106, 74, 0.12) 0%,
-    rgba(196, 154, 108, 0.06) 40%,
+    rgba(59, 90, 254, 0.12) 0%,
+    rgba(79, 172, 254, 0.06) 40%,
     transparent 70%
   );
 }

@@ -146,7 +146,7 @@
 }
 
 [data-theme="light"] .mini-timeline__dot {
-  box-shadow: 0 0 8px rgba(139, 106, 74, 0.25);
+  box-shadow: 0 0 8px rgba(59, 90, 254, 0.25);
 }
 
 .mini-timeline__year {
@@ -187,7 +187,7 @@
 }
 
 [data-theme="light"] .bento-card:hover {
-  border-color: rgba(139, 106, 74, 0.2);
+  border-color: rgba(59, 90, 254, 0.2);
 }
 
 .bento-card--sm {
@@ -208,7 +208,7 @@
 }
 
 [data-theme="light"] .bento-card--highlight {
-  box-shadow: 0 0 20px rgba(139, 106, 74, 0.12);
+  box-shadow: 0 0 20px rgba(59, 90, 254, 0.12);
 }
 
 /* ── MetricCard ── */
