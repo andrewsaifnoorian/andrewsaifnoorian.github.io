@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
 import "./footer.css";
 import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
@@ -20,7 +19,7 @@ const Footer = () => {
           <a href="#experience">Experience</a>
         </li>
         <li>
-          <a href="#services">Services</a>
+          <a href="#services">Expertise</a>
         </li>
         <li>
           <a href="#testimonials">Testimonials</a>
@@ -30,18 +29,28 @@ const Footer = () => {
         </li>
       </ul>
       <div className="footer_socials">
-        <a href="https://www.linkedin.com/in/andrewsaifnoorian/">
+        <a
+          href="https://www.linkedin.com/in/andrewsaifnoorian/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
           <FaLinkedin />
         </a>
-        <a href="https://github.com/andrewsaifnoorian">
+        <a
+          href="https://github.com/andrewsaifnoorian"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
           <FaGithub />
         </a>
-        <Link to="/resume">
+        <Link to="/resume" aria-label="Resume">
           <FaFileAlt />
         </Link>
       </div>
       <div className="footer_copyright">
-        <small>That's all folks!</small>
+        <small>&copy; {new Date().getFullYear()} Andrew Saifnoorian</small>
       </div>
     </footer>
   );
