@@ -24,12 +24,12 @@ const Contact = () => {
       .then(
         () => {
           toast.success("Message sent successfully!");
+          form.current?.reset();
         },
         () => {
           toast.error("Failed to send the message. Please try again.");
         }
       );
-    e.currentTarget.reset();
   };
 
   return (
@@ -59,10 +59,12 @@ const Contact = () => {
             </article>
           </div>
           <form ref={form} onSubmit={sendEmail}>
+            <input type="text" name="name" placeholder="Your Full Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
             <textarea
               name="message"
-              rows={9}
-              placeholder="Please include your full name, contact, and message here!"
+              rows={7}
+              placeholder="Your Message"
               required
             ></textarea>
             <MagneticButton>

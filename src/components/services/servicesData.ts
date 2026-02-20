@@ -67,16 +67,16 @@ export const tabs: TabData[] = [
     timeline: [
       { year: "2024", text: "Angular v8 → v19 Migration", linkedCardId: "ent-paint" },
       { year: "2025", text: "Spring Boot Batch Overhaul — 4x Throughput", linkedCardId: "ent-throughput" },
-      { year: "2025", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-showcase" },
+      { year: "2025", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-throughput" },
       { year: "2026", text: "Joined JPMC — Full-Stack Engineering", linkedCardId: "ent-tech" },
     ],
     bento: [
-      { id: "ent-throughput", type: "metric", size: "lg", value: "4x", label: "Throughput Improvement" },
+      { id: "ent-throughput", type: "metric", size: "sm", value: "4x", label: "Throughput Improvement" },
       { id: "ent-paint", type: "metric", size: "sm", value: "35%", label: "Faster First Paint" },
       {
         id: "ent-tech",
         type: "tech",
-        size: "md",
+        size: "sm",
         icons: [
           { icon: SiReact, name: "React" },
           { icon: SiJavascript, name: "TypeScript" },
@@ -86,13 +86,6 @@ export const tabs: TabData[] = [
           { icon: SiAmazonwebservices, name: "AWS Aurora" },
         ],
       },
-      {
-        id: "ent-showcase",
-        type: "showcase",
-        size: "lg",
-        title: "Payment-Secure Systems",
-        description: "RESTful APIs with enterprise auth flows",
-      },
     ],
   },
   {
@@ -101,7 +94,7 @@ export const tabs: TabData[] = [
     shortLabel: "AI Research",
     icon: FaFlask,
     timeline: [
-      { year: "2019", text: "Rutgers Honors College — Presidential Scholar", linkedCardId: "acad-certs" },
+      { year: "2019", text: "Rutgers Honors College — Presidential Scholar", linkedCardId: "acad-dnn" },
       { year: "2024", text: "Started MS at Johns Hopkins", linkedCardId: "acad-dnn" },
       { year: "2024", text: "Neural Network ROI Research", linkedCardId: "acad-dnn" },
       { year: "2025", text: "Anthropic Claude AI Courses", linkedCardId: "acad-ai" },
@@ -110,7 +103,7 @@ export const tabs: TabData[] = [
       {
         id: "acad-dnn",
         type: "showcase",
-        size: "lg",
+        size: "sm",
         title: "Deep Neural Networks",
         description: "Feedforward NN for ad ROI classification",
       },
@@ -128,11 +121,10 @@ export const tabs: TabData[] = [
       {
         id: "acad-ai",
         type: "showcase",
-        size: "lg",
+        size: "sm",
         title: "Applied AI",
         description: "Claude courses, prompt engineering, model evaluation",
       },
-      { id: "acad-certs", type: "metric", size: "sm", value: "3", label: "Certifications" },
     ],
   },
   {
@@ -144,15 +136,15 @@ export const tabs: TabData[] = [
       { year: "2023", text: "GitLab CI/CD Pipeline Architecture", linkedCardId: "devops-issues" },
       { year: "2023", text: "Selenium/Cucumber Test Automation", linkedCardId: "devops-saved" },
       { year: "2024", text: "Docker + SonarQube Quality Gates", linkedCardId: "devops-tech" },
-      { year: "2024", text: "AWS Infrastructure & Monitoring", linkedCardId: "devops-showcase" },
+      { year: "2024", text: "AWS Infrastructure & Monitoring", linkedCardId: "devops-tech" },
     ],
     bento: [
-      { id: "devops-issues", type: "metric", size: "lg", value: "17+", label: "Critical Issues Caught Pre-Prod" },
+      { id: "devops-issues", type: "metric", size: "sm", value: "17+", label: "Critical Issues Caught Pre-Prod" },
       { id: "devops-saved", type: "metric", size: "sm", value: "2-3 days", label: "Regression Saved Per Cycle" },
       {
         id: "devops-tech",
         type: "tech",
-        size: "lg",
+        size: "sm",
         icons: [
           { icon: SiDocker, name: "Docker" },
           { icon: SiAmazonwebservices, name: "AWS" },
@@ -161,13 +153,6 @@ export const tabs: TabData[] = [
           { icon: SiSelenium, name: "Selenium" },
           { icon: SiTerraform, name: "Terraform" },
         ],
-      },
-      {
-        id: "devops-showcase",
-        type: "showcase",
-        size: "md",
-        title: "Release Management",
-        description: "RFC cycles, cutovers, rollback plans",
       },
     ],
   },
