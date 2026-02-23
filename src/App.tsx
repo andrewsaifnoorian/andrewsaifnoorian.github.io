@@ -23,6 +23,7 @@ import CommandPalette from "./components/command-palette/CommandPalette";
 import EasterEgg from "./components/easter-egg/EasterEgg";
 import NoiseOverlay from "./components/noise-overlay/NoiseOverlay";
 import useDynamicFavicon from "./hooks/useDynamicFavicon";
+import usePerformanceTier from "./hooks/usePerformanceTier";
 
 const ScrollProgress = () => {
   const barRef = useRef<HTMLDivElement>(null);
@@ -111,6 +112,11 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   useDynamicFavicon();
+  const tier = usePerformanceTier();
+
+  useEffect(() => {
+    document.body.dataset.perfTier = tier;
+  }, [tier]);
 
   return (
     <BrowserRouter>

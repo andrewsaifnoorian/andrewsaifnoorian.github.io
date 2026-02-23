@@ -1,19 +1,23 @@
 import { useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useKonamiCode from "../../hooks/useKonamiCode";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import "./easter-egg.css";
 
 const COLORS = ["#ff6b6b", "#feca57", "#48dbfb", "#ff9ff3", "#54a0ff", "#5f27cd", "#01a3a4", "#f368e0"];
-const COUNT = 60;
+const COUNT_FULL = 60;
+const COUNT_LOW = 15;
 
 const randomBetween = (a: number, b: number) => Math.random() * (b - a) + a;
 
 const EasterEgg = () => {
   const activated = useKonamiCode();
+  const lowPerf = useIsLowPerformance();
+  const count = lowPerf ? COUNT_LOW : COUNT_FULL;
 
   const particles = useMemo(
     () =>
-      Array.from({ length: COUNT }, (_, i) => ({
+      Array.from({ length: count }, (_, i) => ({
         id: i,
         color: COLORS[i % COLORS.length],
         x: randomBetween(-300, 300),
@@ -22,7 +26,7 @@ const EasterEgg = () => {
         size: randomBetween(6, 12),
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [activated]
+    [activated, count]
   );
 
   return (

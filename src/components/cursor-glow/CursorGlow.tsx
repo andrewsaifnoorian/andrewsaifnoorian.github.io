@@ -1,13 +1,13 @@
 import { useRef, useEffect } from "react";
 import "./cursor-glow.css";
-import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 
 const CursorGlow = () => {
   const glowRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const lowPerf = useIsLowPerformance();
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (lowPerf) return;
 
     const glow = glowRef.current;
     if (!glow) return;
@@ -41,9 +41,9 @@ const CursorGlow = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       if (frameId) cancelAnimationFrame(frameId);
     };
-  }, [prefersReducedMotion]);
+  }, [lowPerf]);
 
-  if (prefersReducedMotion) return null;
+  if (lowPerf) return null;
 
   return <div ref={glowRef} className="cursor-glow" />;
 };

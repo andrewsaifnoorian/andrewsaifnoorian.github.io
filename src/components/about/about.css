@@ -190,3 +190,16 @@
     font-size: 2rem;
   }
 }
+
+/* ── Low-performance tier ── */
+body[data-perf-tier="reduced"] .hero_name--gradient,
+body[data-perf-tier="minimal"] .hero_name--gradient {
+  animation: none;
+  background-position: 0% 50%;
+}
+
+body[data-perf-tier="reduced"] .hero_caret.blink,
+body[data-perf-tier="minimal"] .hero_caret.blink {
+  animation: none;
+  opacity: 1;
+}

@@ -1,9 +1,9 @@
-import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import "./noise-overlay.css";
 
 const NoiseOverlay = () => {
-  const reducedMotion = usePrefersReducedMotion();
-  if (reducedMotion) return null;
+  const lowPerf = useIsLowPerformance();
+  if (lowPerf) return null;
 
   return (
     <div className="noise-overlay">
