@@ -12,6 +12,7 @@ import {
 } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import useTypewriter from "../../hooks/useTypewriter";
 import useCountingAnimation from "../../hooks/useCountingAnimation";
 
@@ -22,7 +23,8 @@ interface CountingStatProps {
 }
 
 const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
-  const { ref, display } = useCountingAnimation(target);
+  const lowPerf = useIsLowPerformance();
+  const { ref, display } = useCountingAnimation(target, lowPerf);
 
   return (
     <small ref={ref}>
@@ -51,6 +53,7 @@ const Word = ({ children, range, progress }: WordProps) => {
 const WordReveal = ({ text }: { text: string }) => {
   const containerRef = useRef<HTMLParagraphElement>(null);
   const isMobile = useIsMobile(1024);
+  const lowPerf = useIsLowPerformance();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.95", "start 0.65"],
@@ -58,7 +61,7 @@ const WordReveal = ({ text }: { text: string }) => {
 
   const words = text.split(" ");
 
-  if (isMobile) {
+  if (isMobile || lowPerf) {
     return <p>{text}</p>;
   }
 
@@ -79,6 +82,7 @@ const WordReveal = ({ text }: { text: string }) => {
 
 const About = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const lowPerf = useIsLowPerformance();
   const { displayed, done } = useTypewriter("Andrew Saifnoorian", 90, prefersReducedMotion);
   const heroWrapperRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile(600);
@@ -91,12 +95,19 @@ const About = () => {
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
 
+  const HeroTag = lowPerf ? "div" : motion.div;
+  const heroStyle = lowPerf
+    ? undefined
+    : isMobile
+      ? { opacity: heroOpacity }
+      : { opacity: heroOpacity, scale: heroScale };
+
   return (
     <section id="about">
       <div className="hero_wrapper" ref={heroWrapperRef}>
-        <motion.div
+        <HeroTag
           className="hero"
-          style={isMobile ? { opacity: heroOpacity } : { opacity: heroOpacity, scale: heroScale }}
+          style={heroStyle}
         >
           <h5 className="hero_greeting">Hey I'm</h5>
           <h1 className="hero_name">
@@ -106,7 +117,7 @@ const About = () => {
           <p className="hero_subtitle text-light">
             Full-Stack Software Engineer
           </p>
-        </motion.div>
+        </HeroTag>
       </div>
 
       <AnimatedSection>

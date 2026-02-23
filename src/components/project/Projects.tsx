@@ -12,6 +12,7 @@ import IMG9 from "../../assets/tasksapp.webp";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import { motion, useScroll, useTransform } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import ProjectModal, { type ProjectData } from "./ProjectModal";
 import TiltCard from "../tilt-card/TiltCard";
 import ScrambleText from "../scramble-text/ScrambleText";
@@ -221,6 +222,7 @@ const HorizontalScroll = ({ onSelectProject }: { onSelectProject: (p: ProjectDat
 
 const Projects = () => {
   const isMobile = useIsMobile(1024);
+  const lowPerf = useIsLowPerformance();
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
   const handleClose = useCallback(() => setSelectedProject(null), []);
@@ -229,7 +231,7 @@ const Projects = () => {
     <section id="project">
       <h5>My Recent Work</h5>
       <ScrambleText text="Portfolio" />
-      {isMobile ? (
+      {isMobile || lowPerf ? (
         <AnimatedSection>
           <div className="container project_container">
             {projects.map((project) => (

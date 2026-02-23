@@ -21,3 +21,8 @@
     display: none;
   }
 }
+
+body[data-perf-tier="reduced"] .cursor-glow,
+body[data-perf-tier="minimal"] .cursor-glow {
+  display: none;
+}

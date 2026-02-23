@@ -15,3 +15,10 @@
   filter: blur(0);
   transform: scale(1);
 }
+
+body[data-perf-tier="reduced"] .blur-image img,
+body[data-perf-tier="minimal"] .blur-image img {
+  filter: none;
+  transform: none;
+  transition: none;
+}

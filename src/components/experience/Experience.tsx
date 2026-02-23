@@ -3,6 +3,7 @@ import "./experience.css";
 import { motion } from "framer-motion";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import ScrambleText from "../scramble-text/ScrambleText";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import {
   SiAnthropic,
   SiOpenai,
@@ -83,21 +84,28 @@ const IconSkillCard = ({
   name: string;
   level: Level;
   index: number;
-}) => (
-  <motion.article
-    className="experience_details"
-    initial={{ opacity: 0, y: 16 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.35, delay: index * 0.06 }}
-  >
-    <Icon className="experience_details-svg-icon" />
-    <div>
-      <h4>{name}</h4>
-      <LevelDots level={level} />
-    </div>
-  </motion.article>
-);
+}) => {
+  const lowPerf = useIsLowPerformance();
+  const Tag = lowPerf ? "article" : motion.article;
+  const motionProps = lowPerf
+    ? {}
+    : {
+        initial: { opacity: 0, y: 16 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.35, delay: index * 0.06 },
+      };
+
+  return (
+    <Tag className="experience_details" {...motionProps}>
+      <Icon className="experience_details-svg-icon" />
+      <div>
+        <h4>{name}</h4>
+        <LevelDots level={level} />
+      </div>
+    </Tag>
+  );
+};
 
 const Experience = () => {
   return (
