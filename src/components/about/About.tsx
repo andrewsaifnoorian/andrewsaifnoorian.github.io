@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useRef } from "react";
 import "./about.css";
 import Me from "../../assets/me.webp";
 import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
@@ -9,39 +9,12 @@ import {
   motion,
   useScroll,
   useTransform,
-  useMotionValue,
-  useInView,
-  animate,
 } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
+import useTypewriter from "../../hooks/useTypewriter";
+import useCountingAnimation from "../../hooks/useCountingAnimation";
 
-const useTypewriter = (text: string, speed = 80, skip = false) => {
-  const [displayed, setDisplayed] = useState(skip ? text : "");
-  const [done, setDone] = useState(skip);
-
-  const type = useCallback(() => {
-    if (skip) return;
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(text.slice(0, i + 1));
-      i++;
-      if (i >= text.length) {
-        clearInterval(interval);
-        setDone(true);
-      }
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, speed, skip]);
-
-  useEffect(() => {
-    return type();
-  }, [type]);
-
-  return { displayed, done };
-};
-
-/* ── Feature 3: Counting Stat ── */
 interface CountingStatProps {
   target: number;
   suffix: string;
@@ -49,25 +22,7 @@ interface CountingStatProps {
 }
 
 const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const count = useMotionValue(0);
-  const [display, setDisplay] = useState("0");
-
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(count, target, {
-      duration: 2,
-      ease: "easeOut",
-    });
-    const unsubscribe = count.on("change", (v) => {
-      setDisplay(Math.round(v).toString());
-    });
-    return () => {
-      controls.stop();
-      unsubscribe();
-    };
-  }, [inView, count, target]);
+  const { ref, display } = useCountingAnimation(target);
 
   return (
     <small ref={ref}>

@@ -1,36 +1,18 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, useMotionValue, useInView, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import type { BentoCard } from "./servicesData";
 import TiltCard from "../tilt-card/TiltCard";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
+import useCountingAnimation from "../../hooks/useCountingAnimation";
 
 /* ── MetricCard ── */
 const MetricCard = ({ value, label }: { value: string; label: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
   const reducedMotion = usePrefersReducedMotion();
 
   const numericMatch = value.match(/^(\d+)/);
   const numericPart = numericMatch ? parseInt(numericMatch[1], 10) : 0;
   const textPart = numericMatch ? value.slice(numericMatch[1].length) : value;
 
-  const count = useMotionValue(0);
-  const [display, setDisplay] = useState(reducedMotion ? numericPart.toString() : "0");
-
-  useEffect(() => {
-    if (!inView || reducedMotion || numericPart === 0) return;
-    const controls = animate(count, numericPart, {
-      duration: 2,
-      ease: "easeOut",
-    });
-    const unsubscribe = count.on("change", (v) => {
-      setDisplay(Math.round(v).toString());
-    });
-    return () => {
-      controls.stop();
-      unsubscribe();
-    };
-  }, [inView, count, numericPart, reducedMotion]);
+  const { ref, display } = useCountingAnimation(numericPart, reducedMotion);
 
   return (
     <div ref={ref} className="bento-metric">
@@ -106,11 +88,11 @@ const BentoGrid = ({ cards, highlightedId }: BentoGridProps) => {
         const inner = (() => {
           switch (card.type) {
             case "metric":
-              return <MetricCard value={card.value!} label={card.label!} />;
+              return <MetricCard value={card.value} label={card.label} />;
             case "tech":
-              return <TechCardContent icons={card.icons!} reducedMotion={reducedMotion} />;
+              return <TechCardContent icons={card.icons} reducedMotion={reducedMotion} />;
             case "showcase":
-              return <ShowcaseCardContent title={card.title!} description={card.description!} />;
+              return <ShowcaseCardContent title={card.title} description={card.description} />;
           }
         })();
 

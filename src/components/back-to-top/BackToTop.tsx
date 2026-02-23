@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import "./back-to-top.css";
+import useWindowScroll from "../../hooks/useWindowScroll";
 
 const BackToTop = () => {
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  useWindowScroll(
+    useCallback(() => {
       setVisible(window.scrollY > window.innerHeight);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    }, [])
+  );
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

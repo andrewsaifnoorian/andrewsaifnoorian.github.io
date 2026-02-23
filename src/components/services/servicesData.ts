@@ -21,19 +21,31 @@ import {
 import { FaJava } from "react-icons/fa";
 
 /* ── Card Types ── */
-export type BentoCardType = "metric" | "tech" | "showcase";
 export type BentoSize = "sm" | "md" | "lg";
 
-export interface BentoCard {
+interface BentoCardBase {
   id: string;
-  type: BentoCardType;
   size: BentoSize;
-  value?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  icons?: { icon: IconType; name: string }[];
 }
+
+export interface MetricBentoCard extends BentoCardBase {
+  type: "metric";
+  value: string;
+  label: string;
+}
+
+export interface TechBentoCard extends BentoCardBase {
+  type: "tech";
+  icons: { icon: IconType; name: string }[];
+}
+
+export interface ShowcaseBentoCard extends BentoCardBase {
+  type: "showcase";
+  title: string;
+  description: string;
+}
+
+export type BentoCard = MetricBentoCard | TechBentoCard | ShowcaseBentoCard;
 
 export interface TimelineNode {
   year: string;

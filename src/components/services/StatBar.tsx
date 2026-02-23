@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, useMotionValue, useInView, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import { stats } from "./servicesData";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
+import useCountingAnimation from "../../hooks/useCountingAnimation";
 
 const StatItem = ({
   target,
@@ -14,26 +14,8 @@ const StatItem = ({
   label: string;
   index: number;
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
   const reducedMotion = usePrefersReducedMotion();
-  const count = useMotionValue(0);
-  const [display, setDisplay] = useState(reducedMotion ? target.toString() : "0");
-
-  useEffect(() => {
-    if (!inView || reducedMotion) return;
-    const controls = animate(count, target, {
-      duration: 2,
-      ease: "easeOut",
-    });
-    const unsubscribe = count.on("change", (v) => {
-      setDisplay(Math.round(v).toString());
-    });
-    return () => {
-      controls.stop();
-      unsubscribe();
-    };
-  }, [inView, count, target, reducedMotion]);
+  const { ref, display } = useCountingAnimation(target, reducedMotion);
 
   return (
     <motion.div

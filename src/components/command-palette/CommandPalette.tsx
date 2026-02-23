@@ -158,10 +158,13 @@ const CommandPalette = () => {
   );
 };
 
+/** Delay to allow route transition to complete before scrolling */
+const SCROLL_AFTER_NAVIGATE_MS = 100;
+
 function scrollToId(id: string) {
   setTimeout(() => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  }, 100);
+  }, SCROLL_AFTER_NAVIGATE_MS);
 }
 
 export default CommandPalette;

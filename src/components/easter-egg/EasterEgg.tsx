@@ -28,7 +28,7 @@ const EasterEgg = () => {
   return (
     <AnimatePresence>
       {activated && (
-        <div className="confetti-container">
+        <div className="confetti-container" aria-hidden="true">
           {particles.map((p) => (
             <motion.div
               key={p.id}

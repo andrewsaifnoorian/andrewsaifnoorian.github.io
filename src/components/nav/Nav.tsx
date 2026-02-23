@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import "./nav.css";
 import { FaHome, FaBook, FaProjectDiagram } from "react-icons/fa";
 import { MdContactMail } from "react-icons/md";
 import MagneticButton from "../magnetic-button/MagneticButton";
+import useWindowScroll from "../../hooks/useWindowScroll";
 
 const sectionIds = ["about", "project", "experience", "contact"];
 
 const Nav = () => {
   const [activeSection, setActiveSection] = useState("about");
 
-  useEffect(() => {
-    const handleScroll = () => {
+  useWindowScroll(
+    useCallback(() => {
       const scrollY = window.scrollY + window.innerHeight / 3;
 
-      // If near top, highlight home
       if (window.scrollY < 100) {
         setActiveSection("about");
         return;
@@ -26,12 +26,8 @@ const Nav = () => {
           return;
         }
       }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    }, [])
+  );
 
   return (
     <nav>

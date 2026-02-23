@@ -4,7 +4,7 @@ const GLYPHS = "!<>-_\\/[]{}—=+*^?#________";
 const DURATION = 600;
 
 const useTextScramble = (text: string, trigger: boolean, skip: boolean) => {
-  const [display, setDisplay] = useState(skip ? text : text);
+  const [display, setDisplay] = useState(text);
   const frameRef = useRef(0);
 
   useEffect(() => {
