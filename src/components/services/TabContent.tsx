@@ -5,6 +5,9 @@ import MiniTimeline from "./MiniTimeline";
 import BentoGrid from "./BentoGrid";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 
+/** Duration the bento card stays highlighted after clicking a timeline node */
+const HIGHLIGHT_DURATION_MS = 1200;
+
 interface TabContentProps {
   tab: TabData;
 }
@@ -25,7 +28,7 @@ const TabContent = ({ tab }: TabContentProps) => {
       setHighlightedId(cardId);
       const el = document.querySelector(`[data-card-id="${cardId}"]`);
       el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      setTimeout(() => setHighlightedId(null), 1200);
+      setTimeout(() => setHighlightedId(null), HIGHLIGHT_DURATION_MS);
     },
     [reducedMotion]
   );

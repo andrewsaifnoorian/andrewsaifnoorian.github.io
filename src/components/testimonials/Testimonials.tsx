@@ -66,41 +66,39 @@ const Testimonials = () => {
       <ScrambleText text="Testimonials" />
 
       <div ref={ref} className="testimonials_grid container">
-        {peers.map(({ avatar, name, role, review }, i) => (
-          <TiltCard key={name}>
-            {reducedMotion ? (
-              <div className="testimonial-card">
-                <span className="testimonial-quote" aria-hidden="true">
-                  &ldquo;
-                </span>
-                <div className="testimonial-avatar">
-                  <img src={avatar} alt={name} loading="lazy" />
-                </div>
-                <h5 className="testimonial-name">{name}</h5>
-                <span className="testimonial-role">{role}</span>
-                <p className="testimonial-review">&ldquo;{review}&rdquo;</p>
+        {peers.map(({ avatar, name, role, review }, i) => {
+          const content = (
+            <>
+              <span className="testimonial-quote" aria-hidden="true">
+                &ldquo;
+              </span>
+              <div className="testimonial-avatar">
+                <img src={avatar} alt={name} loading="lazy" />
               </div>
-            ) : (
-              <motion.div
-                className="testimonial-card"
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-              >
-                <span className="testimonial-quote" aria-hidden="true">
-                  &ldquo;
-                </span>
-                <div className="testimonial-avatar">
-                  <img src={avatar} alt={name} loading="lazy" />
-                </div>
-                <h5 className="testimonial-name">{name}</h5>
-                <span className="testimonial-role">{role}</span>
-                <p className="testimonial-review">&ldquo;{review}&rdquo;</p>
-              </motion.div>
-            )}
-          </TiltCard>
-        ))}
+              <h5 className="testimonial-name">{name}</h5>
+              <span className="testimonial-role">{role}</span>
+              <p className="testimonial-review">&ldquo;{review}&rdquo;</p>
+            </>
+          );
+
+          return (
+            <TiltCard key={name}>
+              {reducedMotion ? (
+                <div className="testimonial-card">{content}</div>
+              ) : (
+                <motion.div
+                  className="testimonial-card"
+                  custom={i}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                >
+                  {content}
+                </motion.div>
+              )}
+            </TiltCard>
+          );
+        })}
       </div>
     </section>
   );
