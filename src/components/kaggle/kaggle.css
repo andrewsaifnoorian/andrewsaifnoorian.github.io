@@ -1,0 +1,182 @@
+/* ── Grid ── */
+.kaggle_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* ── Card ── */
+.kaggle_item {
+  background: var(--color-bg-variant);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid var(--color-primary-variant);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kaggle_item:hover {
+  border-color: rgba(79, 172, 254, 0.25);
+  border-left-color: rgba(79, 172, 254, 0.6);
+  box-shadow: 0 0 24px rgba(79, 172, 254, 0.08);
+}
+
+.kaggle_item--highlight {
+  border-left-color: rgba(79, 172, 254, 0.8);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.12);
+}
+
+/* ── Header: score + rank ── */
+.kaggle_item-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.kaggle_item-score {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.kaggle_item-score-value {
+  font-size: 1.9rem;
+  font-weight: 700;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.kaggle_item-score-value--placeholder {
+  font-size: 1.5rem;
+  opacity: 0.4;
+}
+
+.kaggle_item-score-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-light);
+}
+
+.kaggle_item-rank {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-light);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2rem;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.kaggle_item-rank--gold {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(17, 0, 252, 0.3), rgba(79, 172, 254, 0.3));
+  border-color: rgba(79, 172, 254, 0.4);
+}
+
+/* ── Title + description ── */
+.kaggle_item-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.kaggle_item-desc {
+  font-size: 0.82rem;
+  color: var(--color-light);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Techniques list ── */
+.kaggle_item-techniques {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.kaggle_item-techniques li {
+  font-size: 0.75rem;
+  color: var(--color-light);
+  padding-left: 0.9rem;
+  position: relative;
+}
+
+.kaggle_item-techniques li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: rgba(79, 172, 254, 0.6);
+  font-weight: 700;
+}
+
+/* ── Footer: tags + link ── */
+.kaggle_item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.kaggle_item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.kaggle_item-tags span {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.kaggle_item-tags__runtime {
+  background: rgba(17, 0, 252, 0.15) !important;
+  border-color: rgba(79, 172, 254, 0.2) !important;
+  color: rgba(79, 172, 254, 0.8) !important;
+}
+
+/* ── Tablet (601px – 1024px) ── */
+@media screen and (max-width: 1024px) {
+  .kaggle_container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+/* ── Mobile (≤600px) ── */
+@media screen and (max-width: 600px) {
+  .kaggle_container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .kaggle_item-score-value {
+    font-size: 1.6rem;
+  }
+}
