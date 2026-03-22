@@ -1,7 +1,14 @@
+import { useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import "./kaggle.css";
-import AnimatedSection from "../animated-section/AnimatedSection";
-import ScrambleText from "../scramble-text/ScrambleText";
 import TiltCard from "../tilt-card/TiltCard";
+import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
+import useIsMobile from "../../hooks/useIsMobile";
 
 interface KaggleCompetition {
   id: number;
@@ -14,6 +21,7 @@ interface KaggleCompetition {
   tags: string[];
   colab: string;
   runtime?: string;
+  accentHue: number;
 }
 
 const competitions: KaggleCompetition[] = [
@@ -34,6 +42,7 @@ const competitions: KaggleCompetition[] = [
     tags: ["Bioinformatics", "NLP"],
     colab: "",
     runtime: "T4 GPU",
+    accentHue: 220,
   },
   {
     id: 2,
@@ -52,6 +61,7 @@ const competitions: KaggleCompetition[] = [
     tags: ["Bioinformatics"],
     colab: "",
     runtime: "T4 GPU",
+    accentHue: 160,
   },
   {
     id: 3,
@@ -70,6 +80,7 @@ const competitions: KaggleCompetition[] = [
     tags: ["Tabular", "Business"],
     colab: "",
     runtime: "T4 GPU",
+    accentHue: 260,
   },
   {
     id: 4,
@@ -86,6 +97,7 @@ const competitions: KaggleCompetition[] = [
     rank: "Rank 8 of 10",
     tags: ["Audio", "Speech"],
     colab: "",
+    accentHue: 30,
   },
   {
     id: 5,
@@ -103,6 +115,7 @@ const competitions: KaggleCompetition[] = [
     rank: "",
     tags: ["Regression", "Tabular"],
     colab: "",
+    accentHue: 190,
   },
   {
     id: 6,
@@ -119,6 +132,7 @@ const competitions: KaggleCompetition[] = [
     rank: "Rank 6 of 9",
     tags: ["Recommender Systems"],
     colab: "",
+    accentHue: 0,
   },
   {
     id: 7,
@@ -134,9 +148,46 @@ const competitions: KaggleCompetition[] = [
     rank: "",
     tags: ["Astronomy", "Tabular"],
     colab: "",
+    accentHue: 280,
   },
 ];
 
+// ── Animation variants ──────────────────────────────────────────────────────
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const panelVariants = {
+  initial: { opacity: 0, y: 30 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: EASE },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: { duration: 0.3, ease: EASE },
+  },
+};
+
+const scoreVariants = {
+  initial: { opacity: 0, scale: 0.85 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 120, damping: 14, delay: 0.15 },
+  },
+};
+
+const techVariants = (i: number) => ({
+  initial: { opacity: 0, x: -12 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.35, delay: 0.2 + i * 0.07, ease: EASE },
+  },
+});
+
+// ── Fallback grid (mobile / low-perf) ──────────────────────────────────────
 const KaggleCard = ({ competition }: { competition: KaggleCompetition }) => {
   const isRank1 = competition.rank.startsWith("Rank 1");
 
@@ -197,18 +248,179 @@ const KaggleCard = ({ competition }: { competition: KaggleCompetition }) => {
   );
 };
 
-const Kaggle = () => (
+const KaggleFallbackGrid = () => (
   <section id="kaggle">
     <h5>Johns Hopkins University · ML Engineering</h5>
-    <ScrambleText text="Kaggle Competitions" />
-    <AnimatedSection>
-      <div className="container kaggle_container">
-        {competitions.map((comp) => (
-          <KaggleCard key={comp.id} competition={comp} />
-        ))}
-      </div>
-    </AnimatedSection>
+    <h2>Kaggle Competitions</h2>
+    <div className="container kaggle_container">
+      {competitions.map((comp) => (
+        <KaggleCard key={comp.id} competition={comp} />
+      ))}
+    </div>
   </section>
 );
+
+// ── Showcase panel ─────────────────────────────────────────────────────────
+const KagglePanel = ({
+  comp,
+  index,
+  total,
+}: {
+  comp: KaggleCompetition;
+  index: number;
+  total: number;
+}) => {
+  const isRank1 = comp.rank.startsWith("Rank 1");
+
+  return (
+    <motion.div
+      key={comp.id}
+      className="kgl-panel"
+      style={{ "--kgl-accent-hue": comp.accentHue } as React.CSSProperties}
+      variants={panelVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      {/* Background radial wash */}
+      <div className="kgl-bg-wash" />
+
+      <div className="kgl-panel-inner">
+        {/* Left column */}
+        <div className="kgl-left">
+          <p className="kgl-eyebrow">Johns Hopkins · ML Engineering</p>
+          <h2 className="kgl-title">{comp.title}</h2>
+          <p className="kgl-desc">{comp.description}</p>
+
+          <ul className="kgl-techniques">
+            {comp.techniques.map((t, i) => (
+              <motion.li key={t} {...techVariants(i)}>
+                {t}
+              </motion.li>
+            ))}
+          </ul>
+
+          <div className="kgl-footer">
+            <div className="kgl-tags">
+              {comp.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+              {comp.runtime && (
+                <span className="kgl-tags__runtime">{comp.runtime}</span>
+              )}
+            </div>
+            {comp.colab && (
+              <a
+                href={comp.colab}
+                className="btn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Notebook
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Right column */}
+        <div className="kgl-right">
+          {comp.score !== "—" ? (
+            <motion.div className="kgl-score-block" variants={scoreVariants}>
+              <span className="kgl-score-value">{comp.score}</span>
+              {comp.scoreLabel && (
+                <span className="kgl-score-label">{comp.scoreLabel}</span>
+              )}
+            </motion.div>
+          ) : (
+            <motion.div className="kgl-score-block" variants={scoreVariants}>
+              <span className="kgl-score-value kgl-score-value--placeholder">—</span>
+            </motion.div>
+          )}
+          {comp.rank && (
+            <span className={`kgl-rank${isRank1 ? " kgl-rank--gold" : ""}`}>
+              {comp.rank}
+            </span>
+          )}
+          <span className="kgl-counter">
+            {index + 1} / {total}
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// ── Sticky scroll showcase ─────────────────────────────────────────────────
+const KaggleShowcase = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const prevIndexRef = useRef(-1);
+
+  const { scrollYProgress } = useScroll({
+    target: outerRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const idx = Math.min(
+      Math.floor(v * competitions.length),
+      competitions.length - 1
+    );
+    if (idx !== prevIndexRef.current) {
+      prevIndexRef.current = idx;
+      setActiveIndex(idx);
+    }
+  });
+
+  const comp = competitions[activeIndex];
+
+  return (
+    <section id="kaggle">
+      <div className="kgl-outer" ref={outerRef}>
+        <div className="kgl-sticky">
+          <AnimatePresence mode="wait">
+            <KagglePanel
+              key={comp.id}
+              comp={comp}
+              index={activeIndex}
+              total={competitions.length}
+            />
+          </AnimatePresence>
+
+          {/* Progress dots */}
+          <nav className="kgl-dots" aria-label="Competition progress">
+            {competitions.map((c, i) => (
+              <button
+                key={c.id}
+                className={`kgl-dot${i === activeIndex ? " kgl-dot--active" : ""}`}
+                aria-label={`Competition ${i + 1}: ${c.title}`}
+                onClick={() => {
+                  if (!outerRef.current) return;
+                  const rect = outerRef.current.getBoundingClientRect();
+                  const totalHeight = outerRef.current.offsetHeight - window.innerHeight;
+                  const targetScroll =
+                    window.scrollY +
+                    rect.top +
+                    (i / competitions.length) * totalHeight +
+                    totalHeight / competitions.length / 2;
+                  window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                }}
+              />
+            ))}
+          </nav>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ── Export ─────────────────────────────────────────────────────────────────
+const Kaggle = () => {
+  const lowPerf = useIsLowPerformance();
+  const isMobile = useIsMobile(1024);
+
+  if (isMobile || lowPerf) return <KaggleFallbackGrid />;
+  return <KaggleShowcase />;
+};
 
 export default Kaggle;
