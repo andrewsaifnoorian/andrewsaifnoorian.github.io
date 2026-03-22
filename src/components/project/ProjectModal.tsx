@@ -23,7 +23,12 @@ const backdrop = {
 
 const modal = {
   hidden: { opacity: 0, scale: 0.9, y: 30 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring" as const, damping: 25, stiffness: 300 } },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring" as const, damping: 25, stiffness: 300 },
+  },
   exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.2 } },
 };
 

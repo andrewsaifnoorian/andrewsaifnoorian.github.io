@@ -14,8 +14,7 @@ const peers = [
     avatar: AVTR1,
     name: "Pawel Morysewicz",
     role: "Colleague",
-    review:
-      "Andrew is the best teammate I have ever worked with in and out of work.",
+    review: "Andrew is the best teammate I have ever worked with in and out of work.",
   },
   {
     avatar: AVTR2,
@@ -28,8 +27,7 @@ const peers = [
     avatar: AVTR3,
     name: "Tyler Noble",
     role: "Peer",
-    review:
-      "Andrew is next up in cyber. He is a great team player and has a strong work ethic.",
+    review: "Andrew is next up in cyber. He is a great team player and has a strong work ethic.",
   },
   {
     avatar: AVTR4,

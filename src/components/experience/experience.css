@@ -12,7 +12,6 @@
   grid-column: 1 / -1;
 }
 
-/* ── Section Cards ── */
 .experience_container > div {
   background: var(--color-bg-variant);
   padding: 2rem;
@@ -34,7 +33,6 @@
   margin-bottom: 1.25rem;
 }
 
-/* ── Skill Grid ── */
 .experience_content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -45,7 +43,6 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* ── Individual Skill ── */
 .experience_details {
   display: flex;
   align-items: center;
@@ -77,7 +74,6 @@
   font-size: 0.7rem;
 }
 
-/* ── Level Dots ── */
 .experience_level {
   display: flex;
   gap: 3px;

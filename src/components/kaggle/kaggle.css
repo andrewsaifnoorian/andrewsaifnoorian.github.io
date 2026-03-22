@@ -12,7 +12,6 @@ section#kaggle {
   height: 800vh;
 }
 
-/* Sticky viewport */
 .kgl-sticky {
   position: sticky;
   top: 0;
@@ -20,7 +19,6 @@ section#kaggle {
   overflow: hidden;
 }
 
-/* Full-screen panel */
 .kgl-panel {
   position: absolute;
   inset: 0;
@@ -41,7 +39,6 @@ section#kaggle {
   pointer-events: none;
 }
 
-/* Inner two-column grid */
 .kgl-panel-inner {
   position: relative;
   z-index: 1;
@@ -84,7 +81,6 @@ section#kaggle {
   margin: 0;
 }
 
-/* Techniques list */
 .kgl-techniques {
   list-style: none;
   padding: 0;
@@ -109,7 +105,6 @@ section#kaggle {
   font-weight: 700;
 }
 
-/* Footer row */
 .kgl-footer {
   display: flex;
   align-items: center;
@@ -269,7 +264,9 @@ section#kaggle {
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
 .kgl-dot--active {
@@ -290,7 +287,6 @@ section#kaggle {
   transform: rotate(45deg) scale(1.4);
 }
 
-
 /* ═══════════════════════════════════════════════════════════════
    FALLBACK GRID — mobile / low-perf (≤1024px)
    ═══════════════════════════════════════════════════════════════ */
@@ -310,7 +306,9 @@ section#kaggle {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .kaggle_item:hover {
@@ -452,7 +450,6 @@ section#kaggle {
   color: rgba(79, 172, 254, 0.8) !important;
 }
 
-/* ── Tablet ── */
 @media screen and (max-width: 1024px) {
   .kaggle_container {
     grid-template-columns: repeat(2, 1fr);
@@ -460,7 +457,6 @@ section#kaggle {
   }
 }
 
-/* ── Mobile ── */
 @media screen and (max-width: 600px) {
   .kaggle_container {
     grid-template-columns: 1fr;
@@ -472,14 +468,12 @@ section#kaggle {
   }
 }
 
-/* ── Intro CTAs ── */
 .kgl-intro-ctas {
   display: flex;
   gap: 0.9rem;
   flex-wrap: wrap;
 }
 
-/* ── Footer action row (tags + buttons) ── */
 .kgl-footer-actions {
   display: flex;
   gap: 0.5rem;
@@ -492,7 +486,6 @@ section#kaggle {
   padding: 0.4rem 0.85rem;
 }
 
-/* ── Fallback grid CTAs ── */
 .kgl-fallback-ctas {
   display: flex;
   gap: 1rem;
@@ -667,9 +660,7 @@ body[data-perf-tier="minimal"] .kgl-modal-backdrop {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ── Light Mode ── */
 @media (prefers-color-scheme: light) {
-  /* Sticky showcase */
   .kgl-footer {
     border-top-color: rgba(0, 0, 0, 0.08);
   }
@@ -700,7 +691,6 @@ body[data-perf-tier="minimal"] .kgl-modal-backdrop {
     color: rgba(0, 0, 0, 0.35);
   }
 
-  /* Fallback grid */
   .kaggle_item {
     border-color: rgba(0, 0, 0, 0.1);
   }

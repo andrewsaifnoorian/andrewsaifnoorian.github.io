@@ -30,7 +30,7 @@ const TabContent = ({ tab }: TabContentProps) => {
       el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       setTimeout(() => setHighlightedId(null), HIGHLIGHT_DURATION_MS);
     },
-    [reducedMotion]
+    [reducedMotion],
   );
 
   return (

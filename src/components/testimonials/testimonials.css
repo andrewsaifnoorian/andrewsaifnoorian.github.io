@@ -9,7 +9,6 @@
   margin-top: 2rem;
 }
 
-/* ── Card ── */
 .testimonial-card {
   position: relative;
   background: var(--color-bg-variant);
@@ -17,12 +16,15 @@
   border-radius: 1rem;
   padding: 2rem 1.75rem 1.75rem;
   text-align: center;
-  transition: border-color 0.3s ease, box-shadow 0.4s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
 }
 
 .testimonial-card:hover {
   border-color: rgba(79, 172, 254, 0.25);
-  box-shadow: 0 0 0 1px rgba(79, 172, 254, 0.08),
+  box-shadow:
+    0 0 0 1px rgba(79, 172, 254, 0.08),
     0 8px 30px rgba(79, 172, 254, 0.1);
 }
 
@@ -60,7 +62,6 @@
   display: block;
 }
 
-/* ── Name ── */
 .testimonial-name {
   font-size: 1rem;
   font-weight: 600;
@@ -83,7 +84,6 @@
   margin-bottom: 1rem;
 }
 
-/* ── Review Text ── */
 .testimonial-review {
   font-size: 0.9rem;
   font-style: italic;

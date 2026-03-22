@@ -5,12 +5,7 @@ import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import MagneticButton from "../magnetic-button/MagneticButton";
 import BlurImage from "../blur-image/BlurImage";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
@@ -35,7 +30,6 @@ const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
   );
 };
 
-/* ── Feature 4: Word-by-Word Reveal ── */
 interface WordProps {
   children: string;
   range: [number, number];
@@ -106,18 +100,13 @@ const About = () => {
   return (
     <section id="about">
       <div className="hero_wrapper" ref={heroWrapperRef}>
-        <HeroTag
-          className="hero"
-          style={heroStyle}
-        >
+        <HeroTag className="hero" style={heroStyle}>
           <h5 className="hero_greeting">Hey I'm</h5>
           <h1 className="hero_name">
             <span className={done ? "hero_name--gradient" : ""}>{displayed}</span>
             <span className={`hero_caret ${done ? "blink" : ""}`}>|</span>
           </h1>
-          <p className="hero_subtitle text-light">
-            Full-Stack Software Engineer
-          </p>
+          <p className="hero_subtitle text-light">Full-Stack Software Engineer</p>
         </HeroTag>
       </div>
 

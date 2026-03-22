@@ -37,7 +37,6 @@ section#project {
   pointer-events: none;
 }
 
-/* ── Two-column panel layout ── */
 .prj-panel-inner {
   position: relative;
   z-index: 1;
@@ -217,7 +216,9 @@ section#project {
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
 .prj-dot--active {
@@ -386,7 +387,9 @@ body[data-perf-tier="minimal"] .prj-modal-backdrop {
   padding: 0;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   cursor: pointer;

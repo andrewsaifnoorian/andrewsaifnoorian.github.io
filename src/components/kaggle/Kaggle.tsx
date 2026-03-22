@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
+import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 import "./kaggle.css";
 import TiltCard from "../tilt-card/TiltCard";
 import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
@@ -230,10 +225,7 @@ const competitions: KaggleCompetition[] = [
     title: "Stellar Classification",
     description:
       "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
-    techniques: [
-      "Linear Discriminant Analysis (LDA)",
-      "Custom redshift-split model",
-    ],
+    techniques: ["Linear Discriminant Analysis (LDA)", "Custom redshift-split model"],
     score: "—",
     scoreLabel: "",
     rank: "",
@@ -423,7 +415,9 @@ const KaggleCard = ({
             </div>
           ) : (
             <div className="kaggle_item-score">
-              <span className="kaggle_item-score-value kaggle_item-score-value--placeholder">—</span>
+              <span className="kaggle_item-score-value kaggle_item-score-value--placeholder">
+                —
+              </span>
             </div>
           )}
           {competition.rank && (
@@ -453,19 +447,11 @@ const KaggleCard = ({
           </div>
           <div className="kgl-footer-actions">
             {competition.colab && (
-              <a
-                href={competition.colab}
-                className="btn"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={competition.colab} className="btn" target="_blank" rel="noreferrer">
                 Notebook
               </a>
             )}
-            <button
-              className="btn kgl-expand-btn"
-              onClick={() => onExpand(competition)}
-            >
+            <button className="btn kgl-expand-btn" onClick={() => onExpand(competition)}>
               Details ↗
             </button>
           </div>
@@ -486,12 +472,7 @@ const KaggleFallbackGrid = () => {
         <a href="#projects" className="btn btn-primary">
           My Projects
         </a>
-        <a
-          href={KAGGLE_PROFILE_URL}
-          className="btn"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={KAGGLE_PROFILE_URL} className="btn" target="_blank" rel="noreferrer">
           Kaggle Profile ↗
         </a>
       </div>
@@ -527,24 +508,20 @@ const KaggleIntroPanel = () => (
     <div className="kgl-intro-inner">
       <p className="kgl-eyebrow">Johns Hopkins University · ML Engineering</p>
       <h2 className="kgl-intro-heading">
-        Kaggle<br />Competitions
+        Kaggle
+        <br />
+        Competitions
       </h2>
       <p className="kgl-intro-body">
-        Seven machine learning competitions completed as part of the Johns
-        Hopkins ML Engineering program. The projects range from DNA sequence
-        classification and audio phoneme detection to diamond price prediction
-        and collaborative filtering.
+        Seven machine learning competitions completed as part of the Johns Hopkins ML Engineering
+        program. The projects range from DNA sequence classification and audio phoneme detection to
+        diamond price prediction and collaborative filtering.
       </p>
       <div className="kgl-intro-ctas">
         <a href="#projects" className="btn btn-primary">
           My Projects
         </a>
-        <a
-          href={KAGGLE_PROFILE_URL}
-          className="btn"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={KAGGLE_PROFILE_URL} className="btn" target="_blank" rel="noreferrer">
           Kaggle Profile ↗
         </a>
       </div>
@@ -606,25 +583,15 @@ const KagglePanel = ({
               {comp.tags.map((tag) => (
                 <span key={tag}>{tag}</span>
               ))}
-              {comp.runtime && (
-                <span className="kgl-tags__runtime">{comp.runtime}</span>
-              )}
+              {comp.runtime && <span className="kgl-tags__runtime">{comp.runtime}</span>}
             </div>
             <div className="kgl-footer-actions">
               {comp.colab && (
-                <a
-                  href={comp.colab}
-                  className="btn"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={comp.colab} className="btn" target="_blank" rel="noreferrer">
                   Notebook
                 </a>
               )}
-              <button
-                className="btn kgl-expand-btn"
-                onClick={() => onExpand(comp)}
-              >
+              <button className="btn kgl-expand-btn" onClick={() => onExpand(comp)}>
                 Details ↗
               </button>
             </div>
@@ -636,9 +603,7 @@ const KagglePanel = ({
           {comp.score !== "—" ? (
             <motion.div className="kgl-score-block" variants={scoreVariants}>
               <span className="kgl-score-value">{comp.score}</span>
-              {comp.scoreLabel && (
-                <span className="kgl-score-label">{comp.scoreLabel}</span>
-              )}
+              {comp.scoreLabel && <span className="kgl-score-label">{comp.scoreLabel}</span>}
             </motion.div>
           ) : (
             <motion.div className="kgl-score-block" variants={scoreVariants}>
@@ -646,9 +611,7 @@ const KagglePanel = ({
             </motion.div>
           )}
           {comp.rank && (
-            <span className={`kgl-rank${isRank1 ? " kgl-rank--gold" : ""}`}>
-              {comp.rank}
-            </span>
+            <span className={`kgl-rank${isRank1 ? " kgl-rank--gold" : ""}`}>{comp.rank}</span>
           )}
           <span className="kgl-counter">
             {index + 1} / {total}
@@ -739,10 +702,7 @@ const KaggleShowcase = () => {
     const rect = outerRef.current.getBoundingClientRect();
     const totalHeight = outerRef.current.offsetHeight - window.innerHeight;
     const targetScroll =
-      window.scrollY +
-      rect.top +
-      (i / TOTAL_PANELS) * totalHeight +
-      totalHeight / TOTAL_PANELS / 2;
+      window.scrollY + rect.top + (i / TOTAL_PANELS) * totalHeight + totalHeight / TOTAL_PANELS / 2;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
     setTimeout(() => {
       suppressRef.current = false;
@@ -775,9 +735,7 @@ const KaggleShowcase = () => {
                 key={i}
                 className={`kgl-dot${i === activeIndex ? " kgl-dot--active" : ""}${i === 0 ? " kgl-dot--intro" : ""}`}
                 aria-label={
-                  i === 0
-                    ? "Introduction"
-                    : `Competition ${i}: ${competitions[i - 1].title}`
+                  i === 0 ? "Introduction" : `Competition ${i}: ${competitions[i - 1].title}`
                 }
                 onClick={() => scrollToPanel(i)}
               />

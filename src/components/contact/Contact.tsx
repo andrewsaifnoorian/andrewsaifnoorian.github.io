@@ -19,7 +19,7 @@ const Contact = () => {
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         form.current!,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       )
       .then(
         () => {
@@ -28,7 +28,7 @@ const Contact = () => {
         },
         () => {
           toast.error("Failed to send the message. Please try again.");
-        }
+        },
       );
   };
 
@@ -61,12 +61,7 @@ const Contact = () => {
           <form ref={form} onSubmit={sendEmail}>
             <input type="text" name="name" placeholder="Your Full Name" required />
             <input type="email" name="email" placeholder="Your Email" required />
-            <textarea
-              name="message"
-              rows={7}
-              placeholder="Your Message"
-              required
-            ></textarea>
+            <textarea name="message" rows={7} placeholder="Your Message" required></textarea>
             <MagneticButton>
               <button type="submit" className="btn btn-primary">
                 Send Message

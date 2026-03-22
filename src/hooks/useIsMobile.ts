@@ -2,10 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 
 const useIsMobile = (breakpoint: number) => {
   const query = `(max-width: ${breakpoint}px)`;
-  const getMatch = useCallback(
-    () => window.matchMedia(query).matches,
-    [query]
-  );
+  const getMatch = useCallback(() => window.matchMedia(query).matches, [query]);
   const [mobile, setMobile] = useState(getMatch);
 
   useEffect(() => {

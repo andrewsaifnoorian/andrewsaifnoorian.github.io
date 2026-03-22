@@ -32,44 +32,61 @@ const CommandPalette = () => {
         id: "home",
         label: "Go to Home",
         Icon: FaHome,
-        action: () => { navigate("/"); close(); scrollToId("about"); },
+        action: () => {
+          navigate("/");
+          close();
+          scrollToId("about");
+        },
       },
       {
         id: "projects",
         label: "Go to Projects",
         Icon: FaProjectDiagram,
-        action: () => { navigate("/"); close(); scrollToId("project"); },
+        action: () => {
+          navigate("/");
+          close();
+          scrollToId("project");
+        },
       },
       {
         id: "experience",
         label: "Go to Experience",
         Icon: FaBook,
-        action: () => { navigate("/"); close(); scrollToId("experience"); },
+        action: () => {
+          navigate("/");
+          close();
+          scrollToId("experience");
+        },
       },
       {
         id: "contact",
         label: "Go to Contact",
         Icon: MdContactMail,
-        action: () => { navigate("/"); close(); scrollToId("contact"); },
+        action: () => {
+          navigate("/");
+          close();
+          scrollToId("contact");
+        },
       },
       {
         id: "resume",
         label: "Open Resume",
         Icon: FaFileAlt,
-        action: () => { navigate("/resume"); close(); },
+        action: () => {
+          navigate("/resume");
+          close();
+        },
       },
     ],
-    [navigate, close]
+    [navigate, close],
   );
 
   const filtered = useMemo(
     () =>
       query
-        ? commands.filter((c) =>
-            c.label.toLowerCase().includes(query.toLowerCase())
-          )
+        ? commands.filter((c) => c.label.toLowerCase().includes(query.toLowerCase()))
         : commands,
-    [query, commands]
+    [query, commands],
   );
 
   useEffect(() => {

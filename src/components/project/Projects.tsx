@@ -274,13 +274,7 @@ const imageVariants = {
 };
 
 // ── Detail modal ────────────────────────────────────────────────────────────
-const ProjectDetailModal = ({
-  project,
-  onClose,
-}: {
-  project: Project;
-  onClose: () => void;
-}) => {
+const ProjectDetailModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -376,7 +370,10 @@ const ProjectCard = ({
         </div>
         <button
           className="btn prj-expand-btn"
-          onClick={(e) => { e.stopPropagation(); onExpand(project); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onExpand(project);
+          }}
         >
           Details ↗
         </button>
@@ -426,12 +423,13 @@ const ProjectIntroPanel = () => (
     <div className="prj-intro-inner">
       <p className="prj-eyebrow">Software Engineering</p>
       <h2 className="prj-intro-heading">
-        My<br />Projects
+        My
+        <br />
+        Projects
       </h2>
       <p className="prj-intro-body">
-        Nine projects spanning full-stack web applications, ML research, DevOps
-        pipelines, and client work. Each one built end-to-end — from architecture
-        decisions to deployment.
+        Nine projects spanning full-stack web applications, ML research, DevOps pipelines, and
+        client work. Each one built end-to-end — from architecture decisions to deployment.
       </p>
       <div className="prj-intro-ctas">
         <a href="#kaggle" className="btn btn-primary">
@@ -592,12 +590,11 @@ const ProjectShowcase = () => {
     const rect = outerRef.current.getBoundingClientRect();
     const totalHeight = outerRef.current.offsetHeight - window.innerHeight;
     const targetScroll =
-      window.scrollY +
-      rect.top +
-      (i / TOTAL_PANELS) * totalHeight +
-      totalHeight / TOTAL_PANELS / 2;
+      window.scrollY + rect.top + (i / TOTAL_PANELS) * totalHeight + totalHeight / TOTAL_PANELS / 2;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
-    setTimeout(() => { suppressRef.current = false; }, 800);
+    setTimeout(() => {
+      suppressRef.current = false;
+    }, 800);
   };
 
   return (

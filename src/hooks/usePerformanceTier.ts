@@ -3,27 +3,17 @@ type PerformanceTier = "full" | "reduced" | "minimal";
 const detectWebGLRenderer = (): string => {
   try {
     const canvas = document.createElement("canvas");
-    const gl =
-      canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     if (!gl) return "";
-    const ext = (gl as WebGLRenderingContext).getExtension(
-      "WEBGL_debug_renderer_info"
-    );
+    const ext = (gl as WebGLRenderingContext).getExtension("WEBGL_debug_renderer_info");
     if (!ext) return "";
-    return (gl as WebGLRenderingContext).getParameter(
-      ext.UNMASKED_RENDERER_WEBGL
-    ) as string;
+    return (gl as WebGLRenderingContext).getParameter(ext.UNMASKED_RENDERER_WEBGL) as string;
   } catch {
     return "";
   }
 };
 
-const SOFTWARE_RENDERERS = [
-  "swiftshader",
-  "llvmpipe",
-  "softpipe",
-  "microsoft basic render driver",
-];
+const SOFTWARE_RENDERERS = ["swiftshader", "llvmpipe", "softpipe", "microsoft basic render driver"];
 
 const detectTier = (): PerformanceTier => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

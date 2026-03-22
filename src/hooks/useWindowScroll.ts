@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 
-const useWindowScroll = (
-  handler: () => void,
-  options?: { passive?: boolean }
-) => {
+const useWindowScroll = (handler: () => void, options?: { passive?: boolean }) => {
   useEffect(() => {
     const opts = { passive: options?.passive ?? true };
     handler();

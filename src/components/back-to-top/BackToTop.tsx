@@ -8,7 +8,7 @@ const BackToTop = () => {
   useWindowScroll(
     useCallback(() => {
       setVisible(window.scrollY > window.innerHeight);
-    }, [])
+    }, []),
   );
 
   const scrollToTop = () => {
