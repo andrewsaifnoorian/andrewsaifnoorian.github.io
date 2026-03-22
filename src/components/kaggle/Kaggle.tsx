@@ -10,6 +10,14 @@ import TiltCard from "../tilt-card/TiltCard";
 import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import useIsMobile from "../../hooks/useIsMobile";
 
+const KAGGLE_PROFILE_URL = "https://www.kaggle.com/andrewsaifnoorian";
+
+interface KaggleExpandedContent {
+  overview: string;
+  approach: string[];
+  result: string;
+}
+
 interface KaggleCompetition {
   id: number;
   title: string;
@@ -22,6 +30,7 @@ interface KaggleCompetition {
   colab: string;
   runtime?: string;
   accentHue: number;
+  expandedContent: KaggleExpandedContent;
 }
 
 const competitions: KaggleCompetition[] = [
@@ -43,6 +52,19 @@ const competitions: KaggleCompetition[] = [
     colab: "",
     runtime: "T4 GPU",
     accentHue: 220,
+    expandedContent: {
+      overview:
+        "The core insight was treating DNA as a natural language: each sequence was tokenized into overlapping k-mers (k=3,4,5) to capture local motifs, then combined with TF-IDF character n-grams for longer-range patterns. Biological domain features — CpG dinucleotide ratio, open reading frame count, GC content, and homopolymer run length — injected knowledge the model couldn't learn from sequence statistics alone.",
+      approach: [
+        "Built 1,344 k-mer count features from 3/4/5-mer vocabularies (4³+4⁴+4⁵ combinations)",
+        "Added TF-IDF char n-gram matrix (4–7-gram range, 50K features via max_features)",
+        "Engineered 8 biological features: CpG ratio, ORF count, GC content, homopolymer run length",
+        "Trained 5-seed DNN (Dense 128→64→1, sigmoid) per random seed for ensemble diversity",
+        "Final prediction: soft-vote average across 5 DNNs + Logistic Regression",
+      ],
+      result:
+        "0.9873 AUC on the held-out test set — tied for first place. The ensemble's diversity (linear vs. deep, different seeds) was the key driver. The biological features alone contributed ~0.008 AUC improvement over pure k-mer features.",
+    },
   },
   {
     id: 2,
@@ -62,6 +84,20 @@ const competitions: KaggleCompetition[] = [
     colab: "",
     runtime: "T4 GPU",
     accentHue: 160,
+    expandedContent: {
+      overview:
+        "Five bacterial species separated using only 286-dimensional k-mer count frequency vectors. The key challenge was class imbalance — certain species were underrepresented 3× relative to the majority. A compact DNN with BatchNorm and Dropout was sufficient; the real lever was reweighting the cross-entropy loss with sklearn's class_weight='balanced'.",
+      approach: [
+        "StandardScaler normalized all 286 k-mer counts to zero mean, unit variance",
+        "Architecture: Dense(128) → BatchNorm → Dropout(0.3) → Dense(64) → Softmax(5)",
+        "class_weight='balanced' computed inverse-frequency weights per species",
+        "EarlyStopping (patience=15) monitored val_loss to prevent overfitting",
+        "ReduceLROnPlateau halved the learning rate after 8 epochs without improvement",
+        "Nadam optimizer (Adam + Nesterov momentum) for smoother gradient updates",
+      ],
+      result:
+        "0.9621 macro-F1 across all 5 species, achieving first place. Without class reweighting, macro-F1 dropped to ~0.89 — the minority species were misclassified almost entirely. BatchNorm was the second most impactful change (+0.02 F1 over vanilla Dense layers).",
+    },
   },
   {
     id: 3,
@@ -81,6 +117,20 @@ const competitions: KaggleCompetition[] = [
     colab: "",
     runtime: "T4 GPU",
     accentHue: 260,
+    expandedContent: {
+      overview:
+        "17 raw session features (bounce rate, page duration, visitor type, etc.) were expanded to 93 via interaction terms and frequency encoding. A Wide & Deep architecture captured both memorization (raw features in the 'wide' linear layer) and generalization (cross-feature interactions in the deep stack).",
+      approach: [
+        "Frequency-encoded 4 high-cardinality categoricals: Browser, OS, Region, Traffic Type",
+        "Engineered interaction features: PageValues × Duration, PageValues × BounceRate, Duration ratios",
+        "Wide layer: raw + crossed features fed directly to a linear output unit",
+        "Deep stack: Dense(512) → Dense(256) → Dense(128) → Dense(64) with BatchNorm and Dropout(0.3)",
+        "Outputs merged and passed through a final sigmoid for binary classification",
+        "SGDR cosine annealing warm restarts (T₀=10 epochs) to escape local minima",
+      ],
+      result:
+        "0.9927 accuracy, ranking 6th of 14. The Wide & Deep architecture improved accuracy by ~0.4% over a plain deep network. The 'wide' memorization component was especially effective for high-PageValues sessions, which are strong purchase intent signals.",
+    },
   },
   {
     id: 4,
@@ -98,6 +148,20 @@ const competitions: KaggleCompetition[] = [
     tags: ["Audio", "Speech"],
     colab: "",
     accentHue: 30,
+    expandedContent: {
+      overview:
+        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale — and they don't require tuning a sequence model for a fixed-width input.",
+      approach: [
+        "Computed log-periodogram: 10 × log₁₀(|FFT|²) for 256 frequency bins per utterance",
+        "StandardScaler fit on training set; applied to train and test",
+        "LightGBM: 200 estimators, num_leaves=63, learning_rate=0.05, subsample=0.8",
+        "class_weight='balanced' for 5-class imbalance across phoneme types",
+        "Early stopping: 50 rounds patience on 15% stratified validation split",
+        "Feature importance confirmed low-frequency bins (0–80 Hz) as most discriminative",
+      ],
+      result:
+        "0.9284 accuracy, rank 8 of 10. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
+    },
   },
   {
     id: 5,
@@ -116,6 +180,19 @@ const competitions: KaggleCompetition[] = [
     tags: ["Regression", "Tabular"],
     colab: "",
     accentHue: 190,
+    expandedContent: {
+      overview:
+        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
+      approach: [
+        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
+        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
+        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
+        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
+        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
+      ],
+      result:
+        "603.56 MAE (~3.1% of mean price). The log-transform alone reduced MAE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed another ~$40 MAE reduction by correcting systematic under-prediction on high-value diamonds.",
+    },
   },
   {
     id: 6,
@@ -133,6 +210,20 @@ const competitions: KaggleCompetition[] = [
     tags: ["Recommender Systems"],
     colab: "",
     accentHue: 0,
+    expandedContent: {
+      overview:
+        "A 128K-user × 380-movie rating matrix (~94% sparse) was factorized into k=5 latent user and item embedding vectors using Truncated SVD. Before decomposition, missing ratings were imputed with each user's mean so the model learns deviations from a user's baseline preference rather than predicting from zero.",
+      approach: [
+        "Built explicit sparse matrix: rows = users, cols = movies, values = ratings 1–5",
+        "Imputed missing entries with per-user mean rating before factorization",
+        "TruncatedSVD(n_components=5, n_iter=10): factored as U × Σ × Vᵀ",
+        "Reconstructed ratings: U × Σ × Vᵀ, clipped to [1, 5]",
+        "Optimized per-boundary rounding thresholds on a validation split vs. nearest-integer",
+        "Threshold search: grid of [1.5, 2.5, 3.5, 4.5] boundaries via brute-force accuracy maximization",
+      ],
+      result:
+        "0.4200 accuracy, rank 6 of 9. Threshold optimization improved accuracy by ~2pp over naive rounding. The low absolute accuracy reflects the fundamental difficulty of 5-class exact-match: a model off by 0.4 on every prediction fails every sample regardless of direction.",
+    },
   },
   {
     id: 7,
@@ -149,6 +240,19 @@ const competitions: KaggleCompetition[] = [
     tags: ["Astronomy", "Tabular"],
     colab: "",
     accentHue: 280,
+    expandedContent: {
+      overview:
+        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes — stars, galaxies, and quasars — are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
+      approach: [
+        "Engineered standard astronomical color indices: u−g, g−r, r−i, i−z",
+        "Linear Discriminant Analysis finds the 2D projection maximizing between-class vs. within-class variance",
+        "Custom redshift-split: separate LDA classifiers for z < 0.5 and z ≥ 0.5",
+        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both — the split enforces this prior",
+        "Final classifier routes each object to the appropriate sub-model based on its redshift",
+      ],
+      result:
+        "Competition not formally graded (work in progress). Cross-validation accuracy exceeded 97% — color indices are highly discriminative. The redshift-split boosted accuracy by ~1.5% on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
+    },
   },
 ];
 
@@ -187,8 +291,123 @@ const techVariants = (i: number) => ({
   },
 });
 
+// ── Detail modal ────────────────────────────────────────────────────────────
+const KaggleDetailModal = ({
+  competition,
+  onClose,
+}: {
+  competition: KaggleCompetition;
+  onClose: () => void;
+}) => {
+  const isRank1 = competition.rank.startsWith("Rank 1");
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      className="kgl-modal-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="kgl-modal"
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.97 }}
+        transition={{ duration: 0.3, ease: EASE }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="kgl-modal-close" onClick={onClose} aria-label="Close details">
+          ×
+        </button>
+
+        {/* Header */}
+        <div className="kgl-modal-header">
+          <p className="kgl-eyebrow">Deep Dive</p>
+          <h3 className="kgl-modal-title">{competition.title}</h3>
+          <div className="kgl-modal-meta">
+            {competition.score !== "—" && (
+              <div className="kgl-modal-score">
+                <span className="kgl-modal-score-value">{competition.score}</span>
+                {competition.scoreLabel && (
+                  <span className="kgl-modal-score-label">{competition.scoreLabel}</span>
+                )}
+              </div>
+            )}
+            {competition.rank && (
+              <span className={`kgl-rank${isRank1 ? " kgl-rank--gold" : ""}`}>
+                {competition.rank}
+              </span>
+            )}
+            <div className="kgl-tags">
+              {competition.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+              {competition.runtime && (
+                <span className="kgl-tags__runtime">{competition.runtime}</span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="kgl-modal-body">
+          <p className="kgl-modal-overview">{competition.expandedContent.overview}</p>
+
+          <div className="kgl-modal-section">
+            <h4 className="kgl-modal-section-title">Technical Approach</h4>
+            <ul className="kgl-modal-approach">
+              {competition.expandedContent.approach.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="kgl-modal-section">
+            <h4 className="kgl-modal-section-title">Result & Insights</h4>
+            <p className="kgl-modal-result">{competition.expandedContent.result}</p>
+          </div>
+        </div>
+
+        {/* Footer */}
+        {competition.colab && (
+          <div className="kgl-modal-footer">
+            <a
+              href={competition.colab}
+              className="btn btn-primary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open Notebook ↗
+            </a>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 // ── Fallback grid (mobile / low-perf) ──────────────────────────────────────
-const KaggleCard = ({ competition }: { competition: KaggleCompetition }) => {
+const KaggleCard = ({
+  competition,
+  onExpand,
+}: {
+  competition: KaggleCompetition;
+  onExpand: (comp: KaggleCompetition) => void;
+}) => {
   const isRank1 = competition.rank.startsWith("Rank 1");
 
   return (
@@ -232,33 +451,67 @@ const KaggleCard = ({ competition }: { competition: KaggleCompetition }) => {
               <span className="kaggle_item-tags__runtime">{competition.runtime}</span>
             )}
           </div>
-          {competition.colab && (
-            <a
-              href={competition.colab}
-              className="btn"
-              target="_blank"
-              rel="noreferrer"
+          <div className="kgl-footer-actions">
+            {competition.colab && (
+              <a
+                href={competition.colab}
+                className="btn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Notebook
+              </a>
+            )}
+            <button
+              className="btn kgl-expand-btn"
+              onClick={() => onExpand(competition)}
             >
-              Notebook
-            </a>
-          )}
+              Details ↗
+            </button>
+          </div>
         </div>
       </article>
     </TiltCard>
   );
 };
 
-const KaggleFallbackGrid = () => (
-  <section id="kaggle">
-    <h5>Johns Hopkins University · ML Engineering</h5>
-    <h2>Kaggle Competitions</h2>
-    <div className="container kaggle_container">
-      {competitions.map((comp) => (
-        <KaggleCard key={comp.id} competition={comp} />
-      ))}
-    </div>
-  </section>
-);
+const KaggleFallbackGrid = () => {
+  const [expandedComp, setExpandedComp] = useState<KaggleCompetition | null>(null);
+
+  return (
+    <section id="kaggle">
+      <h5>Johns Hopkins University · ML Engineering</h5>
+      <h2>Kaggle Competitions</h2>
+      <div className="kgl-fallback-ctas">
+        <a href="#projects" className="btn btn-primary">
+          My Projects
+        </a>
+        <a
+          href={KAGGLE_PROFILE_URL}
+          className="btn"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Kaggle Profile ↗
+        </a>
+      </div>
+      <div className="container kaggle_container">
+        {competitions.map((comp) => (
+          <KaggleCard key={comp.id} competition={comp} onExpand={setExpandedComp} />
+        ))}
+      </div>
+      <AnimatePresence>
+        {expandedComp && (
+          <KaggleDetailModal
+            key="detail-modal"
+            competition={expandedComp}
+            onClose={() => setExpandedComp(null)}
+          />
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
 
 // ── Intro panel ────────────────────────────────────────────────────────────
 const KaggleIntroPanel = () => (
@@ -273,13 +526,28 @@ const KaggleIntroPanel = () => (
     <div className="kgl-bg-wash" />
     <div className="kgl-intro-inner">
       <p className="kgl-eyebrow">Johns Hopkins University · ML Engineering</p>
-      <h2 className="kgl-intro-heading">Kaggle<br />Competitions</h2>
+      <h2 className="kgl-intro-heading">
+        Kaggle<br />Competitions
+      </h2>
       <p className="kgl-intro-body">
         Seven machine learning competitions completed as part of the Johns
         Hopkins ML Engineering program. The projects range from DNA sequence
         classification and audio phoneme detection to diamond price prediction
         and collaborative filtering.
       </p>
+      <div className="kgl-intro-ctas">
+        <a href="#projects" className="btn btn-primary">
+          My Projects
+        </a>
+        <a
+          href={KAGGLE_PROFILE_URL}
+          className="btn"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Kaggle Profile ↗
+        </a>
+      </div>
       <motion.p
         className="kgl-scroll-hint"
         animate={{ y: [0, 6, 0] }}
@@ -296,10 +564,12 @@ const KagglePanel = ({
   comp,
   index,
   total,
+  onExpand,
 }: {
   comp: KaggleCompetition;
   index: number;
   total: number;
+  onExpand: (comp: KaggleCompetition) => void;
 }) => {
   const isRank1 = comp.rank.startsWith("Rank 1");
 
@@ -340,16 +610,24 @@ const KagglePanel = ({
                 <span className="kgl-tags__runtime">{comp.runtime}</span>
               )}
             </div>
-            {comp.colab && (
-              <a
-                href={comp.colab}
-                className="btn"
-                target="_blank"
-                rel="noreferrer"
+            <div className="kgl-footer-actions">
+              {comp.colab && (
+                <a
+                  href={comp.colab}
+                  className="btn"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Notebook
+                </a>
+              )}
+              <button
+                className="btn kgl-expand-btn"
+                onClick={() => onExpand(comp)}
               >
-                Notebook
-              </a>
-            )}
+                Details ↗
+              </button>
+            </div>
           </div>
         </div>
 
@@ -387,6 +665,7 @@ const STEP_MS = 500; // ms between sequential panel steps (matches enter animati
 
 const KaggleShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [expandedComp, setExpandedComp] = useState<KaggleCompetition | null>(null);
   const outerRef = useRef<HTMLDivElement>(null);
 
   // Refs so the step closure always reads the latest values
@@ -465,7 +744,9 @@ const KaggleShowcase = () => {
       (i / TOTAL_PANELS) * totalHeight +
       totalHeight / TOTAL_PANELS / 2;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
-    setTimeout(() => { suppressRef.current = false; }, 800);
+    setTimeout(() => {
+      suppressRef.current = false;
+    }, 800);
   };
 
   return (
@@ -482,6 +763,7 @@ const KaggleShowcase = () => {
                 comp={competitions[activeIndex - 1]}
                 index={activeIndex - 1}
                 total={competitions.length}
+                onExpand={setExpandedComp}
               />
             )}
           </AnimatePresence>
@@ -492,13 +774,28 @@ const KaggleShowcase = () => {
               <button
                 key={i}
                 className={`kgl-dot${i === activeIndex ? " kgl-dot--active" : ""}${i === 0 ? " kgl-dot--intro" : ""}`}
-                aria-label={i === 0 ? "Introduction" : `Competition ${i}: ${competitions[i - 1].title}`}
+                aria-label={
+                  i === 0
+                    ? "Introduction"
+                    : `Competition ${i}: ${competitions[i - 1].title}`
+                }
                 onClick={() => scrollToPanel(i)}
               />
             ))}
           </nav>
         </div>
       </div>
+
+      {/* Detail modal — rendered outside the sticky container */}
+      <AnimatePresence>
+        {expandedComp && (
+          <KaggleDetailModal
+            key="detail-modal"
+            competition={expandedComp}
+            onClose={() => setExpandedComp(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };
