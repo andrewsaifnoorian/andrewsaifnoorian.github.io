@@ -12,13 +12,7 @@ const BlurImage = ({ src, alt, className, ...rest }: BlurImageProps) => {
 
   return (
     <div className={`blur-image ${className ?? ""}`}>
-      <img
-        src={src}
-        alt={alt}
-        className={loaded ? "loaded" : ""}
-        onLoad={handleLoad}
-        {...rest}
-      />
+      <img src={src} alt={alt} className={loaded ? "loaded" : ""} onLoad={handleLoad} {...rest} />
     </div>
   );
 };

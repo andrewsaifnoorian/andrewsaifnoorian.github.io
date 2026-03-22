@@ -1,10 +1,5 @@
 import { useRef, useEffect } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Nav from "./components/nav/Nav";
 import About from "./components/about/About";
@@ -38,8 +33,7 @@ const ScrollProgress = () => {
         if (!el) return;
         const scrollTop = document.documentElement.scrollTop;
         const scrollHeight =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
+          document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
         el.style.width = `${pct}%`;
       });
@@ -122,7 +116,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-
       <CursorGlow />
       <BackToTop />
       <CommandPalette />

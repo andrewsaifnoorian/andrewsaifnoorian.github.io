@@ -8,11 +8,7 @@ interface AnimatedSectionProps {
   delay?: number;
 }
 
-const AnimatedSection = ({
-  children,
-  className,
-  delay = 0,
-}: AnimatedSectionProps) => {
+const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const prefersReducedMotion = usePrefersReducedMotion();

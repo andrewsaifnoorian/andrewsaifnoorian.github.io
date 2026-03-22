@@ -3,7 +3,7 @@ import { useMotionValue, useInView, animate } from "framer-motion";
 
 const useCountingAnimation = (
   target: number,
-  skip = false
+  skip = false,
 ): { ref: React.RefObject<HTMLElement | null>; display: string } => {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true });

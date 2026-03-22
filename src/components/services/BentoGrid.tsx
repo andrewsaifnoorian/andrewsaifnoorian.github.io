@@ -49,13 +49,7 @@ const TechCardContent = ({
 );
 
 /* ── ShowcaseCard ── */
-const ShowcaseCardContent = ({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) => (
+const ShowcaseCardContent = ({ title, description }: { title: string; description: string }) => (
   <div className="bento-showcase">
     <h4 className="bento-showcase__title">{title}</h4>
     <p className="bento-showcase__desc">{description}</p>

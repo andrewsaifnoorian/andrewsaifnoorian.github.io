@@ -26,40 +26,28 @@ const Nav = () => {
           return;
         }
       }
-    }, [])
+    }, []),
   );
 
   return (
     <nav>
       <MagneticButton>
-        <a
-          href="#about"
-          className={activeSection === "about" ? "active" : ""}
-        >
+        <a href="#about" className={activeSection === "about" ? "active" : ""}>
           <FaHome />
         </a>
       </MagneticButton>
       <MagneticButton>
-        <a
-          href="#project"
-          className={activeSection === "project" ? "active" : ""}
-        >
+        <a href="#project" className={activeSection === "project" ? "active" : ""}>
           <FaProjectDiagram />
         </a>
       </MagneticButton>
       <MagneticButton>
-        <a
-          href="#experience"
-          className={activeSection === "experience" ? "active" : ""}
-        >
+        <a href="#experience" className={activeSection === "experience" ? "active" : ""}>
           <FaBook />
         </a>
       </MagneticButton>
       <MagneticButton>
-        <a
-          href="#contact"
-          className={activeSection === "contact" ? "active" : ""}
-        >
+        <a href="#contact" className={activeSection === "contact" ? "active" : ""}>
           <MdContactMail />
         </a>
       </MagneticButton>

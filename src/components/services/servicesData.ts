@@ -1,10 +1,5 @@
 import { IconType } from "react-icons";
-import {
-  FaBuilding,
-  FaFlask,
-  FaServer,
-  FaJava,
-} from "react-icons/fa";
+import { FaBuilding, FaFlask, FaServer, FaJava } from "react-icons/fa";
 import {
   SiReact,
   SiAngular,
@@ -78,12 +73,22 @@ export const tabs: TabData[] = [
     icon: FaBuilding,
     timeline: [
       { year: "2024", text: "Angular v8 → v19 Migration", linkedCardId: "ent-paint" },
-      { year: "2025", text: "Spring Boot Batch Overhaul — 4x Throughput", linkedCardId: "ent-throughput" },
+      {
+        year: "2025",
+        text: "Spring Boot Batch Overhaul — 4x Throughput",
+        linkedCardId: "ent-throughput",
+      },
       { year: "2025", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-throughput" },
       { year: "2026", text: "Joined JPMC — Full-Stack Engineering", linkedCardId: "ent-tech" },
     ],
     bento: [
-      { id: "ent-throughput", type: "metric", size: "sm", value: "4x", label: "Throughput Improvement" },
+      {
+        id: "ent-throughput",
+        type: "metric",
+        size: "sm",
+        value: "4x",
+        label: "Throughput Improvement",
+      },
       { id: "ent-paint", type: "metric", size: "sm", value: "35%", label: "Faster First Paint" },
       {
         id: "ent-tech",
@@ -106,7 +111,11 @@ export const tabs: TabData[] = [
     shortLabel: "AI Research",
     icon: FaFlask,
     timeline: [
-      { year: "2019", text: "Rutgers Honors College — Presidential Scholar", linkedCardId: "acad-dnn" },
+      {
+        year: "2019",
+        text: "Rutgers Honors College — Presidential Scholar",
+        linkedCardId: "acad-dnn",
+      },
       { year: "2024", text: "Started MS at Johns Hopkins", linkedCardId: "acad-dnn" },
       { year: "2024", text: "Neural Network ROI Research", linkedCardId: "acad-dnn" },
       { year: "2025", text: "Anthropic Claude AI Courses", linkedCardId: "acad-ai" },
@@ -151,8 +160,20 @@ export const tabs: TabData[] = [
       { year: "2024", text: "AWS Infrastructure & Monitoring", linkedCardId: "devops-tech" },
     ],
     bento: [
-      { id: "devops-issues", type: "metric", size: "sm", value: "17+", label: "Critical Issues Caught Pre-Prod" },
-      { id: "devops-saved", type: "metric", size: "sm", value: "2-3 days", label: "Regression Saved Per Cycle" },
+      {
+        id: "devops-issues",
+        type: "metric",
+        size: "sm",
+        value: "17+",
+        label: "Critical Issues Caught Pre-Prod",
+      },
+      {
+        id: "devops-saved",
+        type: "metric",
+        size: "sm",
+        value: "2-3 days",
+        label: "Regression Saved Per Cycle",
+      },
       {
         id: "devops-tech",
         type: "tech",

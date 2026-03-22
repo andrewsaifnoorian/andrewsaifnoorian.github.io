@@ -4,7 +4,16 @@ import useKonamiCode from "../../hooks/useKonamiCode";
 import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import "./easter-egg.css";
 
-const COLORS = ["#ff6b6b", "#feca57", "#48dbfb", "#ff9ff3", "#54a0ff", "#5f27cd", "#01a3a4", "#f368e0"];
+const COLORS = [
+  "#ff6b6b",
+  "#feca57",
+  "#48dbfb",
+  "#ff9ff3",
+  "#54a0ff",
+  "#5f27cd",
+  "#01a3a4",
+  "#f368e0",
+];
 const COUNT_FULL = 60;
 const COUNT_LOW = 15;
 
@@ -26,7 +35,7 @@ const EasterEgg = () => {
         size: randomBetween(6, 12),
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [activated, count]
+    [activated, count],
   );
 
   return (
