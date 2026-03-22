@@ -66,8 +66,8 @@ const Home = () => (
   <>
     <ScrollProgress />
     <About />
-    <Projects />
     <Kaggle />
+    <Projects />
     <Nav />
     <Experience />
     <Services />

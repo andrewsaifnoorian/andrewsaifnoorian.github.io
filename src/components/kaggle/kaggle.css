@@ -1,11 +1,253 @@
-/* ── Grid ── */
+/* ═══════════════════════════════════════════════════════════════
+   KAGGLE SHOWCASE — sticky scroll (desktop ≥1025px)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Override global section margin-top */
+section#kaggle {
+  margin-top: 0;
+}
+
+/* Outer scroll container — 7 × 100vh so each competition = 1 viewport */
+.kgl-outer {
+  height: 700vh;
+}
+
+/* Sticky viewport */
+.kgl-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Full-screen panel */
+.kgl-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Radial background wash using per-panel accent hue */
+.kgl-bg-wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 60% 50%,
+    hsla(var(--kgl-accent-hue), 80%, 60%, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Inner two-column grid */
+.kgl-panel-inner {
+  position: relative;
+  z-index: 1;
+  width: var(--container-width-lg);
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ── Left column ──────────────────────────────────────────── */
+.kgl-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.kgl-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsla(var(--kgl-accent-hue), 80%, 70%, 0.9);
+  margin: 0;
+}
+
+.kgl-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.kgl-desc {
+  font-size: 0.9rem;
+  color: var(--color-light);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Techniques list */
+.kgl-techniques {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.kgl-techniques li {
+  font-size: 0.82rem;
+  color: var(--color-light);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.kgl-techniques li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: hsla(var(--kgl-accent-hue), 80%, 65%, 0.8);
+  font-weight: 700;
+}
+
+/* Footer row */
+.kgl-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.kgl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.kgl-tags span {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.kgl-tags__runtime {
+  background: rgba(17, 0, 252, 0.15) !important;
+  border-color: rgba(79, 172, 254, 0.2) !important;
+  color: rgba(79, 172, 254, 0.8) !important;
+}
+
+/* ── Right column ─────────────────────────────────────────── */
+.kgl-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.kgl-score-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.kgl-score-value {
+  font-size: clamp(4rem, 10vw, 8.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.kgl-score-value--placeholder {
+  opacity: 0.3;
+  font-size: clamp(3rem, 7vw, 6rem);
+}
+
+.kgl-score-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-light);
+}
+
+.kgl-rank {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-light);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 2rem;
+  white-space: nowrap;
+}
+
+.kgl-rank--gold {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(17, 0, 252, 0.3), rgba(79, 172, 254, 0.3));
+  border-color: rgba(79, 172, 254, 0.4);
+}
+
+.kgl-counter {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+/* ── Progress dots ────────────────────────────────────────── */
+.kgl-dots {
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.kgl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.kgl-dot--active {
+  background: rgba(79, 172, 254, 0.9);
+  transform: scale(1.5);
+}
+
+.kgl-dot:hover:not(.kgl-dot--active) {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FALLBACK GRID — mobile / low-perf (≤1024px)
+   ═══════════════════════════════════════════════════════════════ */
+
 .kaggle_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-/* ── Card ── */
 .kaggle_item {
   background: var(--color-bg-variant);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -29,7 +271,6 @@
   box-shadow: 0 0 20px rgba(79, 172, 254, 0.12);
 }
 
-/* ── Header: score + rank ── */
 .kaggle_item-header {
   display: flex;
   align-items: flex-start;
@@ -85,7 +326,6 @@
   border-color: rgba(79, 172, 254, 0.4);
 }
 
-/* ── Title + description ── */
 .kaggle_item-title {
   font-size: 1rem;
   font-weight: 500;
@@ -101,7 +341,6 @@
   margin: 0;
 }
 
-/* ── Techniques list ── */
 .kaggle_item-techniques {
   list-style: none;
   padding: 0;
@@ -127,7 +366,6 @@
   font-weight: 700;
 }
 
-/* ── Footer: tags + link ── */
 .kaggle_item-footer {
   display: flex;
   align-items: center;
@@ -161,7 +399,7 @@
   color: rgba(79, 172, 254, 0.8) !important;
 }
 
-/* ── Tablet (601px – 1024px) ── */
+/* ── Tablet ── */
 @media screen and (max-width: 1024px) {
   .kaggle_container {
     grid-template-columns: repeat(2, 1fr);
@@ -169,7 +407,7 @@
   }
 }
 
-/* ── Mobile (≤600px) ── */
+/* ── Mobile ── */
 @media screen and (max-width: 600px) {
   .kaggle_container {
     grid-template-columns: 1fr;
