@@ -21,17 +21,17 @@
 }
 
 :root {
-  --color-bg: #0e0e11;
-  --color-bg-variant: #020e80;
+  --color-bg: #050508;
+  --color-bg-variant: #1c1c1e;
   --color-primary: #ffffff;
-  --color-primary-variant: rgba(17, 0, 252, 0.932);
+  --color-primary-variant: rgba(79, 172, 254, 0.85);
   --color-white: #fff;
-  --color-light: rgba(255, 255, 255, 0.6);
+  --color-light: rgba(235, 235, 245, 0.55);
   --container-width-lg: 75%;
   --container-width-md: 86%;
   --container-width-sm: 90%;
   --transition: all 400ms ease;
-  --gradient-accent: linear-gradient(135deg, #1100fc, #4facfe, #00f2fe);
+  --gradient-accent: linear-gradient(135deg, #2563eb, #4facfe, #00f2fe);
 }
 
 
