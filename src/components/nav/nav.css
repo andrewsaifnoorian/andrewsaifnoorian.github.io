@@ -29,3 +29,14 @@ nav a.active {
   background: var(--color-primary);
   color: var(--color-bg);
 }
+
+@media (prefers-color-scheme: light) {
+  nav {
+    background: rgba(245, 245, 247, 0.92);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  nav a:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+}

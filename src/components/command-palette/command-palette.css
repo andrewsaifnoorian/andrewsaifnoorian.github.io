@@ -76,3 +76,18 @@ body[data-perf-tier="minimal"] .cmd-palette_backdrop {
   color: var(--color-light);
   font-size: 0.9rem;
 }
+
+@media (prefers-color-scheme: light) {
+  .cmd-palette_backdrop {
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  body[data-perf-tier="reduced"] .cmd-palette_backdrop,
+  body[data-perf-tier="minimal"] .cmd-palette_backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .cmd-palette {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  }
+}

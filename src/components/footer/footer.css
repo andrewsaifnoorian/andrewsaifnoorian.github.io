@@ -63,3 +63,13 @@ footer a:hover {
     gap: 1rem;
   }
 }
+
+@media (prefers-color-scheme: light) {
+  footer {
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .footer_socials a {
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+}

@@ -97,6 +97,19 @@
 }
 
 /* ══════════════════════════════════════
+   Light Mode
+   ══════════════════════════════════════ */
+@media (prefers-color-scheme: light) {
+  .experience_container > div {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .experience_details:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ══════════════════════════════════════
    Tablet
    ══════════════════════════════════════ */
 @media screen and (max-width: 1024px) {

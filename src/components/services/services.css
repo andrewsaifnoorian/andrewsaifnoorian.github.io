@@ -357,6 +357,35 @@
 }
 
 /* ══════════════════════════════════════
+   Light Mode
+   ══════════════════════════════════════ */
+@media (prefers-color-scheme: light) {
+  .expertise-tab {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .expertise-tab:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .mini-timeline__node:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .bento-card {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .bento-tech__item:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .stat-bar {
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ══════════════════════════════════════
    Mobile (≤600px)
    ══════════════════════════════════════ */
 @media screen and (max-width: 600px) {

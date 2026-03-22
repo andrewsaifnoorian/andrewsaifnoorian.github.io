@@ -73,3 +73,14 @@ textarea:focus {
     width: var(--container-width-sm);
   }
 }
+
+@media (prefers-color-scheme: light) {
+  .contact_option {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  input,
+  textarea {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}

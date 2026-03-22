@@ -230,3 +230,14 @@
     gap: 1rem;
   }
 }
+
+@media (prefers-color-scheme: light) {
+  .project_item {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .project_item-tech span {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}

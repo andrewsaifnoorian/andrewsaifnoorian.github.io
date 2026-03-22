@@ -471,3 +471,56 @@ section#kaggle {
     font-size: 1.6rem;
   }
 }
+
+/* ── Light Mode ── */
+@media (prefers-color-scheme: light) {
+  /* Sticky showcase */
+  .kgl-footer {
+    border-top-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .kgl-tags span {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .kgl-rank {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .kgl-dot {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .kgl-dot:hover:not(.kgl-dot--active) {
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .kgl-scroll-hint {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .kgl-counter {
+    color: rgba(0, 0, 0, 0.35);
+  }
+
+  /* Fallback grid */
+  .kaggle_item {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .kaggle_item-rank {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .kaggle_item-footer {
+    border-top-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .kaggle_item-tags span {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}
