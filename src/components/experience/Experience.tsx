@@ -31,33 +31,35 @@ const LEVEL_DOTS: Record<Level, number> = {
   Experienced: 4,
 };
 
-const aiCloudSkills = [
-  { Icon: SiAnthropic, name: "Claude", level: "Experienced" as Level },
-  { Icon: SiOpenai, name: "ChatGPT", level: "Experienced" as Level },
-  { Icon: SiGooglegemini, name: "Gemini", level: "Proficient" as Level },
-  { Icon: SiAmazonwebservices, name: "AWS", level: "Experienced" as Level },
-  { Icon: FaMicrosoft, name: "Azure", level: "Proficient" as Level },
-  { Icon: SiGooglecloud, name: "GCP", level: "Proficient" as Level },
-  { Icon: SiOracle, name: "Oracle", level: "Proficient" as Level },
-  { Icon: SiDatabricks, name: "Databricks", level: "Proficient" as Level },
+type Skill = { Icon: ComponentType<{ className?: string }>; name: string; level: Level };
+
+const aiCloudSkills: Skill[] = [
+  { Icon: SiAnthropic, name: "Claude", level: "Experienced" },
+  { Icon: SiOpenai, name: "ChatGPT", level: "Experienced" },
+  { Icon: SiGooglegemini, name: "Gemini", level: "Proficient" },
+  { Icon: SiAmazonwebservices, name: "AWS", level: "Experienced" },
+  { Icon: FaMicrosoft, name: "Azure", level: "Proficient" },
+  { Icon: SiGooglecloud, name: "GCP", level: "Proficient" },
+  { Icon: SiOracle, name: "Oracle", level: "Proficient" },
+  { Icon: SiDatabricks, name: "Databricks", level: "Proficient" },
 ];
 
-const frontendSkills = [
-  { Icon: SiReact, name: "React", level: "Experienced" as Level },
-  { Icon: SiAngular, name: "Angular", level: "Experienced" as Level },
-  { Icon: FaCog, name: "ServiceNow", level: "Experienced" as Level },
-  { Icon: SiHtml5, name: "HTML", level: "Experienced" as Level },
-  { Icon: SiCss3, name: "CSS", level: "Experienced" as Level },
-  { Icon: SiJavascript, name: "JavaScript", level: "Experienced" as Level },
+const frontendSkills: Skill[] = [
+  { Icon: SiReact, name: "React", level: "Experienced" },
+  { Icon: SiAngular, name: "Angular", level: "Experienced" },
+  { Icon: FaCog, name: "ServiceNow", level: "Experienced" },
+  { Icon: SiHtml5, name: "HTML", level: "Experienced" },
+  { Icon: SiCss3, name: "CSS", level: "Experienced" },
+  { Icon: SiJavascript, name: "JavaScript", level: "Experienced" },
 ];
 
-const backendSkills = [
-  { Icon: FaJava, name: "Java", level: "Experienced" as Level },
-  { Icon: SiApachemaven, name: "Maven", level: "Experienced" as Level },
-  { Icon: SiPython, name: "Python", level: "Proficient" as Level },
-  { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" as Level },
-  { Icon: FaDatabase, name: "SQL", level: "Experienced" as Level },
-  { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" as Level },
+const backendSkills: Skill[] = [
+  { Icon: FaJava, name: "Java", level: "Experienced" },
+  { Icon: SiApachemaven, name: "Maven", level: "Experienced" },
+  { Icon: SiPython, name: "Python", level: "Proficient" },
+  { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" },
+  { Icon: FaDatabase, name: "SQL", level: "Experienced" },
+  { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" },
 ];
 
 const LevelDots = ({ level }: { level: Level }) => {
@@ -74,17 +76,7 @@ const LevelDots = ({ level }: { level: Level }) => {
   );
 };
 
-const IconSkillCard = ({
-  Icon,
-  name,
-  level,
-  index,
-}: {
-  Icon: ComponentType<{ className?: string }>;
-  name: string;
-  level: Level;
-  index: number;
-}) => {
+const IconSkillCard = ({ Icon, name, level, index }: Skill & { index: number }) => {
   const lowPerf = useIsLowPerformance();
   const Tag = lowPerf ? "article" : motion.article;
   const motionProps = lowPerf

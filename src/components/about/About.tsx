@@ -9,6 +9,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
@@ -38,7 +39,7 @@ const CountingStat = ({ target, suffix, label }: CountingStatProps) => {
 interface WordProps {
   children: string;
   range: [number, number];
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+  progress: MotionValue<number>;
 }
 
 const Word = ({ children, range, progress }: WordProps) => {
@@ -148,7 +149,6 @@ const About = () => {
             <WordReveal text="Full-stack software engineer focused on building secure, scalable applications using React + TypeScript, Java/Spring Boot, and AWS (Aurora/Postgres). Strong interest in neural networks and machine learning, currently preparing for the AWS Solutions Architect - Associate certification and completing Anthropic's Claude training courses on applied AI and model capability." />
             <MagneticButton>
               <a href="#project" className="btn btn-primary">
-                {" "}
                 See my projects
               </a>
             </MagneticButton>

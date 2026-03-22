@@ -275,9 +275,10 @@ const KaggleIntroPanel = () => (
       <p className="kgl-eyebrow">Johns Hopkins University · ML Engineering</p>
       <h2 className="kgl-intro-heading">Kaggle<br />Competitions</h2>
       <p className="kgl-intro-body">
-        Seven in-class machine learning competitions spanning bioinformatics,
-        audio, tabular data, and recommender systems — built and submitted
-        during the JHU ML Engineering program.
+        Seven machine learning competitions completed as part of the Johns
+        Hopkins ML Engineering program. The projects range from DNA sequence
+        classification and audio phoneme detection to diamond price prediction
+        and collaborative filtering.
       </p>
       <motion.p
         className="kgl-scroll-hint"

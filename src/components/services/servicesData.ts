@@ -3,6 +3,7 @@ import {
   FaBuilding,
   FaFlask,
   FaServer,
+  FaJava,
 } from "react-icons/fa";
 import {
   SiReact,
@@ -18,7 +19,6 @@ import {
   SiSelenium,
   SiTerraform,
 } from "react-icons/si";
-import { FaJava } from "react-icons/fa";
 
 /* ── Card Types ── */
 export type BentoSize = "sm" | "md" | "lg";
