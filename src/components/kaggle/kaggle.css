@@ -252,12 +252,12 @@ section#kaggle {
 /* ── Progress dots ────────────────────────────────────────── */
 .kgl-dots {
   position: absolute;
-  right: 2.5rem;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: row;
+  gap: 0.6rem;
   z-index: 10;
 }
 
