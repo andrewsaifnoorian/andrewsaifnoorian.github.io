@@ -10,7 +10,7 @@ import TiltCard from "../tilt-card/TiltCard";
 import { useIsLowPerformance } from "../../hooks/usePerformanceTier";
 import useIsMobile from "../../hooks/useIsMobile";
 
-const KAGGLE_PROFILE_URL = "https://www.kaggle.com/andrewsaifnoorian";
+const KAGGLE_PROFILE_URL = "https://www.kaggle.com/andrewsafe";
 
 interface KaggleExpandedContent {
   overview: string;
