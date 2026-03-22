@@ -29,7 +29,7 @@
 }
 
 .hero_name--gradient {
-  background: linear-gradient(90deg, #4facfe, #00f2fe, #1100fc, #4facfe);
+  background: linear-gradient(90deg, #4facfe, #00f2fe, #2563eb, #4facfe);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
