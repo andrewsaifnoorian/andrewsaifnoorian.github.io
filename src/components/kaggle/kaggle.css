@@ -7,9 +7,9 @@ section#kaggle {
   margin-top: 0;
 }
 
-/* Outer scroll container — 7 × 100vh so each competition = 1 viewport */
+/* Outer scroll container — 1 intro + 7 competitions = 8 × 100vh */
 .kgl-outer {
-  height: 700vh;
+  height: 800vh;
 }
 
 /* Sticky viewport */
@@ -205,6 +205,50 @@ section#kaggle {
   margin-top: 0.5rem;
 }
 
+/* ── Intro panel ──────────────────────────────────────────── */
+.kgl-panel--intro {
+  justify-content: center;
+  align-items: center;
+}
+
+.kgl-intro-inner {
+  position: relative;
+  z-index: 1;
+  width: var(--container-width-lg);
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.kgl-intro-heading {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.kgl-intro-body {
+  font-size: 1rem;
+  color: var(--color-light);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0;
+}
+
+.kgl-scroll-hint {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.06em;
+  margin: 0.5rem 0 0;
+}
+
 /* ── Progress dots ────────────────────────────────────────── */
 .kgl-dots {
   position: absolute;
@@ -235,6 +279,15 @@ section#kaggle {
 
 .kgl-dot:hover:not(.kgl-dot--active) {
   background: rgba(255, 255, 255, 0.45);
+}
+
+.kgl-dot--intro {
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.kgl-dot--intro.kgl-dot--active {
+  transform: rotate(45deg) scale(1.4);
 }
 
 

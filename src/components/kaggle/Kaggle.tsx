@@ -260,6 +260,36 @@ const KaggleFallbackGrid = () => (
   </section>
 );
 
+// ── Intro panel ────────────────────────────────────────────────────────────
+const KaggleIntroPanel = () => (
+  <motion.div
+    className="kgl-panel kgl-panel--intro"
+    style={{ "--kgl-accent-hue": 220 } as React.CSSProperties}
+    variants={panelVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+  >
+    <div className="kgl-bg-wash" />
+    <div className="kgl-intro-inner">
+      <p className="kgl-eyebrow">Johns Hopkins University · ML Engineering</p>
+      <h2 className="kgl-intro-heading">Kaggle<br />Competitions</h2>
+      <p className="kgl-intro-body">
+        Seven in-class machine learning competitions spanning bioinformatics,
+        audio, tabular data, and recommender systems — built and submitted
+        during the JHU ML Engineering program.
+      </p>
+      <motion.p
+        className="kgl-scroll-hint"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        Scroll to explore ↓
+      </motion.p>
+    </div>
+  </motion.div>
+);
+
 // ── Showcase panel ─────────────────────────────────────────────────────────
 const KagglePanel = ({
   comp,
@@ -351,6 +381,8 @@ const KagglePanel = ({
 };
 
 // ── Sticky scroll showcase ─────────────────────────────────────────────────
+const TOTAL_PANELS = competitions.length + 1; // 1 intro + 7 competitions
+
 const KaggleShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const outerRef = useRef<HTMLDivElement>(null);
@@ -363,8 +395,8 @@ const KaggleShowcase = () => {
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const idx = Math.min(
-      Math.floor(v * competitions.length),
-      competitions.length - 1
+      Math.floor(v * TOTAL_PANELS),
+      TOTAL_PANELS - 1
     );
     if (idx !== prevIndexRef.current) {
       prevIndexRef.current = idx;
@@ -372,39 +404,43 @@ const KaggleShowcase = () => {
     }
   });
 
-  const comp = competitions[activeIndex];
+  const scrollToPanel = (i: number) => {
+    if (!outerRef.current) return;
+    const rect = outerRef.current.getBoundingClientRect();
+    const totalHeight = outerRef.current.offsetHeight - window.innerHeight;
+    const targetScroll =
+      window.scrollY +
+      rect.top +
+      (i / TOTAL_PANELS) * totalHeight +
+      totalHeight / TOTAL_PANELS / 2;
+    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+  };
 
   return (
     <section id="kaggle">
       <div className="kgl-outer" ref={outerRef}>
         <div className="kgl-sticky">
           <AnimatePresence mode="wait">
-            <KagglePanel
-              key={comp.id}
-              comp={comp}
-              index={activeIndex}
-              total={competitions.length}
-            />
+            {activeIndex === 0 ? (
+              <KaggleIntroPanel key="intro" />
+            ) : (
+              <KagglePanel
+                key={competitions[activeIndex - 1].id}
+                comp={competitions[activeIndex - 1]}
+                index={activeIndex - 1}
+                total={competitions.length}
+              />
+            )}
           </AnimatePresence>
 
-          {/* Progress dots */}
-          <nav className="kgl-dots" aria-label="Competition progress">
-            {competitions.map((c, i) => (
+          {/* Progress dots — first dot = intro, rest = competitions */}
+          <nav className="kgl-dots" aria-label="Kaggle section progress">
+            {Array.from({ length: TOTAL_PANELS }, (_, i) => (
               <button
-                key={c.id}
-                className={`kgl-dot${i === activeIndex ? " kgl-dot--active" : ""}`}
-                aria-label={`Competition ${i + 1}: ${c.title}`}
-                onClick={() => {
-                  if (!outerRef.current) return;
-                  const rect = outerRef.current.getBoundingClientRect();
-                  const totalHeight = outerRef.current.offsetHeight - window.innerHeight;
-                  const targetScroll =
-                    window.scrollY +
-                    rect.top +
-                    (i / competitions.length) * totalHeight +
-                    totalHeight / competitions.length / 2;
-                  window.scrollTo({ top: targetScroll, behavior: "smooth" });
-                }}
+                key={i}
+                className={`kgl-dot${i === activeIndex ? " kgl-dot--active" : ""}${i === 0 ? " kgl-dot--intro" : ""}`}
+                aria-label={i === 0 ? "Introduction" : `Competition ${i}: ${competitions[i - 1].title}`}
+                onClick={() => scrollToPanel(i)}
               />
             ))}
           </nav>
