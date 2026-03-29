@@ -7,9 +7,9 @@ section#kaggle {
   margin-top: 0;
 }
 
-/* Outer scroll container — 1 intro + 7 competitions = 8 × 100vh */
+/* Outer scroll container — 1 intro + 8 competitions = 9 × 100vh */
 .kgl-outer {
-  height: 800vh;
+  height: 900vh;
 }
 
 .kgl-sticky {

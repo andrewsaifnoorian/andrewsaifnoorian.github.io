@@ -222,6 +222,39 @@ const competitions: KaggleCompetition[] = [
   },
   {
     id: 7,
+    title: "Radon Level Prediction",
+    description:
+      "Regression task predicting indoor radon concentration (pCi/L) from EPA SRRS survey data with geographic, structural, and uranium features.",
+    techniques: [
+      "RandomForest (300 trees) + GradientBoosting ensemble",
+      "log1p target transform",
+      "County-level Bayesian shrinkage aggregates",
+      "33 engineered features (basement, state, log transforms, interactions)",
+    ],
+    score: "24.19",
+    scoreLabel: "MSE",
+    rank: "Rank 3 of 16",
+    tags: ["Regression", "Geospatial", "Environment"],
+    colab: "",
+    accentHue: 75,
+    expandedContent: {
+      overview:
+        "The dataset is the EPA SRRS (State Radon Survey), the same dataset used in Gelman & Hill's multilevel modeling textbook. The target — indoor radon in pCi/L — is heavily right-skewed (mean=4.72, max=282). The baseline drops all categorical features via select_dtypes and uses a 5-neuron DNN. The strategy here was to recover basement type, state geography, and county-level geology, then replace the DNN with a RandomForest + GradientBoosting ensemble trained on a log-transformed target.",
+      approach: [
+        "Recovered 3 dropped categoricals: has_basement (Y/N), is_basement_floor (floor=0), and 7 one-hot state indicators",
+        "County-level Bayesian shrinkage: smoothed mean radon per FIPS code (n=5 toward global mean) to capture local geology without overfitting small counties",
+        "Log-transformed skewed inputs: log1p(Uppm), log1p(pcterr), log1p(adjwt) to stabilize tree splits",
+        "Interaction features: basement × Uppm, floor × Uppm, lat × Uppm to model combined structural/spatial effects",
+        "Target transform: log1p(Y) reduces target skewness from ~2.9 to ~0.2; predictions back-transformed with expm1",
+        "RF (300 trees, max_depth=15, min_samples_leaf=2) + GBR (200 trees, max_depth=4, lr=0.1, subsample=0.8)",
+        "Ensemble: 70% RF + 30% GBR; entire pipeline runs in ~35s (within the 60s runtime limit)",
+      ],
+      result:
+        "24.19 MSE on the public leaderboard, rank 3 of 16. RF feature importance revealed log_pcterr and pcterr as dominant predictors (~48% each) — measurement error correlates with true radon levels since high-radon environments are harder to measure precisely. County aggregates and has_basement contributed meaningful marginal improvements. Without the log target transform, RF MSE on raw Y was ~10 vs. ~6.6 with it.",
+    },
+  },
+  {
+    id: 8,
     title: "Stellar Classification",
     description:
       "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
@@ -513,9 +546,9 @@ const KaggleIntroPanel = () => (
         Competitions
       </h2>
       <p className="kgl-intro-body">
-        Seven machine learning competitions completed as part of the Johns Hopkins ML Engineering
+        Eight machine learning competitions completed as part of the Johns Hopkins ML Engineering
         program. The projects range from DNA sequence classification and audio phoneme detection to
-        diamond price prediction and collaborative filtering.
+        radon level prediction and collaborative filtering.
       </p>
       <div className="kgl-intro-ctas">
         <a href="#projects" className="btn btn-primary">
@@ -623,7 +656,7 @@ const KagglePanel = ({
 };
 
 // ── Sticky scroll showcase ─────────────────────────────────────────────────
-const TOTAL_PANELS = competitions.length + 1; // 1 intro + 7 competitions
+const TOTAL_PANELS = competitions.length + 1; // 1 intro + 8 competitions
 const STEP_MS = 500; // ms between sequential panel steps (matches enter animation)
 
 const KaggleShowcase = () => {
