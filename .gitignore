@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Kaggle notebooks (keep local, not public)
+src/assets/*.ipynb
