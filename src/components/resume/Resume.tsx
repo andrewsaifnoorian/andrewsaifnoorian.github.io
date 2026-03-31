@@ -6,7 +6,7 @@ const Resume = () => {
     <section className="resume_page">
       <h1>Oops... Awkward.</h1>
       <p>
-        Hey, sorry about that! I'm currently <strong>not</strong> looking for a job. But hey, I
+        Hey, sorry about that! I'm currently <strong>not</strong> looking for a job, but I
         appreciate the curiosity!
       </p>
       <p>

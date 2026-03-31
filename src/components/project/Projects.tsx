@@ -432,12 +432,9 @@ const ProjectIntroPanel = () => (
         client work. Each one built end-to-end — from architecture decisions to deployment.
       </p>
       <div className="prj-intro-ctas">
-        <a href="#kaggle" className="btn btn-primary">
-          Kaggle Competitions
-        </a>
         <a
           href="https://github.com/andrewsaifnoorian"
-          className="btn"
+          className="btn btn-primary"
           target="_blank"
           rel="noreferrer"
         >
