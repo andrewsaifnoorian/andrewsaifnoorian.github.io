@@ -63,6 +63,32 @@ const competitions: KaggleCompetition[] = [
   },
   {
     id: 2,
+    title: "Stellar Classification",
+    description:
+      "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
+    techniques: ["Linear Discriminant Analysis (LDA)", "Custom redshift-split model"],
+    score: "—",
+    scoreLabel: "",
+    rank: "",
+    tags: ["Astronomy", "Tabular"],
+    colab: "",
+    accentHue: 280,
+    expandedContent: {
+      overview:
+        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes — stars, galaxies, and quasars — are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
+      approach: [
+        "Engineered standard astronomical color indices: u−g, g−r, r−i, i−z",
+        "Linear Discriminant Analysis finds the 2D projection maximizing between-class vs. within-class variance",
+        "Custom redshift-split: separate LDA classifiers for z < 0.5 and z ≥ 0.5",
+        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both — the split enforces this prior",
+        "Final classifier routes each object to the appropriate sub-model based on its redshift",
+      ],
+      result:
+        "Competition not formally graded (work in progress). Cross-validation accuracy exceeded 97% — color indices are highly discriminative. The redshift-split boosted accuracy by ~1.5% on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
+    },
+  },
+  {
+    id: 3,
     title: "Bacteria Classification",
     description:
       "5-class bacterial species classification from 286-dimensional k-mer count frequency features.",
@@ -95,7 +121,38 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 3,
+    id: 4,
+    title: "Diamond Price Prediction",
+    description:
+      "Regression task predicting prices of 40K diamonds from 9 physical and quality characteristics.",
+    techniques: [
+      "RidgeCV with log-target transform",
+      "Degree-2 polynomial feature expansion",
+      "One-hot categorical encoding",
+      "Quantile-matching post-processing",
+    ],
+    score: "603.56",
+    scoreLabel: "MAE",
+    rank: "",
+    tags: ["Regression", "Tabular"],
+    colab: "",
+    accentHue: 190,
+    expandedContent: {
+      overview:
+        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
+      approach: [
+        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
+        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
+        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
+        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
+        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
+      ],
+      result:
+        "603.56 MAE (~3.1% of mean price). The log-transform alone reduced MAE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed another ~$40 MAE reduction by correcting systematic under-prediction on high-value diamonds.",
+    },
+  },
+  {
+    id: 5,
     title: "Radon Level Prediction",
     description:
       "Regression task predicting indoor radon concentration (pCi/L) from EPA SRRS survey data with geographic, structural, and uranium features.",
@@ -128,7 +185,7 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 4,
+    id: 6,
     title: "Purchase Intent Classification",
     description:
       "Binary classification of online purchase intent from 17 behavioral e-commerce session features.",
@@ -161,7 +218,7 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 5,
+    id: 7,
     title: "Collaborative Filtering (Netflix)",
     description:
       "Movie rating prediction on a 128K-user × 380-movie sparse matrix using matrix factorization.",
@@ -172,7 +229,7 @@ const competitions: KaggleCompetition[] = [
     ],
     score: "0.4200",
     scoreLabel: "Accuracy",
-    rank: "Rank 6 of 9",
+    rank: "Rank 6 of 14",
     tags: ["Recommender Systems"],
     colab: "",
     accentHue: 0,
@@ -188,11 +245,11 @@ const competitions: KaggleCompetition[] = [
         "Threshold search: grid of [1.5, 2.5, 3.5, 4.5] boundaries via brute-force accuracy maximization",
       ],
       result:
-        "0.4200 accuracy, rank 6 of 9. Threshold optimization improved accuracy by ~2pp over naive rounding. The low absolute accuracy reflects the fundamental difficulty of 5-class exact-match: a model off by 0.4 on every prediction fails every sample regardless of direction.",
+        "0.4200 accuracy, rank 6 of 14. Threshold optimization improved accuracy by ~2pp over naive rounding. The low absolute accuracy reflects the fundamental difficulty of 5-class exact-match: a model off by 0.4 on every prediction fails every sample regardless of direction.",
     },
   },
   {
-    id: 6,
+    id: 8,
     title: "Audio Classification (Phonemes)",
     description:
       "5-class phoneme classification from 256-point log-periodogram spectral features across 50K utterances.",
@@ -203,7 +260,7 @@ const competitions: KaggleCompetition[] = [
     ],
     score: "0.9284",
     scoreLabel: "Accuracy",
-    rank: "Rank 8 of 10",
+    rank: "Rank 8 of 18",
     tags: ["Audio", "Speech"],
     colab: "",
     accentHue: 30,
@@ -219,64 +276,7 @@ const competitions: KaggleCompetition[] = [
         "Feature importance confirmed low-frequency bins (0–80 Hz) as most discriminative",
       ],
       result:
-        "0.9284 accuracy, rank 8 of 10. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
-    },
-  },
-  {
-    id: 7,
-    title: "Diamond Price Prediction",
-    description:
-      "Regression task predicting prices of 40K diamonds from 9 physical and quality characteristics.",
-    techniques: [
-      "RidgeCV with log-target transform",
-      "Degree-2 polynomial feature expansion",
-      "One-hot categorical encoding",
-      "Quantile-matching post-processing",
-    ],
-    score: "603.56",
-    scoreLabel: "MAE",
-    rank: "",
-    tags: ["Regression", "Tabular"],
-    colab: "",
-    accentHue: 190,
-    expandedContent: {
-      overview:
-        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
-      approach: [
-        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
-        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
-        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
-        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
-        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
-      ],
-      result:
-        "603.56 MAE (~3.1% of mean price). The log-transform alone reduced MAE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed another ~$40 MAE reduction by correcting systematic under-prediction on high-value diamonds.",
-    },
-  },
-  {
-    id: 8,
-    title: "Stellar Classification",
-    description:
-      "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
-    techniques: ["Linear Discriminant Analysis (LDA)", "Custom redshift-split model"],
-    score: "—",
-    scoreLabel: "",
-    rank: "",
-    tags: ["Astronomy", "Tabular"],
-    colab: "",
-    accentHue: 280,
-    expandedContent: {
-      overview:
-        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes — stars, galaxies, and quasars — are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
-      approach: [
-        "Engineered standard astronomical color indices: u−g, g−r, r−i, i−z",
-        "Linear Discriminant Analysis finds the 2D projection maximizing between-class vs. within-class variance",
-        "Custom redshift-split: separate LDA classifiers for z < 0.5 and z ≥ 0.5",
-        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both — the split enforces this prior",
-        "Final classifier routes each object to the appropriate sub-model based on its redshift",
-      ],
-      result:
-        "Competition not formally graded (work in progress). Cross-validation accuracy exceeded 97% — color indices are highly discriminative. The redshift-split boosted accuracy by ~1.5% on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
+        "0.9284 accuracy, rank 8 of 18. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
     },
   },
 ];
