@@ -96,6 +96,39 @@ const competitions: KaggleCompetition[] = [
   },
   {
     id: 3,
+    title: "Radon Level Prediction",
+    description:
+      "Regression task predicting indoor radon concentration (pCi/L) from EPA SRRS survey data with geographic, structural, and uranium features.",
+    techniques: [
+      "RandomForest (300 trees) + GradientBoosting ensemble",
+      "log1p target transform",
+      "County-level Bayesian shrinkage aggregates",
+      "33 engineered features (basement, state, log transforms, interactions)",
+    ],
+    score: "24.19",
+    scoreLabel: "MSE",
+    rank: "Rank 3 of 16",
+    tags: ["Regression", "Geospatial", "Environment"],
+    colab: "",
+    accentHue: 75,
+    expandedContent: {
+      overview:
+        "The dataset is the EPA SRRS (State Radon Survey), the same dataset used in Gelman & Hill's multilevel modeling textbook. The target — indoor radon in pCi/L — is heavily right-skewed (mean=4.72, max=282). The baseline drops all categorical features via select_dtypes and uses a 5-neuron DNN. The strategy here was to recover basement type, state geography, and county-level geology, then replace the DNN with a RandomForest + GradientBoosting ensemble trained on a log-transformed target.",
+      approach: [
+        "Recovered 3 dropped categoricals: has_basement (Y/N), is_basement_floor (floor=0), and 7 one-hot state indicators",
+        "County-level Bayesian shrinkage: smoothed mean radon per FIPS code (n=5 toward global mean) to capture local geology without overfitting small counties",
+        "Log-transformed skewed inputs: log1p(Uppm), log1p(pcterr), log1p(adjwt) to stabilize tree splits",
+        "Interaction features: basement × Uppm, floor × Uppm, lat × Uppm to model combined structural/spatial effects",
+        "Target transform: log1p(Y) reduces target skewness from ~2.9 to ~0.2; predictions back-transformed with expm1",
+        "RF (300 trees, max_depth=15, min_samples_leaf=2) + GBR (200 trees, max_depth=4, lr=0.1, subsample=0.8)",
+        "Ensemble: 70% RF + 30% GBR; entire pipeline runs in ~35s (within the 60s runtime limit)",
+      ],
+      result:
+        "24.19 MSE on the public leaderboard, rank 3 of 16. RF feature importance revealed log_pcterr and pcterr as dominant predictors (~48% each) — measurement error correlates with true radon levels since high-radon environments are harder to measure precisely. County aggregates and has_basement contributed meaningful marginal improvements. Without the log target transform, RF MSE on raw Y was ~10 vs. ~6.6 with it.",
+    },
+  },
+  {
+    id: 4,
     title: "Purchase Intent Classification",
     description:
       "Binary classification of online purchase intent from 17 behavioral e-commerce session features.",
@@ -128,69 +161,7 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 4,
-    title: "Audio Classification (Phonemes)",
-    description:
-      "5-class phoneme classification from 256-point log-periodogram spectral features across 50K utterances.",
-    techniques: [
-      "StandardScaler on full training set",
-      "LightGBM (200 trees, num_leaves=63)",
-      "Balanced class weights",
-    ],
-    score: "0.9284",
-    scoreLabel: "Accuracy",
-    rank: "Rank 8 of 10",
-    tags: ["Audio", "Speech"],
-    colab: "",
-    accentHue: 30,
-    expandedContent: {
-      overview:
-        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale — and they don't require tuning a sequence model for a fixed-width input.",
-      approach: [
-        "Computed log-periodogram: 10 × log₁₀(|FFT|²) for 256 frequency bins per utterance",
-        "StandardScaler fit on training set; applied to train and test",
-        "LightGBM: 200 estimators, num_leaves=63, learning_rate=0.05, subsample=0.8",
-        "class_weight='balanced' for 5-class imbalance across phoneme types",
-        "Early stopping: 50 rounds patience on 15% stratified validation split",
-        "Feature importance confirmed low-frequency bins (0–80 Hz) as most discriminative",
-      ],
-      result:
-        "0.9284 accuracy, rank 8 of 10. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
-    },
-  },
-  {
     id: 5,
-    title: "Diamond Price Prediction",
-    description:
-      "Regression task predicting prices of 40K diamonds from 9 physical and quality characteristics.",
-    techniques: [
-      "RidgeCV with log-target transform",
-      "Degree-2 polynomial feature expansion",
-      "One-hot categorical encoding",
-      "Quantile-matching post-processing",
-    ],
-    score: "603.56",
-    scoreLabel: "MAE",
-    rank: "",
-    tags: ["Regression", "Tabular"],
-    colab: "",
-    accentHue: 190,
-    expandedContent: {
-      overview:
-        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
-      approach: [
-        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
-        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
-        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
-        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
-        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
-      ],
-      result:
-        "603.56 MAE (~3.1% of mean price). The log-transform alone reduced MAE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed another ~$40 MAE reduction by correcting systematic under-prediction on high-value diamonds.",
-    },
-  },
-  {
-    id: 6,
     title: "Collaborative Filtering (Netflix)",
     description:
       "Movie rating prediction on a 128K-user × 380-movie sparse matrix using matrix factorization.",
@@ -221,36 +192,65 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 7,
-    title: "Radon Level Prediction",
+    id: 6,
+    title: "Audio Classification (Phonemes)",
     description:
-      "Regression task predicting indoor radon concentration (pCi/L) from EPA SRRS survey data with geographic, structural, and uranium features.",
+      "5-class phoneme classification from 256-point log-periodogram spectral features across 50K utterances.",
     techniques: [
-      "RandomForest (300 trees) + GradientBoosting ensemble",
-      "log1p target transform",
-      "County-level Bayesian shrinkage aggregates",
-      "33 engineered features (basement, state, log transforms, interactions)",
+      "StandardScaler on full training set",
+      "LightGBM (200 trees, num_leaves=63)",
+      "Balanced class weights",
     ],
-    score: "24.19",
-    scoreLabel: "MSE",
-    rank: "Rank 3 of 16",
-    tags: ["Regression", "Geospatial", "Environment"],
+    score: "0.9284",
+    scoreLabel: "Accuracy",
+    rank: "Rank 8 of 10",
+    tags: ["Audio", "Speech"],
     colab: "",
-    accentHue: 75,
+    accentHue: 30,
     expandedContent: {
       overview:
-        "The dataset is the EPA SRRS (State Radon Survey), the same dataset used in Gelman & Hill's multilevel modeling textbook. The target — indoor radon in pCi/L — is heavily right-skewed (mean=4.72, max=282). The baseline drops all categorical features via select_dtypes and uses a 5-neuron DNN. The strategy here was to recover basement type, state geography, and county-level geology, then replace the DNN with a RandomForest + GradientBoosting ensemble trained on a log-transformed target.",
+        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale — and they don't require tuning a sequence model for a fixed-width input.",
       approach: [
-        "Recovered 3 dropped categoricals: has_basement (Y/N), is_basement_floor (floor=0), and 7 one-hot state indicators",
-        "County-level Bayesian shrinkage: smoothed mean radon per FIPS code (n=5 toward global mean) to capture local geology without overfitting small counties",
-        "Log-transformed skewed inputs: log1p(Uppm), log1p(pcterr), log1p(adjwt) to stabilize tree splits",
-        "Interaction features: basement × Uppm, floor × Uppm, lat × Uppm to model combined structural/spatial effects",
-        "Target transform: log1p(Y) reduces target skewness from ~2.9 to ~0.2; predictions back-transformed with expm1",
-        "RF (300 trees, max_depth=15, min_samples_leaf=2) + GBR (200 trees, max_depth=4, lr=0.1, subsample=0.8)",
-        "Ensemble: 70% RF + 30% GBR; entire pipeline runs in ~35s (within the 60s runtime limit)",
+        "Computed log-periodogram: 10 × log₁₀(|FFT|²) for 256 frequency bins per utterance",
+        "StandardScaler fit on training set; applied to train and test",
+        "LightGBM: 200 estimators, num_leaves=63, learning_rate=0.05, subsample=0.8",
+        "class_weight='balanced' for 5-class imbalance across phoneme types",
+        "Early stopping: 50 rounds patience on 15% stratified validation split",
+        "Feature importance confirmed low-frequency bins (0–80 Hz) as most discriminative",
       ],
       result:
-        "24.19 MSE on the public leaderboard, rank 3 of 16. RF feature importance revealed log_pcterr and pcterr as dominant predictors (~48% each) — measurement error correlates with true radon levels since high-radon environments are harder to measure precisely. County aggregates and has_basement contributed meaningful marginal improvements. Without the log target transform, RF MSE on raw Y was ~10 vs. ~6.6 with it.",
+        "0.9284 accuracy, rank 8 of 10. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
+    },
+  },
+  {
+    id: 7,
+    title: "Diamond Price Prediction",
+    description:
+      "Regression task predicting prices of 40K diamonds from 9 physical and quality characteristics.",
+    techniques: [
+      "RidgeCV with log-target transform",
+      "Degree-2 polynomial feature expansion",
+      "One-hot categorical encoding",
+      "Quantile-matching post-processing",
+    ],
+    score: "603.56",
+    scoreLabel: "MAE",
+    rank: "",
+    tags: ["Regression", "Tabular"],
+    colab: "",
+    accentHue: 190,
+    expandedContent: {
+      overview:
+        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
+      approach: [
+        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
+        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
+        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
+        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
+        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
+      ],
+      result:
+        "603.56 MAE (~3.1% of mean price). The log-transform alone reduced MAE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed another ~$40 MAE reduction by correcting systematic under-prediction on high-value diamonds.",
     },
   },
   {
