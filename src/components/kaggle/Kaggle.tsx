@@ -67,9 +67,9 @@ const competitions: KaggleCompetition[] = [
     description:
       "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
     techniques: ["Linear Discriminant Analysis (LDA)", "Custom redshift-split model"],
-    score: "—",
-    scoreLabel: "",
-    rank: "",
+    score: "0.9647",
+    scoreLabel: "Accuracy",
+    rank: "Rank 7 of 16",
     tags: ["Astronomy", "Tabular"],
     colab: "",
     accentHue: 280,
@@ -84,7 +84,7 @@ const competitions: KaggleCompetition[] = [
         "Final classifier routes each object to the appropriate sub-model based on its redshift",
       ],
       result:
-        "Competition not formally graded (work in progress). Cross-validation accuracy exceeded 97% — color indices are highly discriminative. The redshift-split boosted accuracy by ~1.5% on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
+        "0.9647 accuracy on the private leaderboard — 7th of 16 teams, beating the baseline (0.9103). The redshift-split boosted accuracy on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
     },
   },
   {
