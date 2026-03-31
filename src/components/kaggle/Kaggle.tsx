@@ -63,32 +63,6 @@ const competitions: KaggleCompetition[] = [
   },
   {
     id: 2,
-    title: "Stellar Classification",
-    description:
-      "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
-    techniques: ["Linear Discriminant Analysis (LDA)", "Custom redshift-split model"],
-    score: "0.9647",
-    scoreLabel: "Accuracy",
-    rank: "Rank 7 of 16",
-    tags: ["Astronomy", "Tabular"],
-    colab: "",
-    accentHue: 280,
-    expandedContent: {
-      overview:
-        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes — stars, galaxies, and quasars — are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
-      approach: [
-        "Engineered standard astronomical color indices: u−g, g−r, r−i, i−z",
-        "Linear Discriminant Analysis finds the 2D projection maximizing between-class vs. within-class variance",
-        "Custom redshift-split: separate LDA classifiers for z < 0.5 and z ≥ 0.5",
-        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both — the split enforces this prior",
-        "Final classifier routes each object to the appropriate sub-model based on its redshift",
-      ],
-      result:
-        "0.9647 accuracy on the private leaderboard — 7th of 16 teams, beating the baseline (0.9103). The redshift-split boosted accuracy on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
-    },
-  },
-  {
-    id: 3,
     title: "Bacteria Classification",
     description:
       "5-class bacterial species classification from 286-dimensional k-mer count frequency features.",
@@ -121,38 +95,7 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 4,
-    title: "Diamond Price Prediction",
-    description:
-      "Regression task predicting prices of 40K diamonds from 9 physical and quality characteristics.",
-    techniques: [
-      "RidgeCV with log-target transform",
-      "Degree-2 polynomial feature expansion",
-      "One-hot categorical encoding",
-      "Quantile-matching post-processing",
-    ],
-    score: "603.56",
-    scoreLabel: "MAE",
-    rank: "",
-    tags: ["Regression", "Tabular"],
-    colab: "",
-    accentHue: 190,
-    expandedContent: {
-      overview:
-        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
-      approach: [
-        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
-        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
-        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
-        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
-        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
-      ],
-      result:
-        "603.56 MAE (~3.1% of mean price). The log-transform alone reduced MAE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed another ~$40 MAE reduction by correcting systematic under-prediction on high-value diamonds.",
-    },
-  },
-  {
-    id: 5,
+    id: 3,
     title: "Radon Level Prediction",
     description:
       "Regression task predicting indoor radon concentration (pCi/L) from EPA SRRS survey data with geographic, structural, and uranium features.",
@@ -185,7 +128,38 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 6,
+    id: 4,
+    title: "Diamond Price Prediction",
+    description:
+      "Regression task predicting prices of 40K diamonds from 9 physical and quality characteristics.",
+    techniques: [
+      "RidgeCV with log-target transform",
+      "Degree-2 polynomial feature expansion",
+      "One-hot categorical encoding",
+      "Quantile-matching post-processing",
+    ],
+    score: "570.19",
+    scoreLabel: "RMSE",
+    rank: "Rank 4 of 16",
+    tags: ["Regression", "Tabular"],
+    colab: "",
+    accentHue: 190,
+    expandedContent: {
+      overview:
+        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
+      approach: [
+        "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
+        "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
+        "PolynomialFeatures(degree=2, interaction_only=False) expanded 12 → 90 features",
+        "RidgeCV auto-selected α from [0.001, 0.01, 0.1, 1, 10, 100] via 5-fold CV",
+        "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
+      ],
+      result:
+        "570.19 RMSE on the private leaderboard — 4th of 16 teams, beating the baseline (1087.59). The log-transform alone reduced RMSE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed additional reduction by correcting systematic under-prediction on high-value diamonds.",
+    },
+  },
+  {
+    id: 5,
     title: "Purchase Intent Classification",
     description:
       "Binary classification of online purchase intent from 17 behavioral e-commerce session features.",
@@ -218,7 +192,7 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 7,
+    id: 6,
     title: "Collaborative Filtering (Netflix)",
     description:
       "Movie rating prediction on a 128K-user × 380-movie sparse matrix using matrix factorization.",
@@ -246,6 +220,32 @@ const competitions: KaggleCompetition[] = [
       ],
       result:
         "0.4200 accuracy, rank 6 of 14. Threshold optimization improved accuracy by ~2pp over naive rounding. The low absolute accuracy reflects the fundamental difficulty of 5-class exact-match: a model off by 0.4 on every prediction fails every sample regardless of direction.",
+    },
+  },
+  {
+    id: 7,
+    title: "Stellar Classification",
+    description:
+      "Multi-class classification of astronomical objects (stars, galaxies, quasars) from spectroscopic survey data.",
+    techniques: ["Linear Discriminant Analysis (LDA)", "Custom redshift-split model"],
+    score: "0.9647",
+    scoreLabel: "Accuracy",
+    rank: "Rank 7 of 16",
+    tags: ["Astronomy", "Tabular"],
+    colab: "",
+    accentHue: 280,
+    expandedContent: {
+      overview:
+        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes — stars, galaxies, and quasars — are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
+      approach: [
+        "Engineered standard astronomical color indices: u−g, g−r, r−i, i−z",
+        "Linear Discriminant Analysis finds the 2D projection maximizing between-class vs. within-class variance",
+        "Custom redshift-split: separate LDA classifiers for z < 0.5 and z ≥ 0.5",
+        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both — the split enforces this prior",
+        "Final classifier routes each object to the appropriate sub-model based on its redshift",
+      ],
+      result:
+        "0.9647 accuracy on the private leaderboard — 7th of 16 teams, beating the baseline (0.9103). The redshift-split boosted accuracy on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
     },
   },
   {
