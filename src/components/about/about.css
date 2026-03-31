@@ -134,6 +134,12 @@
   color: var(--color-white);
 }
 
+.about_ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .word-reveal {
   margin: 2rem 0 2.6rem;
   color: var(--color-white);

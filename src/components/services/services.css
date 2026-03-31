@@ -83,7 +83,7 @@
 
 .mini-timeline__line {
   position: absolute;
-  left: 0.45rem;
+  left: 4px;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -119,7 +119,6 @@
   height: 10px;
   border-radius: 50%;
   background: var(--gradient-accent);
-  transform: translateX(-0.05rem);
   box-shadow: 0 0 8px rgba(79, 172, 254, 0.3);
 }
 
@@ -311,7 +310,7 @@
   .mini-timeline__line {
     left: 0;
     right: 0;
-    top: 0.45rem;
+    top: 4px;
     bottom: auto;
     width: auto;
     height: 2px;
@@ -327,7 +326,6 @@
   .mini-timeline__dot {
     left: 1rem;
     top: 0;
-    transform: translateY(-0.05rem);
   }
 
   .bento-grid {
@@ -412,7 +410,7 @@
   }
 
   .mini-timeline__line {
-    left: 0.45rem;
+    left: 4px;
     top: 0;
     bottom: 0;
     width: 2px;
@@ -429,7 +427,6 @@
   .mini-timeline__dot {
     left: -1.5rem;
     top: 0.75rem;
-    transform: translateX(-0.05rem);
   }
 
   .bento-grid {

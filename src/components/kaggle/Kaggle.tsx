@@ -502,10 +502,7 @@ const KaggleFallbackGrid = () => {
       <h5>Johns Hopkins University · ML Engineering</h5>
       <h2>Kaggle Competitions</h2>
       <div className="kgl-fallback-ctas">
-        <a href="#projects" className="btn btn-primary">
-          My Projects
-        </a>
-        <a href={KAGGLE_PROFILE_URL} className="btn" target="_blank" rel="noreferrer">
+        <a href={KAGGLE_PROFILE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
           Kaggle Profile ↗
         </a>
       </div>
@@ -551,10 +548,7 @@ const KaggleIntroPanel = () => (
         radon level prediction and collaborative filtering.
       </p>
       <div className="kgl-intro-ctas">
-        <a href="#projects" className="btn btn-primary">
-          My Projects
-        </a>
-        <a href={KAGGLE_PROFILE_URL} className="btn" target="_blank" rel="noreferrer">
+        <a href={KAGGLE_PROFILE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
           Kaggle Profile ↗
         </a>
       </div>
