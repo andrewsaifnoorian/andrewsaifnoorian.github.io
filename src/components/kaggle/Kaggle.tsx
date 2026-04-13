@@ -294,7 +294,7 @@ const competitions: KaggleCompetition[] = [
     scoreLabel: "Accuracy",
     rank: "Rank 3 of 9",
     tags: ["Computer Vision", "Image Classification"],
-    colab: "/venus-mars.ipynb",
+    colab: "",
     runtime: "T4 GPU",
     accentHue: 320,
     expandedContent: {
@@ -327,7 +327,7 @@ const competitions: KaggleCompetition[] = [
     scoreLabel: "Correlation",
     rank: "Rank 7 of 9",
     tags: ["Time Series", "Finance"],
-    colab: "/crypto.ipynb",
+    colab: "",
     runtime: "T4 GPU",
     accentHue: 45,
     expandedContent: {
