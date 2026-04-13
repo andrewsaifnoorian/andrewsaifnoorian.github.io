@@ -128,6 +128,39 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
+    id: 9,
+    title: "Venus vs Mars (Gender Classification)",
+    description:
+      "Binary classification of 5,000 facial images as female or male using fine-tuned ConvNeXtBase with horizontal flip augmentation.",
+    techniques: [
+      "ConvNeXtBase (ImageNet-22K pretrained)",
+      "RandomFlip augmentation + crop_to_aspect_ratio",
+      "GlobalAvgPooling2D → Dense(256) → Sigmoid",
+      "mixed_float16 precision, full dataset training",
+    ],
+    score: "0.9752",
+    scoreLabel: "Accuracy",
+    rank: "Rank 3 of 9",
+    tags: ["Computer Vision", "Image Classification"],
+    colab: "",
+    runtime: "T4 GPU",
+    accentHue: 320,
+    expandedContent: {
+      overview:
+        "5,000 labeled facial images (2,500 female, 2,500 male) at 178×218px. ConvNeXtBase — pretrained on ImageNet-22K with 14M images — was frozen and used as a feature extractor. Only the classification head was trained, making it the sole learnable component mapping 1024-channel feature maps to the binary output. The head was widened to 256 units (vs. the 64-unit baseline) to avoid an information bottleneck when decoding ConvNeXt's richer feature space.",
+      approach: [
+        "Loaded all 5,000 images via image_dataset_from_directory with crop_to_aspect_ratio=True to preserve facial proportions",
+        "RandomFlip('horizontal') applied on-the-fly during training to make the model orientation-invariant without doubling storage",
+        "Mixed float16 precision enabled to reduce memory usage and accelerate T4 GPU throughput",
+        "Removed the 80/20 validation split — all data used for training to maximize exposure in a competition setting",
+        "Frozen ConvNeXtBase backbone (259 layers, 87.8M params); only Dense(256) → Dropout(0.3) → Dense(1) head trained",
+        "Compiled with binary cross-entropy and Adam (lr=1e-3); trained for 2 epochs (Phase 1 head-only fine-tuning)",
+      ],
+      result:
+        "0.9752 accuracy on the held-out test set — rank 3 of 9 teams, well above the baseline (0.4072). The combination of horizontal flip augmentation, aspect-ratio cropping, and full-dataset training improved accuracy by 0.32% over the frozen-backbone baseline. ConvNeXt's larger kernels (7×7) and LayerNorm throughout made it significantly more accurate than EfficientNet variants, which plateaued at 90–94% despite completing within the runtime limit.",
+    },
+  },
+  {
     id: 4,
     title: "Diamond Price Prediction",
     description:
@@ -249,70 +282,6 @@ const competitions: KaggleCompetition[] = [
     },
   },
   {
-    id: 8,
-    title: "Audio Classification (Phonemes)",
-    description:
-      "5-class phoneme classification from 256-point log-periodogram spectral features across 50K utterances.",
-    techniques: [
-      "StandardScaler on full training set",
-      "LightGBM (200 trees, num_leaves=63)",
-      "Balanced class weights",
-    ],
-    score: "0.9284",
-    scoreLabel: "Accuracy",
-    rank: "Rank 8 of 18",
-    tags: ["Audio", "Speech"],
-    colab: "",
-    accentHue: 30,
-    expandedContent: {
-      overview:
-        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale — and they don't require tuning a sequence model for a fixed-width input.",
-      approach: [
-        "Computed log-periodogram: 10 × log₁₀(|FFT|²) for 256 frequency bins per utterance",
-        "StandardScaler fit on training set; applied to train and test",
-        "LightGBM: 200 estimators, num_leaves=63, learning_rate=0.05, subsample=0.8",
-        "class_weight='balanced' for 5-class imbalance across phoneme types",
-        "Early stopping: 50 rounds patience on 15% stratified validation split",
-        "Feature importance confirmed low-frequency bins (0–80 Hz) as most discriminative",
-      ],
-      result:
-        "0.9284 accuracy, rank 8 of 18. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
-    },
-  },
-  {
-    id: 9,
-    title: "Venus vs Mars (Gender Classification)",
-    description:
-      "Binary classification of 5,000 facial images as female or male using fine-tuned ConvNeXtBase with horizontal flip augmentation.",
-    techniques: [
-      "ConvNeXtBase (ImageNet-22K pretrained)",
-      "RandomFlip augmentation + crop_to_aspect_ratio",
-      "GlobalAvgPooling2D → Dense(256) → Sigmoid",
-      "mixed_float16 precision, full dataset training",
-    ],
-    score: "0.9752",
-    scoreLabel: "Accuracy",
-    rank: "Rank 3 of 9",
-    tags: ["Computer Vision", "Image Classification"],
-    colab: "",
-    runtime: "T4 GPU",
-    accentHue: 320,
-    expandedContent: {
-      overview:
-        "5,000 labeled facial images (2,500 female, 2,500 male) at 178×218px. ConvNeXtBase — pretrained on ImageNet-22K with 14M images — was frozen and used as a feature extractor. Only the classification head was trained, making it the sole learnable component mapping 1024-channel feature maps to the binary output. The head was widened to 256 units (vs. the 64-unit baseline) to avoid an information bottleneck when decoding ConvNeXt's richer feature space.",
-      approach: [
-        "Loaded all 5,000 images via image_dataset_from_directory with crop_to_aspect_ratio=True to preserve facial proportions",
-        "RandomFlip('horizontal') applied on-the-fly during training to make the model orientation-invariant without doubling storage",
-        "Mixed float16 precision enabled to reduce memory usage and accelerate T4 GPU throughput",
-        "Removed the 80/20 validation split — all data used for training to maximize exposure in a competition setting",
-        "Frozen ConvNeXtBase backbone (259 layers, 87.8M params); only Dense(256) → Dropout(0.3) → Dense(1) head trained",
-        "Compiled with binary cross-entropy and Adam (lr=1e-3); trained for 2 epochs (Phase 1 head-only fine-tuning)",
-      ],
-      result:
-        "0.9752 accuracy on the held-out test set — rank 3 of 9 teams, well above the baseline (0.4072). The combination of horizontal flip augmentation, aspect-ratio cropping, and full-dataset training improved accuracy by 0.32% over the frozen-backbone baseline. ConvNeXt's larger kernels (7×7) and LayerNorm throughout made it significantly more accurate than EfficientNet variants, which plateaued at 90–94% despite completing within the runtime limit.",
-    },
-  },
-  {
     id: 10,
     title: "Crypto Price Forecasting",
     description:
@@ -343,6 +312,37 @@ const competitions: KaggleCompetition[] = [
       ],
       result:
         "0.4612 weighted Pearson correlation on the leaderboard — rank 7 of 9, beating the baseline (0.1314). The return-based feature engineering was the most impactful change: predicting delta rather than raw Close stabilized training and allowed the LSTM to focus on directional dynamics rather than drifting price levels. Huber loss provided additional stability by preventing extreme residuals from dominating gradient updates.",
+    },
+  },
+  {
+    id: 8,
+    title: "Audio Classification (Phonemes)",
+    description:
+      "5-class phoneme classification from 256-point log-periodogram spectral features across 50K utterances.",
+    techniques: [
+      "StandardScaler on full training set",
+      "LightGBM (200 trees, num_leaves=63)",
+      "Balanced class weights",
+    ],
+    score: "0.9284",
+    scoreLabel: "Accuracy",
+    rank: "Rank 8 of 18",
+    tags: ["Audio", "Speech"],
+    colab: "",
+    accentHue: 30,
+    expandedContent: {
+      overview:
+        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale — and they don't require tuning a sequence model for a fixed-width input.",
+      approach: [
+        "Computed log-periodogram: 10 × log₁₀(|FFT|²) for 256 frequency bins per utterance",
+        "StandardScaler fit on training set; applied to train and test",
+        "LightGBM: 200 estimators, num_leaves=63, learning_rate=0.05, subsample=0.8",
+        "class_weight='balanced' for 5-class imbalance across phoneme types",
+        "Early stopping: 50 rounds patience on 15% stratified validation split",
+        "Feature importance confirmed low-frequency bins (0–80 Hz) as most discriminative",
+      ],
+      result:
+        "0.9284 accuracy, rank 8 of 18. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
     },
   },
 ];
@@ -716,7 +716,7 @@ const KagglePanel = ({
 };
 
 // ── Sticky scroll showcase ─────────────────────────────────────────────────
-const TOTAL_PANELS = competitions.length + 1; // 1 intro + 8 competitions
+const TOTAL_PANELS = competitions.length + 1; // 1 intro + 10 competitions
 const STEP_MS = 500; // ms between sequential panel steps (matches enter animation)
 
 const KaggleShowcase = () => {
