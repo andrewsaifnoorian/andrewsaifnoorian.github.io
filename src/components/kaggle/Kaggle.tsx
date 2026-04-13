@@ -279,6 +279,72 @@ const competitions: KaggleCompetition[] = [
         "0.9284 accuracy, rank 8 of 18. Given only spectral energy features with no temporal context, this is near the practical ceiling for this representation. MFCC features or a CNN over mel-spectrograms would likely push accuracy higher by leveraging temporal structure.",
     },
   },
+  {
+    id: 9,
+    title: "Venus vs Mars (Gender Classification)",
+    description:
+      "Binary classification of 5,000 facial images as female or male using fine-tuned ConvNeXtBase with horizontal flip augmentation.",
+    techniques: [
+      "ConvNeXtBase (ImageNet-22K pretrained)",
+      "RandomFlip augmentation + crop_to_aspect_ratio",
+      "GlobalAvgPooling2D → Dense(256) → Sigmoid",
+      "mixed_float16 precision, full dataset training",
+    ],
+    score: "0.9752",
+    scoreLabel: "Accuracy",
+    rank: "Rank 3 of 9",
+    tags: ["Computer Vision", "Image Classification"],
+    colab: "/venus-mars.ipynb",
+    runtime: "T4 GPU",
+    accentHue: 320,
+    expandedContent: {
+      overview:
+        "5,000 labeled facial images (2,500 female, 2,500 male) at 178×218px. ConvNeXtBase — pretrained on ImageNet-22K with 14M images — was frozen and used as a feature extractor. Only the classification head was trained, making it the sole learnable component mapping 1024-channel feature maps to the binary output. The head was widened to 256 units (vs. the 64-unit baseline) to avoid an information bottleneck when decoding ConvNeXt's richer feature space.",
+      approach: [
+        "Loaded all 5,000 images via image_dataset_from_directory with crop_to_aspect_ratio=True to preserve facial proportions",
+        "RandomFlip('horizontal') applied on-the-fly during training to make the model orientation-invariant without doubling storage",
+        "Mixed float16 precision enabled to reduce memory usage and accelerate T4 GPU throughput",
+        "Removed the 80/20 validation split — all data used for training to maximize exposure in a competition setting",
+        "Frozen ConvNeXtBase backbone (259 layers, 87.8M params); only Dense(256) → Dropout(0.3) → Dense(1) head trained",
+        "Compiled with binary cross-entropy and Adam (lr=1e-3); trained for 2 epochs (Phase 1 head-only fine-tuning)",
+      ],
+      result:
+        "0.9752 accuracy on the held-out test set — rank 3 of 9 teams, well above the baseline (0.4072). The combination of horizontal flip augmentation, aspect-ratio cropping, and full-dataset training improved accuracy by 0.32% over the frozen-backbone baseline. ConvNeXt's larger kernels (7×7) and LayerNorm throughout made it significantly more accurate than EfficientNet variants, which plateaued at 90–94% despite completing within the runtime limit.",
+    },
+  },
+  {
+    id: 10,
+    title: "Crypto Price Forecasting",
+    description:
+      "Time-series regression forecasting cryptocurrency closing prices from 500K+ OHLCV observations using a two-layer LSTM with embargo splitting.",
+    techniques: [
+      "LSTM (100 units × 2 layers) + Dropout(0.2)",
+      "Huber loss for outlier-robust training",
+      "Return & rolling-window feature engineering (5/10/20 steps)",
+      "Embargo train/val split to prevent temporal leakage",
+    ],
+    score: "0.4612",
+    scoreLabel: "Correlation",
+    rank: "Rank 7 of 9",
+    tags: ["Time Series", "Finance"],
+    colab: "/crypto.ipynb",
+    runtime: "T4 GPU",
+    accentHue: 45,
+    expandedContent: {
+      overview:
+        "500K OHLCV (Open, High, Low, Close, Volume, VWAP, Count) observations for a single cryptocurrency. The raw Close series is non-stationary and noisy, so the model predicts delta (price change) rather than absolute price. Sequences of 128 time steps are fed to a two-layer LSTM that outputs 50-step-ahead delta forecasts. An embargo gap of 50 steps between train and validation prevents look-ahead leakage — a critical detail for financial time-series evaluation.",
+      approach: [
+        "Engineered 20 features from raw OHLCV: delta, log_return, OC_diff, HL_diff, rolling std/momentum/slope over 5, 10, and 20-step windows, and binary direction",
+        "Embargo split: 80% train / 20% val with a 50-step gap between them to prevent temporal leakage",
+        "Sequences: Nx=128 input steps, Ny=50 output steps, step=5 stride — generating ~100K training sequences",
+        "Architecture: LSTM(100, return_sequences=True) → Dropout(0.2) → LSTM(100) → Dropout(0.2) → Dense(50)",
+        "Huber loss (δ=1) instead of MSE to down-weight the gradient contribution of extreme crypto price spikes",
+        "Adam optimizer, 20 epochs with early stopping monitored on validation Huber loss",
+      ],
+      result:
+        "0.4612 weighted Pearson correlation on the leaderboard — rank 7 of 9, beating the baseline (0.1314). The return-based feature engineering was the most impactful change: predicting delta rather than raw Close stabilized training and allowed the LSTM to focus on directional dynamics rather than drifting price levels. Huber loss provided additional stability by preventing extreme residuals from dominating gradient updates.",
+    },
+  },
 ];
 
 // ── Animation variants ──────────────────────────────────────────────────────
@@ -543,9 +609,9 @@ const KaggleIntroPanel = () => (
         Competitions
       </h2>
       <p className="kgl-intro-body">
-        Eight machine learning competitions completed as part of the Johns Hopkins ML Engineering
-        program. The projects range from DNA sequence classification and audio phoneme detection to
-        radon level prediction and collaborative filtering.
+        Ten machine learning competitions completed as part of the Johns Hopkins ML Engineering
+        program. The projects span DNA sequence classification, audio phoneme detection, radon level
+        prediction, collaborative filtering, gender classification, and crypto price forecasting.
       </p>
       <div className="kgl-intro-ctas">
         <a href={KAGGLE_PROFILE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
