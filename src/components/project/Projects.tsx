@@ -10,6 +10,7 @@ import IMG6 from "../../assets/poker5hand.webp";
 import IMG7 from "../../assets/underMSRP.webp";
 import IMG8 from "../../assets/CarM.webp";
 import IMG9 from "../../assets/tasksapp.webp";
+import IMG10 from "../../assets/monodepth2-uncertainty.webp";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import TiltCard from "../tilt-card/TiltCard";
 import BlurImage from "../blur-image/BlurImage";
@@ -87,6 +88,30 @@ const projects: Project[] = [
   },
   {
     id: 3,
+    image: IMG10,
+    title: "Self-Supervised Depth Estimation with Predictive Uncertainty",
+    category: "Deep Learning / Research",
+    description:
+      "Extended Monodepth2 with a Poggi-style per-pixel uncertainty head to improve depth estimation on specular and reflective surfaces. Uncertainty maps down-weight non-Lambertian pixels during training via an NLL loss formulation.",
+    techStack: ["Python", "PyTorch", "Monodepth2", "KITTI", "Booster Dataset", "TensorBoard"],
+    accentHue: 280,
+    expandedContent: {
+      overview:
+        "Standard self-supervised monocular depth estimation (SS-MDE) struggles on specular, reflective, or translucent surfaces because the photometric consistency assumption breaks down — a mirror doesn't produce a reliable reprojection error signal. This project extended Monodepth2 (Godard et al., ICCV 2019) with a per-pixel predictive uncertainty head inspired by Poggi et al. (CVPR 2020), allowing the model to learn which pixels to trust during training. The result is a more robust depth model on non-Lambertian surfaces, evaluated on the Booster and KITTI benchmarks.",
+      approach: [
+        "Added a parallel uncertainty head (uncertconv) to depth_decoder.py alongside the depth output; the head predicts log(σ²) clamped to [−10, 10] for numerical stability",
+        "Implemented apply_uncertainty_weighting() in trainer.py using the NLL loss: L = ρ(error) · exp(−log_var) / 2 + 0.5 · log_var, where ρ is the per-pixel photometric reprojection error",
+        "Added --use_uncertainty CLI flag and --uncertainty_warmup_epochs for clean opt-in training; backward-compatible with vanilla Monodepth2 runs",
+        "Integrated Automatic Mixed Precision (AMP) training via torch.cuda.amp — ~2× throughput improvement and ~40% VRAM reduction on modern GPUs",
+        "Logged per-epoch sigma (σ = exp(log_var/2)) maps to TensorBoard to visually confirm that high-uncertainty regions correspond to specular highlights, reflections, and wet roads",
+        "Evaluated on 7 standard depth metrics: Abs Rel, Sq Rel, RMSE, RMSE log, and δ < 1.25 / 1.25² / 1.25³ thresholds, plus AUSE / AURG sparsification curves to validate uncertainty calibration",
+      ],
+      result:
+        "A modified Monodepth2 training pipeline where the model simultaneously predicts depth and per-pixel aleatoric uncertainty. The NLL-weighted loss effectively down-weights specular highlights, reflections, and transparent regions during backpropagation — surfaces that would otherwise inject noisy gradients. Sigma maps produced by TensorBoard logging visually confirmed that high-uncertainty regions correspond to expected problem areas (windows, chrome, wet roads). My specific contributions were the uncertainty head architecture, the NLL loss integration, AMP training, and the TensorBoard instrumentation.",
+    },
+  },
+  {
+    id: 4,
     image: IMG3,
     title: "DevOps & Secure Software Development",
     category: "DevOps / Security",
@@ -110,7 +135,7 @@ const projects: Project[] = [
     },
   },
   {
-    id: 4,
+    id: 5,
     image: IMG4,
     title: "Heroes Movement LLC",
     category: "Frontend",
@@ -134,7 +159,7 @@ const projects: Project[] = [
     },
   },
   {
-    id: 5,
+    id: 6,
     image: IMG1,
     title: "Prime Detailing NJ",
     category: "Frontend",
@@ -158,7 +183,7 @@ const projects: Project[] = [
     },
   },
   {
-    id: 6,
+    id: 7,
     image: IMG5,
     title: "Clue Game",
     category: "Full Stack",
@@ -182,7 +207,7 @@ const projects: Project[] = [
     },
   },
   {
-    id: 7,
+    id: 8,
     image: IMG6,
     title: "5 Hand Poker",
     category: "Backend / Java",
@@ -206,7 +231,7 @@ const projects: Project[] = [
     },
   },
   {
-    id: 8,
+    id: 9,
     image: IMG7,
     title: "Under MSRP App",
     category: "Full Stack",
@@ -230,7 +255,7 @@ const projects: Project[] = [
     },
   },
   {
-    id: 9,
+    id: 10,
     image: IMG9,
     title: "Tasks Web App",
     category: "Frontend / React",
@@ -428,7 +453,7 @@ const ProjectIntroPanel = () => (
         Projects
       </h2>
       <p className="prj-intro-body">
-        Nine projects spanning full-stack web applications, ML research, DevOps pipelines, and
+        Ten projects spanning full-stack web applications, deep learning research, DevOps pipelines, and
         client work. Each one built end-to-end — from architecture decisions to deployment.
       </p>
       <div className="prj-intro-ctas">
@@ -515,7 +540,7 @@ const ProjectPanel = ({
 );
 
 // ── Sticky scroll showcase ─────────────────────────────────────────────────
-const TOTAL_PANELS = projects.length + 1; // 1 intro + 9 projects
+const TOTAL_PANELS = projects.length + 1; // 1 intro + 10 projects
 const STEP_MS = 500;
 
 const ProjectShowcase = () => {
