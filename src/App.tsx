@@ -7,6 +7,7 @@ import Experience from "./components/experience/Experience";
 import Services from "./components/services/Services";
 import Projects from "./components/project/Projects";
 import Kaggle from "./components/kaggle/Kaggle";
+import LocalAI from "./components/local-ai/LocalAI";
 import Testimonials from "./components/testimonials/Testimonials";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/footer/Footer";
@@ -62,6 +63,7 @@ const Home = () => (
     <About />
     <Kaggle />
     <Projects />
+    <LocalAI />
     <Nav />
     <Experience />
     <Services />

@@ -11,6 +11,7 @@ import IMG7 from "../../assets/underMSRP.webp";
 import IMG8 from "../../assets/CarM.webp";
 import IMG9 from "../../assets/tasksapp.webp";
 import IMG10 from "../../assets/monodepth2-uncertainty.webp";
+import IMG11 from "../../assets/monodepth2-disp.webp";
 import AnimatedSection from "../animated-section/AnimatedSection";
 import TiltCard from "../tilt-card/TiltCard";
 import BlurImage from "../blur-image/BlurImage";
@@ -256,6 +257,30 @@ const projects: Project[] = [
   },
   {
     id: 10,
+    image: IMG11,
+    title: "Monodepth2: Depth Disparity Estimation",
+    category: "Deep Learning / Research",
+    description:
+      "Self-supervised monocular depth estimation using the Monodepth2 baseline. Trained on KITTI with the reprojection-based photometric loss, producing dense per-pixel disparity maps from a single RGB image at inference time.",
+    techStack: ["Python", "PyTorch", "Monodepth2", "KITTI", "TensorBoard"],
+    accentHue: 200,
+    expandedContent: {
+      overview:
+        "Monodepth2 (Godard et al., ICCV 2019) is a self-supervised monocular depth estimation framework that learns depth and camera pose jointly from unlabeled video sequences, using reprojection-based photometric consistency as the training signal — no depth ground truth required. The model outputs a per-pixel disparity map from a single RGB image, which can be converted to metric depth given the camera's known baseline. This entry focuses on the baseline system and its disparity outputs before the uncertainty head extension was added.",
+      approach: [
+        "Trained the encoder-decoder depth network on KITTI Eigen split using the standard monocular self-supervised loss: minimum reprojection loss + edge-aware smoothness regularization",
+        "Used the ResNet-18 encoder pretrained on ImageNet for fast convergence; the decoder outputs 4-scale disparity maps (1/4 to full resolution)",
+        "Applied the auto-masking technique from Godard et al. to exclude static pixels (where the camera hasn't moved relative to the scene) from the photometric loss",
+        "Evaluated on the Eigen test split using the standard 7 depth metrics: Abs Rel, Sq Rel, RMSE, RMSE log, and δ < 1.25 / 1.25² / 1.25³ thresholds",
+        "Visualized disparity maps with the plasma colormap — warmer colors = closer objects, cooler = farther away",
+        "Used TensorBoard for monitoring per-epoch loss curves and qualitative disparity map outputs on held-out validation frames",
+      ],
+      result:
+        "A working self-supervised depth estimation pipeline producing dense disparity maps from single monocular images. The baseline system demonstrated Monodepth2's key innovation — training on raw video without depth labels — and achieved competitive benchmark numbers on the KITTI Eigen split. These disparity outputs serve as the depth signal that the uncertainty extension (a separate project) is evaluated against.",
+    },
+  },
+  {
+    id: 11,
     image: IMG9,
     title: "Tasks Web App",
     category: "Frontend / React",
@@ -453,7 +478,7 @@ const ProjectIntroPanel = () => (
         Projects
       </h2>
       <p className="prj-intro-body">
-        Ten projects spanning full-stack web applications, deep learning research, DevOps pipelines, and
+        Eleven projects spanning full-stack web applications, deep learning research, DevOps pipelines, and
         client work. Each one built end-to-end — from architecture decisions to deployment.
       </p>
       <div className="prj-intro-ctas">
@@ -540,7 +565,7 @@ const ProjectPanel = ({
 );
 
 // ── Sticky scroll showcase ─────────────────────────────────────────────────
-const TOTAL_PANELS = projects.length + 1; // 1 intro + 10 projects
+const TOTAL_PANELS = projects.length + 1; // 1 intro + 11 projects
 const STEP_MS = 500;
 
 const ProjectShowcase = () => {
