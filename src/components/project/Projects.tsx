@@ -75,7 +75,7 @@ const projects: Project[] = [
     accentHue: 30,
     expandedContent: {
       overview:
-        "A DevSecOps reference implementation covering the full software delivery lifecycle — from code commit to containerized production deployment — with automated security gates at each stage. Completed as part of a graduate-level Secure Software Development course.",
+        "A DevSecOps reference implementation covering the full software delivery lifecycle, from code commit to containerized production deployment, with automated security gates at each stage. Completed as part of a graduate-level Secure Software Development course.",
       approach: [
         "Jenkins declarative pipeline with stages: Build → Test → SAST → Dependency Scan → Containerize → Deploy",
         "SonarQube static analysis enforcing quality gates (0 critical vulnerabilities to pass)",
@@ -85,7 +85,7 @@ const projects: Project[] = [
         "Secrets management via environment variables and AWS Secrets Manager (no hardcoded credentials)",
       ],
       result:
-        "A complete DevSecOps pipeline with documented stages, security scan reports, and live AWS deployment. Demonstrated how security tooling integrates into CI/CD without blocking development velocity — all security checks automated as pipeline gates.",
+        "A complete DevSecOps pipeline with documented stages, security scan reports, and live AWS deployment. Demonstrated how security tooling integrates into CI/CD without blocking development velocity; all security checks automated as pipeline gates.",
     },
   },
   {
@@ -123,17 +123,17 @@ const projects: Project[] = [
     accentHue: 200,
     expandedContent: {
       overview:
-        "Monodepth2 (Godard et al., ICCV 2019) is a self-supervised monocular depth estimation framework that learns depth and camera pose jointly from unlabeled video sequences, using reprojection-based photometric consistency as the training signal — no depth ground truth required. The model outputs a per-pixel disparity map from a single RGB image, which can be converted to metric depth given the camera's known baseline. This entry focuses on the baseline system and its disparity outputs before the uncertainty head extension was added.",
+        "Monodepth2 (Godard et al., ICCV 2019) is a self-supervised monocular depth estimation framework that learns depth and camera pose jointly from unlabeled video sequences, using reprojection-based photometric consistency as the training signal, no depth ground truth required. The model outputs a per-pixel disparity map from a single RGB image, which can be converted to metric depth given the camera's known baseline. This entry focuses on the baseline system and its disparity outputs before the uncertainty head extension was added.",
       approach: [
         "Trained the encoder-decoder depth network on KITTI Eigen split using the standard monocular self-supervised loss: minimum reprojection loss + edge-aware smoothness regularization",
         "Used the ResNet-18 encoder pretrained on ImageNet for fast convergence; the decoder outputs 4-scale disparity maps (1/4 to full resolution)",
         "Applied the auto-masking technique from Godard et al. to exclude static pixels (where the camera hasn't moved relative to the scene) from the photometric loss",
         "Evaluated on the Eigen test split using the standard 7 depth metrics: Abs Rel, Sq Rel, RMSE, RMSE log, and δ < 1.25 / 1.25² / 1.25³ thresholds",
-        "Visualized disparity maps with the plasma colormap — warmer colors = closer objects, cooler = farther away",
+        "Visualized disparity maps with the plasma colormap, warmer colors = closer objects, cooler = farther away",
         "Used TensorBoard for monitoring per-epoch loss curves and qualitative disparity map outputs on held-out validation frames",
       ],
       result:
-        "A working self-supervised depth estimation pipeline producing dense disparity maps from single monocular images. The baseline system demonstrated Monodepth2's key innovation — training on raw video without depth labels — and achieved competitive benchmark numbers on the KITTI Eigen split. These disparity outputs serve as the depth signal that the uncertainty extension (a separate project) is evaluated against.",
+        "A working self-supervised depth estimation pipeline producing dense disparity maps from single monocular images. The baseline system demonstrated Monodepth2's key innovation of training on raw video without depth labels, achieving competitive benchmark numbers on the KITTI Eigen split. These disparity outputs serve as the depth signal that the uncertainty extension (a separate project) is evaluated against.",
     },
   },
   {
@@ -147,17 +147,17 @@ const projects: Project[] = [
     accentHue: 280,
     expandedContent: {
       overview:
-        "Standard self-supervised monocular depth estimation (SS-MDE) struggles on specular, reflective, or translucent surfaces because the photometric consistency assumption breaks down — a mirror doesn't produce a reliable reprojection error signal. This project extended Monodepth2 (Godard et al., ICCV 2019) with a per-pixel predictive uncertainty head inspired by Poggi et al. (CVPR 2020), allowing the model to learn which pixels to trust during training. The result is a more robust depth model on non-Lambertian surfaces, evaluated on the Booster and KITTI benchmarks.",
+        "Standard self-supervised monocular depth estimation (SS-MDE) struggles on specular, reflective, or translucent surfaces because the photometric consistency assumption breaks down; a mirror doesn't produce a reliable reprojection error signal. This project extended Monodepth2 (Godard et al., ICCV 2019) with a per-pixel predictive uncertainty head inspired by Poggi et al. (CVPR 2020), allowing the model to learn which pixels to trust during training. The result is a more robust depth model on non-Lambertian surfaces, evaluated on the Booster and KITTI benchmarks.",
       approach: [
         "Added a parallel uncertainty head (uncertconv) to depth_decoder.py alongside the depth output; the head predicts log(σ²) clamped to [−10, 10] for numerical stability",
         "Implemented apply_uncertainty_weighting() in trainer.py using the NLL loss: L = ρ(error) · exp(−log_var) / 2 + 0.5 · log_var, where ρ is the per-pixel photometric reprojection error",
         "Added --use_uncertainty CLI flag and --uncertainty_warmup_epochs for clean opt-in training; backward-compatible with vanilla Monodepth2 runs",
-        "Integrated Automatic Mixed Precision (AMP) training via torch.cuda.amp — ~2× throughput improvement and ~40% VRAM reduction on modern GPUs",
+        "Integrated Automatic Mixed Precision (AMP) training via torch.cuda.amp, ~2x throughput improvement and ~40% VRAM reduction on modern GPUs",
         "Logged per-epoch sigma (σ = exp(log_var/2)) maps to TensorBoard to visually confirm that high-uncertainty regions correspond to specular highlights, reflections, and wet roads",
         "Evaluated on 7 standard depth metrics: Abs Rel, Sq Rel, RMSE, RMSE log, and δ < 1.25 / 1.25² / 1.25³ thresholds, plus AUSE / AURG sparsification curves to validate uncertainty calibration",
       ],
       result:
-        "A modified Monodepth2 training pipeline where the model simultaneously predicts depth and per-pixel aleatoric uncertainty. The NLL-weighted loss effectively down-weights specular highlights, reflections, and transparent regions during backpropagation — surfaces that would otherwise inject noisy gradients. Sigma maps produced by TensorBoard logging visually confirmed that high-uncertainty regions correspond to expected problem areas (windows, chrome, wet roads). My specific contributions were the uncertainty head architecture, the NLL loss integration, AMP training, and the TensorBoard instrumentation.",
+        "A modified Monodepth2 training pipeline where the model simultaneously predicts depth and per-pixel aleatoric uncertainty. The NLL-weighted loss effectively down-weights specular highlights, reflections, and transparent regions during backpropagation, surfaces that would otherwise inject noisy gradients. Sigma maps produced by TensorBoard logging visually confirmed that high-uncertainty regions correspond to expected problem areas (windows, chrome, wet roads). My specific contributions were the uncertainty head architecture, the NLL loss integration, AMP training, and the TensorBoard instrumentation.",
     },
   },
   {
@@ -219,7 +219,7 @@ const projects: Project[] = [
     accentHue: 140,
     expandedContent: {
       overview:
-        "A browser-playable implementation of the classic Clue (Cluedo) board game built entirely in React + TypeScript. The entire game state — suspect/weapon/room tracking, card distribution, accusation logic, and win conditions — is managed client-side.",
+        "A browser-playable implementation of the classic Clue (Cluedo) board game built entirely in React + TypeScript. The entire game state, including suspect/weapon/room tracking, card distribution, accusation logic, and win conditions, all managed client-side.",
       approach: [
         "TypeScript interfaces modeling all game entities: Suspect, Weapon, Room, Card, Player",
         "Custom React hooks for game state (useGameState) and player turn management (useTurnManager)",
@@ -229,7 +229,7 @@ const projects: Project[] = [
         "Deployed to Netlify with automated CI from the main branch",
       ],
       result:
-        "A fully playable Clue implementation in the browser supporting multi-player turn-based gameplay. The project was primarily a TypeScript architecture exercise — modeling a complex board game with strict type safety and well-separated game logic.",
+        "A fully playable Clue implementation in the browser supporting multi-player turn-based gameplay. The project was primarily a TypeScript architecture exercise, modeling a complex board game with strict type safety and well-separated game logic.",
     },
   },
   {
@@ -253,7 +253,7 @@ const projects: Project[] = [
         "Deck class with shuffle and deal methods for full game simulation",
       ],
       result:
-        "A well-tested Java program with full coverage of all 10 hand types and their tiebreaker logic. The project was primarily an OOP and unit testing exercise — demonstrating clean class design, the Comparator pattern, and rigorous edge-case testing.",
+        "A well-tested Java program with full coverage of all 10 hand types and their tiebreaker logic. The project was primarily an OOP and unit testing exercise, demonstrating clean class design, the Comparator pattern, and rigorous edge-case testing.",
     },
   },
   {
@@ -267,7 +267,7 @@ const projects: Project[] = [
     accentHue: 190,
     expandedContent: {
       overview:
-        "A business tool automating bulk email outreach for vehicle dealerships. Dealers upload a contact list (CSV), customize an email template with vehicle-specific merge fields, and trigger a SendGrid campaign — all from a clean React dashboard.",
+        "A business tool automating bulk email outreach for vehicle dealerships. Dealers upload a contact list (CSV), customize an email template with vehicle-specific merge fields, and trigger a SendGrid campaign, all from a clean React dashboard.",
       approach: [
         "React frontend with template editor, CSV upload, and campaign preview",
         "CSV parsing and contact segmentation: filter by zip code, vehicle interest, previous purchase",
@@ -291,17 +291,17 @@ const projects: Project[] = [
     accentHue: 280,
     expandedContent: {
       overview:
-        "A minimalist task manager built as a TypeScript architecture exercise. The focus was on clean custom hook design, strict type safety, and smooth UI interactions — not feature breadth. Tasks persist across sessions via localStorage serialization.",
+        "A minimalist task manager built as a TypeScript architecture exercise. The focus was on clean custom hook design, strict type safety, and smooth UI interactions, not feature breadth. Tasks persist across sessions via localStorage serialization.",
       approach: [
         "TypeScript interfaces: Task (id, title, category, completed, createdAt) with strict typing",
         "Custom useTasks hook encapsulating all CRUD operations and localStorage sync",
         "useLocalStorage generic hook for type-safe persistence with JSON serialization/deserialization",
-        "Category filtering with a tabbed interface — All, Active, Completed views",
+        "Category filtering with a tabbed interface: All, Active, Completed views",
         "CSS3 transitions for task add/complete/remove animations (opacity + translate)",
         "Keyboard accessibility: Enter to add, Delete key support, focus management",
       ],
       result:
-        "A clean, fast-loading productivity tool with zero dependencies beyond React. The project demonstrated TypeScript best practices — generic hooks, discriminated unions for task state, and strict null checks — in a small but well-structured codebase.",
+        "A clean, fast-loading productivity tool with zero dependencies beyond React. The project demonstrated TypeScript best practices, including generic hooks, discriminated unions for task state, and strict null checks, in a small but well-structured codebase.",
     },
   },
 ];
@@ -470,7 +470,7 @@ const ProjectIntroPanel = () => (
       </h2>
       <p className="prj-intro-body">
         Eleven projects spanning full-stack web applications, deep learning research, DevOps pipelines, and
-        client work. Each one built end-to-end — from architecture decisions to deployment.
+        client work. Each one built end-to-end, from architecture decisions to deployment.
       </p>
       <div className="prj-intro-ctas">
         <a

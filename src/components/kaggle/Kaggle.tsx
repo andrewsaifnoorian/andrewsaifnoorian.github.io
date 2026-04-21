@@ -50,7 +50,7 @@ const competitions: KaggleCompetition[] = [
     accentHue: 220,
     expandedContent: {
       overview:
-        "The core insight was treating DNA as a natural language: each sequence was tokenized into overlapping k-mers (k=3,4,5) to capture local motifs, then combined with TF-IDF character n-grams for longer-range patterns. Biological domain features — CpG dinucleotide ratio, open reading frame count, GC content, and homopolymer run length — injected knowledge the model couldn't learn from sequence statistics alone.",
+        "The core insight was treating DNA as a natural language: each sequence was tokenized into overlapping k-mers (k=3,4,5) to capture local motifs, then combined with TF-IDF character n-grams for longer-range patterns. Biological domain features like CpG dinucleotide ratio, open reading frame count, GC content, and homopolymer run length injected knowledge the model couldn't learn from sequence statistics alone.",
       approach: [
         "Built 1,344 k-mer count features from 3/4/5-mer vocabularies (4³+4⁴+4⁵ combinations)",
         "Added TF-IDF char n-gram matrix (4–7-gram range, 50K features via max_features)",
@@ -59,7 +59,7 @@ const competitions: KaggleCompetition[] = [
         "Final prediction: soft-vote average across 5 DNNs + Logistic Regression",
       ],
       result:
-        "0.9873 AUC on the held-out test set — tied for first place. The ensemble's diversity (linear vs. deep, different seeds) was the key driver. The biological features alone contributed ~0.008 AUC improvement over pure k-mer features.",
+        "0.9873 AUC on the held-out test set, tied for first place. The ensemble's diversity (linear vs. deep, different seeds) was the key driver. The biological features alone contributed ~0.008 AUC improvement over pure k-mer features.",
     },
   },
   {
@@ -82,7 +82,7 @@ const competitions: KaggleCompetition[] = [
     accentHue: 160,
     expandedContent: {
       overview:
-        "Five bacterial species separated using only 286-dimensional k-mer count frequency vectors. The key challenge was class imbalance — certain species were underrepresented 3× relative to the majority. A compact DNN with BatchNorm and Dropout was sufficient; the real lever was reweighting the cross-entropy loss with sklearn's class_weight='balanced'.",
+        "Five bacterial species separated using only 286-dimensional k-mer count frequency vectors. The key challenge was class imbalance, with certain species underrepresented 3× relative to the majority. A compact DNN with BatchNorm and Dropout was sufficient; the real lever was reweighting the cross-entropy loss with sklearn's class_weight='balanced'.",
       approach: [
         "StandardScaler normalized all 286 k-mer counts to zero mean, unit variance",
         "Architecture: Dense(128) → BatchNorm → Dropout(0.3) → Dense(64) → Softmax(5)",
@@ -92,7 +92,7 @@ const competitions: KaggleCompetition[] = [
         "Nadam optimizer (Adam + Nesterov momentum) for smoother gradient updates",
       ],
       result:
-        "0.9621 macro-F1 across all 5 species, achieving first place. Without class reweighting, macro-F1 dropped to ~0.89 — the minority species were misclassified almost entirely. BatchNorm was the second most impactful change (+0.02 F1 over vanilla Dense layers).",
+        "0.9621 macro-F1 across all 5 species, achieving first place. Without class reweighting, macro-F1 dropped to ~0.89, with the minority species misclassified almost entirely. BatchNorm was the second most impactful change (+0.02 F1 over vanilla Dense layers).",
     },
   },
   {
@@ -114,7 +114,7 @@ const competitions: KaggleCompetition[] = [
     accentHue: 75,
     expandedContent: {
       overview:
-        "The dataset is the EPA SRRS (State Radon Survey), the same dataset used in Gelman & Hill's multilevel modeling textbook. The target — indoor radon in pCi/L — is heavily right-skewed (mean=4.72, max=282). The baseline drops all categorical features via select_dtypes and uses a 5-neuron DNN. The strategy here was to recover basement type, state geography, and county-level geology, then replace the DNN with a RandomForest + GradientBoosting ensemble trained on a log-transformed target.",
+        "The dataset is the EPA SRRS (State Radon Survey), the same dataset used in Gelman & Hill's multilevel modeling textbook. The target (indoor radon in pCi/L) is heavily right-skewed (mean=4.72, max=282). The baseline drops all categorical features via select_dtypes and uses a 5-neuron DNN. The strategy here was to recover basement type, state geography, and county-level geology, then replace the DNN with a RandomForest + GradientBoosting ensemble trained on a log-transformed target.",
       approach: [
         "Recovered 3 dropped categoricals: has_basement (Y/N), is_basement_floor (floor=0), and 7 one-hot state indicators",
         "County-level Bayesian shrinkage: smoothed mean radon per FIPS code (n=5 toward global mean) to capture local geology without overfitting small counties",
@@ -125,7 +125,7 @@ const competitions: KaggleCompetition[] = [
         "Ensemble: 70% RF + 30% GBR; entire pipeline runs in ~35s (within the 60s runtime limit)",
       ],
       result:
-        "24.19 MSE on the public leaderboard, rank 3 of 16. RF feature importance revealed log_pcterr and pcterr as dominant predictors (~48% each) — measurement error correlates with true radon levels since high-radon environments are harder to measure precisely. County aggregates and has_basement contributed meaningful marginal improvements. Without the log target transform, RF MSE on raw Y was ~10 vs. ~6.6 with it.",
+        "24.19 MSE on the public leaderboard, rank 3 of 16. RF feature importance revealed log_pcterr and pcterr as dominant predictors (~48% each); measurement error correlates with true radon levels since high-radon environments are harder to measure precisely. County aggregates and has_basement contributed meaningful marginal improvements. Without the log target transform, RF MSE on raw Y was ~10 vs. ~6.6 with it.",
     },
   },
   {
@@ -148,17 +148,17 @@ const competitions: KaggleCompetition[] = [
     accentHue: 320,
     expandedContent: {
       overview:
-        "5,000 labeled facial images (2,500 female, 2,500 male) at 178×218px. ConvNeXtBase — pretrained on ImageNet-22K with 14M images — was frozen and used as a feature extractor. Only the classification head was trained, making it the sole learnable component mapping 1024-channel feature maps to the binary output. The head was widened to 256 units (vs. the 64-unit baseline) to avoid an information bottleneck when decoding ConvNeXt's richer feature space.",
+        "5,000 labeled facial images (2,500 female, 2,500 male) at 178×218px. ConvNeXtBase, pretrained on ImageNet-22K with 14M images, was frozen and used as a feature extractor. Only the classification head was trained, making it the sole learnable component mapping 1024-channel feature maps to the binary output. The head was widened to 256 units (vs. the 64-unit baseline) to avoid an information bottleneck when decoding ConvNeXt's richer feature space.",
       approach: [
         "Loaded all 5,000 images via image_dataset_from_directory with crop_to_aspect_ratio=True to preserve facial proportions",
         "RandomFlip('horizontal') applied on-the-fly during training to make the model orientation-invariant without doubling storage",
         "Mixed float16 precision enabled to reduce memory usage and accelerate T4 GPU throughput",
-        "Removed the 80/20 validation split — all data used for training to maximize exposure in a competition setting",
+        "Removed the 80/20 validation split, all data used for training to maximize exposure in a competition setting",
         "Frozen ConvNeXtBase backbone (259 layers, 87.8M params); only Dense(256) → Dropout(0.3) → Dense(1) head trained",
         "Compiled with binary cross-entropy and Adam (lr=1e-3); trained for 2 epochs (Phase 1 head-only fine-tuning)",
       ],
       result:
-        "0.9752 accuracy on the held-out test set — rank 3 of 9 teams, well above the baseline (0.4072). The combination of horizontal flip augmentation, aspect-ratio cropping, and full-dataset training improved accuracy by 0.32% over the frozen-backbone baseline. ConvNeXt's larger kernels (7×7) and LayerNorm throughout made it significantly more accurate than EfficientNet variants, which plateaued at 90–94% despite completing within the runtime limit.",
+        "0.9752 accuracy on the held-out test set, rank 3 of 9 teams, well above the baseline (0.4072). The combination of horizontal flip augmentation, aspect-ratio cropping, and full-dataset training improved accuracy by 0.32% over the frozen-backbone baseline. ConvNeXt's larger kernels (7×7) and LayerNorm throughout made it significantly more accurate than EfficientNet variants, which plateaued at 90–94% despite completing within the runtime limit.",
     },
   },
   {
@@ -180,7 +180,7 @@ const competitions: KaggleCompetition[] = [
     accentHue: 190,
     expandedContent: {
       overview:
-        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error — critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
+        "Diamond prices span $326–$18,823 with a heavy right skew. Applying log1p to the target stabilizes variance and shifts the loss focus to percentage error rather than absolute error, critical when a $500 mistake on a $1K diamond matters as much as a $5,000 mistake on a $10K diamond. Degree-2 polynomial features capture the non-linear carat effect (price scales roughly as carat²·²).",
       approach: [
         "Applied log1p(price) target transform to reduce skewness from ~2.9 to ~0.2",
         "One-hot encoded cut (5), color (7), clarity (8) → 20 binary columns",
@@ -189,7 +189,7 @@ const competitions: KaggleCompetition[] = [
         "Post-processing: quantile-matching shifted the predicted distribution to align with training targets",
       ],
       result:
-        "570.19 RMSE on the private leaderboard — 4th of 16 teams, beating the baseline (1087.59). The log-transform alone reduced RMSE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed additional reduction by correcting systematic under-prediction on high-value diamonds.",
+        "570.19 RMSE on the private leaderboard, 4th of 16 teams, beating the baseline (1087.59). The log-transform alone reduced RMSE by ~18% vs. linear regression on raw price. Quantile-matching post-processing contributed additional reduction by correcting systematic under-prediction on high-value diamonds.",
     },
   },
   {
@@ -270,16 +270,16 @@ const competitions: KaggleCompetition[] = [
     accentHue: 280,
     expandedContent: {
       overview:
-        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes — stars, galaxies, and quasars — are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
+        "SDSS (Sloan Digital Sky Survey) spectroscopic data provides 5 photometric band magnitudes (u, g, r, i, z) plus redshift and derived features. LDA was the natural first choice: the three object classes (stars, galaxies, and quasars) are known to separate linearly in astronomical color space (u−g vs. g−r, etc.).",
       approach: [
         "Engineered standard astronomical color indices: u−g, g−r, r−i, i−z",
         "Linear Discriminant Analysis finds the 2D projection maximizing between-class vs. within-class variance",
         "Custom redshift-split: separate LDA classifiers for z < 0.5 and z ≥ 0.5",
-        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both — the split enforces this prior",
+        "Stars cluster at z ≈ 0; quasars at z > 0.5; galaxies span both; the split enforces this prior",
         "Final classifier routes each object to the appropriate sub-model based on its redshift",
       ],
       result:
-        "0.9647 accuracy on the private leaderboard — 7th of 16 teams, beating the baseline (0.9103). The redshift-split boosted accuracy on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
+        "0.9647 accuracy on the private leaderboard, 7th of 16 teams, beating the baseline (0.9103). The redshift-split boosted accuracy on the quasar class specifically, which the single global LDA model frequently confused with high-redshift galaxies.",
     },
   },
   {
@@ -302,17 +302,17 @@ const competitions: KaggleCompetition[] = [
     accentHue: 45,
     expandedContent: {
       overview:
-        "500K OHLCV (Open, High, Low, Close, Volume, VWAP, Count) observations for a single cryptocurrency. The raw Close series is non-stationary and noisy, so the model predicts delta (price change) rather than absolute price. Sequences of 128 time steps are fed to a two-layer LSTM that outputs 50-step-ahead delta forecasts. An embargo gap of 50 steps between train and validation prevents look-ahead leakage — a critical detail for financial time-series evaluation.",
+        "500K OHLCV (Open, High, Low, Close, Volume, VWAP, Count) observations for a single cryptocurrency. The raw Close series is non-stationary and noisy, so the model predicts delta (price change) rather than absolute price. Sequences of 128 time steps are fed to a two-layer LSTM that outputs 50-step-ahead delta forecasts. An embargo gap of 50 steps between train and validation prevents look-ahead leakage, a critical detail for financial time-series evaluation.",
       approach: [
         "Engineered 20 features from raw OHLCV: delta, log_return, OC_diff, HL_diff, rolling std/momentum/slope over 5, 10, and 20-step windows, and binary direction",
         "Embargo split: 80% train / 20% val with a 50-step gap between them to prevent temporal leakage",
-        "Sequences: Nx=128 input steps, Ny=50 output steps, step=5 stride — generating ~100K training sequences",
+        "Sequences: Nx=128 input steps, Ny=50 output steps, step=5 stride, generating ~100K training sequences",
         "Architecture: LSTM(100, return_sequences=True) → Dropout(0.2) → LSTM(100) → Dropout(0.2) → Dense(50)",
         "Huber loss (δ=1) instead of MSE to down-weight the gradient contribution of extreme crypto price spikes",
         "Adam optimizer, 20 epochs with early stopping monitored on validation Huber loss",
       ],
       result:
-        "0.4612 weighted Pearson correlation on the leaderboard — rank 7 of 9, beating the baseline (0.1314). The return-based feature engineering was the most impactful change: predicting delta rather than raw Close stabilized training and allowed the LSTM to focus on directional dynamics rather than drifting price levels. Huber loss provided additional stability by preventing extreme residuals from dominating gradient updates.",
+        "0.4612 weighted Pearson correlation on the leaderboard, rank 7 of 9, beating the baseline (0.1314). The return-based feature engineering was the most impactful change: predicting delta rather than raw Close stabilized training and allowed the LSTM to focus on directional dynamics rather than drifting price levels. Huber loss provided additional stability by preventing extreme residuals from dominating gradient updates.",
     },
   },
   {
@@ -333,7 +333,7 @@ const competitions: KaggleCompetition[] = [
     accentHue: 30,
     expandedContent: {
       overview:
-        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale — and they don't require tuning a sequence model for a fixed-width input.",
+        "50K utterances, each represented as a 256-point log-periodogram (power spectral density in dB). LightGBM was chosen over a DNN because gradient-boosted trees handle structured, fixed-length spectral features more efficiently at this scale, and they don't require tuning a sequence model for a fixed-width input.",
       approach: [
         "Computed log-periodogram: 10 × log₁₀(|FFT|²) for 256 frequency bins per utterance",
         "StandardScaler fit on training set; applied to train and test",

@@ -74,7 +74,7 @@ const entries: LAIEntry[] = [
     accentHue: 135,
     expandedContent: {
       overview:
-        "Ollama wraps llama.cpp into a Docker-friendly service that exposes a local REST API on port 11434. The API has two modes: the native Ollama format (`/api/generate`, `/api/chat`) and an OpenAI-compatible shim (`/v1/chat/completions`). The OpenAI shim is what makes this stack plug-and-play with any tool that already speaks OpenAI — Open WebUI, LangChain, LlamaIndex, AutoGen, CrewAI, and VS Code extensions all work by pointing their base URL at localhost:11434. The model family running on this stack is Gemma (Google DeepMind), available at three parameter scales: 4b for consumer hardware, 12b for a mid-range GPU, and 27b for a workstation-class card.",
+        "Ollama wraps llama.cpp into a Docker-friendly service that exposes a local REST API on port 11434. The API has two modes: the native Ollama format (`/api/generate`, `/api/chat`) and an OpenAI-compatible shim (`/v1/chat/completions`). The OpenAI shim is what makes this stack plug-and-play with any tool that already speaks OpenAI: Open WebUI, LangChain, LlamaIndex, AutoGen, CrewAI, and VS Code extensions all work by pointing their base URL at localhost:11434. The model family running on this stack is Gemma (Google DeepMind), available at three parameter scales: 4b for consumer hardware, 12b for a mid-range GPU, and 27b for a workstation-class card.",
       approach: [
         "Pulled model via `make pull-model` which runs `docker exec ollama ollama pull gemma4`, downloads ~3 GB of GGUF weights into the mounted volume at ./volumes/ollama",
         "OLLAMA_HOST=0.0.0.0 binds the API to all interfaces inside the container (not just loopback) so requests from the Open WebUI container on the bridge network reach it",
@@ -84,7 +84,7 @@ const entries: LAIEntry[] = [
         "Tested orchestrator integration: LangChain's ChatOllama and OpenAI-compatible constructors both worked without modification by pointing base_url at http://localhost:11434; documented token hygiene rules for agentic loop efficiency (strip boilerplate, use role tags, cap RAG chunks at 300–400 tokens, disable streaming for inter-agent calls)",
       ],
       result:
-        "A production-adjacent inference endpoint serving Gemma at 25–40 tokens/second on consumer GPU hardware, with zero API costs and no data leaving the machine. The OpenAI-compatible API made integration with the broader LLM tooling ecosystem seamless — any tool expecting OpenAI just works. The token hygiene guidelines documented in the README reduced per-call overhead in agentic loops by 20–40% by eliminating redundant prompt boilerplate and static system prompt re-transmission.",
+        "A production-adjacent inference endpoint serving Gemma at 25–40 tokens/second on consumer GPU hardware, with zero API costs and no data leaving the machine. The OpenAI-compatible API made integration with the broader LLM tooling ecosystem seamless, any tool expecting OpenAI just works. The token hygiene guidelines documented in the README reduced per-call overhead in agentic loops by 20–40% by eliminating redundant prompt boilerplate and static system prompt re-transmission.",
     },
   },
   {
@@ -105,10 +105,10 @@ const entries: LAIEntry[] = [
     accentHue: 270,
     expandedContent: {
       overview:
-        "Open WebUI is the React + FastAPI application that wraps the Ollama API in a full-featured chat interface. It's configured here in single-user mode (WEBUI_AUTH=False) with all telemetry disabled — SCARF_NO_ANALYTICS, DO_NOT_TRACK, and ANONYMIZED_TELEMETRY are all set to prevent any outbound analytics. Conversation history is stored in a SQLite database at ./volumes/open-webui/webui.db, which is bind-mounted so data persists across container restarts and rebuilds. On the DevOps side, the project has a full GitLab CI/CD pipeline with five stages, Docker-in-Docker for build and test stages, SonarQube code quality scanning, and Trivy vulnerability scanning against the Ollama base image.",
+        "Open WebUI is the React + FastAPI application that wraps the Ollama API in a full-featured chat interface. It's configured here in single-user mode (WEBUI_AUTH=False) with all telemetry disabled: SCARF_NO_ANALYTICS, DO_NOT_TRACK, and ANONYMIZED_TELEMETRY are all set to prevent any outbound analytics. Conversation history is stored in a SQLite database at ./volumes/open-webui/webui.db, which is bind-mounted so data persists across container restarts and rebuilds. On the DevOps side, the project has a full GitLab CI/CD pipeline with five stages, Docker-in-Docker for build and test stages, SonarQube code quality scanning, and Trivy vulnerability scanning against the Ollama base image.",
       approach: [
         "Deployed Open WebUI pointing OLLAMA_BASE_URL at http://ollama:11434, uses the container name on the bridge network rather than localhost, so the request routes correctly between containers",
-        "WEBUI_AUTH=False disables the mandatory account creation on first launch — the instance is single-user and private, so the auth layer adds friction without security benefit",
+        "WEBUI_AUTH=False disables the mandatory account creation on first launch, the instance is single-user and private, so the auth layer adds friction without security benefit",
         "Disabled three separate telemetry systems: SCARF_NO_ANALYTICS (package analytics), DO_NOT_TRACK (standard browser header propagation), and ANONYMIZED_TELEMETRY (Open WebUI's own usage reporting)",
         "Custom theme: theme/custom.css is mounted into the Open WebUI container and loaded at runtime, allows persistent CSS overrides (colors, fonts, logo) without rebuilding the image",
         "GitLab CI/CD pipeline stages: lint:compose (validates docker-compose.yml), lint:yaml (yamllint on CI and compose files), build:image-check (pulls and inspects Ollama image on main), test:api-healthcheck (spins up stack, hits /api/tags, tears down, gated on MR events), scan:sonarqube (SonarQube analysis on main), scan:trivy (Trivy HIGH/CRITICAL scan against Ollama image), deploy:local (manual trigger, force-recreates containers from pulled images)",
@@ -275,7 +275,7 @@ const LAIIntroPanel = () => (
         AI Stack
       </h2>
       <p className="lai-intro-body">
-        A fully self-hosted LLM stack — Ollama for inference, Google's Gemma model as the backend,
+        A fully self-hosted LLM stack: Ollama for inference, Google's Gemma model as the backend,
         and Open WebUI as the chat interface. Containerized with Docker Compose on an isolated
         bridge network, with a GitLab CI/CD pipeline covering lint, build, test, security scanning,
         and deployment. Frontier AI running entirely on local hardware: no API keys, no data leaving

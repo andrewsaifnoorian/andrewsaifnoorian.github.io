@@ -28,7 +28,7 @@ const certs: Cert[] = [
     credentialUrl: "https://verify.skilljar.com/c/he5xp2opte3x",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
     description:
-      "Completed Anthropic's official course on the Model Context Protocol — the open standard enabling AI models to securely connect with external tools, APIs, data sources, and services. Covers MCP architecture, server/client integration patterns, and building Claude-powered agentic workflows.",
+      "Completed Anthropic's official course on the Model Context Protocol, the open standard enabling AI models to securely connect with external tools, APIs, data sources, and services. Covers MCP architecture, server/client integration patterns, and building Claude-powered agentic workflows.",
     skills: ["Model Context Protocol (MCP)", "GitHub", "MCP Servers", "Anthropic Claude"],
   },
   {

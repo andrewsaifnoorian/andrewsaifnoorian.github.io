@@ -82,11 +82,11 @@ export const tabs: TabData[] = [
       { year: "2024", text: "Angular v8 → v19 Migration", linkedCardId: "ent-paint" },
       {
         year: "2025",
-        text: "Spring Boot Batch Overhaul — 5x Throughput",
+        text: "Spring Boot Batch Overhaul: 5x Throughput",
         linkedCardId: "ent-throughput",
       },
       { year: "2025", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-throughput" },
-      { year: "2026", text: "Joined JPMC — Full-Stack Engineering", linkedCardId: "ent-tech" },
+      { year: "2026", text: "Joined JPMC: Full-Stack Engineering", linkedCardId: "ent-tech" },
     ],
     bento: [
       {
@@ -120,7 +120,7 @@ export const tabs: TabData[] = [
     timeline: [
       {
         year: "2019",
-        text: "Rutgers Honors College — Presidential Scholar",
+        text: "Rutgers Honors College: Presidential Scholar",
         linkedCardId: "acad-dnn",
       },
       { year: "2024", text: "Started MS at Johns Hopkins", linkedCardId: "acad-dnn" },
