@@ -64,6 +64,30 @@ const projects: Project[] = [
     },
   },
   {
+    id: 4,
+    image: IMG3,
+    title: "DevOps & Secure Software Development",
+    category: "DevOps / Security",
+    description:
+      "End-to-end CI/CD pipeline implementation with security best practices including static analysis, dependency scanning, containerization, and automated deployments.",
+    techStack: ["Docker", "Jenkins", "AWS", "SonarQube", "Terraform"],
+    accentHue: 30,
+    expandedContent: {
+      overview:
+        "A DevSecOps reference implementation covering the full software delivery lifecycle — from code commit to containerized production deployment — with automated security gates at each stage. Completed as part of a graduate-level Secure Software Development course.",
+      approach: [
+        "Jenkins declarative pipeline with stages: Build → Test → SAST → Dependency Scan → Containerize → Deploy",
+        "SonarQube static analysis enforcing quality gates (0 critical vulnerabilities to pass)",
+        "OWASP Dependency-Check scanning all third-party libraries against the CVE database",
+        "Multi-stage Docker builds to minimize final image attack surface and size",
+        "Terraform IaC provisioning reproducible AWS EC2 + S3 infrastructure",
+        "Secrets management via environment variables and AWS Secrets Manager (no hardcoded credentials)",
+      ],
+      result:
+        "A complete DevSecOps pipeline with documented stages, security scan reports, and live AWS deployment. Demonstrated how security tooling integrates into CI/CD without blocking development velocity — all security checks automated as pipeline gates.",
+    },
+  },
+  {
     id: 2,
     image: IMG8,
     title: "Car Maintenance App",
@@ -88,6 +112,30 @@ const projects: Project[] = [
     },
   },
   {
+    id: 10,
+    image: IMG11,
+    title: "Monodepth2: Depth Disparity Estimation",
+    category: "Deep Learning / Research",
+    description:
+      "Self-supervised monocular depth estimation using the Monodepth2 baseline. Trained on KITTI with the reprojection-based photometric loss, producing dense per-pixel disparity maps from a single RGB image at inference time.",
+    techStack: ["Python", "PyTorch", "Monodepth2", "KITTI", "TensorBoard"],
+    accentHue: 200,
+    expandedContent: {
+      overview:
+        "Monodepth2 (Godard et al., ICCV 2019) is a self-supervised monocular depth estimation framework that learns depth and camera pose jointly from unlabeled video sequences, using reprojection-based photometric consistency as the training signal — no depth ground truth required. The model outputs a per-pixel disparity map from a single RGB image, which can be converted to metric depth given the camera's known baseline. This entry focuses on the baseline system and its disparity outputs before the uncertainty head extension was added.",
+      approach: [
+        "Trained the encoder-decoder depth network on KITTI Eigen split using the standard monocular self-supervised loss: minimum reprojection loss + edge-aware smoothness regularization",
+        "Used the ResNet-18 encoder pretrained on ImageNet for fast convergence; the decoder outputs 4-scale disparity maps (1/4 to full resolution)",
+        "Applied the auto-masking technique from Godard et al. to exclude static pixels (where the camera hasn't moved relative to the scene) from the photometric loss",
+        "Evaluated on the Eigen test split using the standard 7 depth metrics: Abs Rel, Sq Rel, RMSE, RMSE log, and δ < 1.25 / 1.25² / 1.25³ thresholds",
+        "Visualized disparity maps with the plasma colormap — warmer colors = closer objects, cooler = farther away",
+        "Used TensorBoard for monitoring per-epoch loss curves and qualitative disparity map outputs on held-out validation frames",
+      ],
+      result:
+        "A working self-supervised depth estimation pipeline producing dense disparity maps from single monocular images. The baseline system demonstrated Monodepth2's key innovation — training on raw video without depth labels — and achieved competitive benchmark numbers on the KITTI Eigen split. These disparity outputs serve as the depth signal that the uncertainty extension (a separate project) is evaluated against.",
+    },
+  },
+  {
     id: 3,
     image: IMG10,
     title: "Self-Supervised Depth Estimation with Predictive Uncertainty",
@@ -109,30 +157,6 @@ const projects: Project[] = [
       ],
       result:
         "A modified Monodepth2 training pipeline where the model simultaneously predicts depth and per-pixel aleatoric uncertainty. The NLL-weighted loss effectively down-weights specular highlights, reflections, and transparent regions during backpropagation — surfaces that would otherwise inject noisy gradients. Sigma maps produced by TensorBoard logging visually confirmed that high-uncertainty regions correspond to expected problem areas (windows, chrome, wet roads). My specific contributions were the uncertainty head architecture, the NLL loss integration, AMP training, and the TensorBoard instrumentation.",
-    },
-  },
-  {
-    id: 4,
-    image: IMG3,
-    title: "DevOps & Secure Software Development",
-    category: "DevOps / Security",
-    description:
-      "End-to-end CI/CD pipeline implementation with security best practices including static analysis, dependency scanning, containerization, and automated deployments.",
-    techStack: ["Docker", "Jenkins", "AWS", "SonarQube", "Terraform"],
-    accentHue: 30,
-    expandedContent: {
-      overview:
-        "A DevSecOps reference implementation covering the full software delivery lifecycle — from code commit to containerized production deployment — with automated security gates at each stage. Completed as part of a graduate-level Secure Software Development course.",
-      approach: [
-        "Jenkins declarative pipeline with stages: Build → Test → SAST → Dependency Scan → Containerize → Deploy",
-        "SonarQube static analysis enforcing quality gates (0 critical vulnerabilities to pass)",
-        "OWASP Dependency-Check scanning all third-party libraries against the CVE database",
-        "Multi-stage Docker builds to minimize final image attack surface and size",
-        "Terraform IaC provisioning reproducible AWS EC2 + S3 infrastructure",
-        "Secrets management via environment variables and AWS Secrets Manager (no hardcoded credentials)",
-      ],
-      result:
-        "A complete DevSecOps pipeline with documented stages, security scan reports, and live AWS deployment. Demonstrated how security tooling integrates into CI/CD without blocking development velocity — all security checks automated as pipeline gates.",
     },
   },
   {
@@ -253,30 +277,6 @@ const projects: Project[] = [
       ],
       result:
         "A functional dealership marketing tool that reduced manual outreach work significantly. The CSV-to-campaign pipeline cut campaign setup time from hours of manual emails to a few minutes per batch.",
-    },
-  },
-  {
-    id: 10,
-    image: IMG11,
-    title: "Monodepth2: Depth Disparity Estimation",
-    category: "Deep Learning / Research",
-    description:
-      "Self-supervised monocular depth estimation using the Monodepth2 baseline. Trained on KITTI with the reprojection-based photometric loss, producing dense per-pixel disparity maps from a single RGB image at inference time.",
-    techStack: ["Python", "PyTorch", "Monodepth2", "KITTI", "TensorBoard"],
-    accentHue: 200,
-    expandedContent: {
-      overview:
-        "Monodepth2 (Godard et al., ICCV 2019) is a self-supervised monocular depth estimation framework that learns depth and camera pose jointly from unlabeled video sequences, using reprojection-based photometric consistency as the training signal — no depth ground truth required. The model outputs a per-pixel disparity map from a single RGB image, which can be converted to metric depth given the camera's known baseline. This entry focuses on the baseline system and its disparity outputs before the uncertainty head extension was added.",
-      approach: [
-        "Trained the encoder-decoder depth network on KITTI Eigen split using the standard monocular self-supervised loss: minimum reprojection loss + edge-aware smoothness regularization",
-        "Used the ResNet-18 encoder pretrained on ImageNet for fast convergence; the decoder outputs 4-scale disparity maps (1/4 to full resolution)",
-        "Applied the auto-masking technique from Godard et al. to exclude static pixels (where the camera hasn't moved relative to the scene) from the photometric loss",
-        "Evaluated on the Eigen test split using the standard 7 depth metrics: Abs Rel, Sq Rel, RMSE, RMSE log, and δ < 1.25 / 1.25² / 1.25³ thresholds",
-        "Visualized disparity maps with the plasma colormap — warmer colors = closer objects, cooler = farther away",
-        "Used TensorBoard for monitoring per-epoch loss curves and qualitative disparity map outputs on held-out validation frames",
-      ],
-      result:
-        "A working self-supervised depth estimation pipeline producing dense disparity maps from single monocular images. The baseline system demonstrated Monodepth2's key innovation — training on raw video without depth labels — and achieved competitive benchmark numbers on the KITTI Eigen split. These disparity outputs serve as the depth signal that the uncertainty extension (a separate project) is evaluated against.",
     },
   },
   {

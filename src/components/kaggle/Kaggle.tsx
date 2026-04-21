@@ -569,7 +569,7 @@ const KaggleFallbackGrid = () => {
       <h2>Kaggle Competitions</h2>
       <div className="kgl-fallback-ctas">
         <a href={KAGGLE_PROFILE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
-          Kaggle Profile ↗
+          Kaggle Profile
         </a>
       </div>
       <div className="container kaggle_container">
@@ -615,7 +615,7 @@ const KaggleIntroPanel = () => (
       </p>
       <div className="kgl-intro-ctas">
         <a href={KAGGLE_PROFILE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
-          Kaggle Profile ↗
+          Kaggle Profile
         </a>
       </div>
       <motion.p

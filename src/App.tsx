@@ -61,9 +61,9 @@ const Home = () => (
   <>
     <ScrollProgress />
     <About />
+    <LocalAI />
     <Kaggle />
     <Projects />
-    <LocalAI />
     <Nav />
     <Experience />
     <Services />

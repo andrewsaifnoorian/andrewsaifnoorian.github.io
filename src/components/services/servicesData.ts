@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { FaBuilding, FaFlask, FaServer, FaJava } from "react-icons/fa";
+import { FaBuilding, FaFlask, FaServer, FaJava, FaCode, FaRocket, FaBrain } from "react-icons/fa";
 import {
   SiReact,
   SiAngular,
@@ -13,6 +13,10 @@ import {
   SiSonarqube,
   SiSelenium,
   SiTerraform,
+  SiVscodium,
+  SiIntellijidea,
+  SiGithubcopilot,
+  SiOpenai,
 } from "react-icons/si";
 
 /* ── Card Types ── */
@@ -40,7 +44,11 @@ export interface ShowcaseBentoCard extends BentoCardBase {
   description: string;
 }
 
-export type BentoCard = MetricBentoCard | TechBentoCard | ShowcaseBentoCard;
+export interface DevToolsBentoCard extends BentoCardBase {
+  type: "dev-tools";
+}
+
+export type BentoCard = MetricBentoCard | TechBentoCard | ShowcaseBentoCard | DevToolsBentoCard;
 
 export interface TimelineNode {
   year: string;
@@ -75,7 +83,7 @@ export const tabs: TabData[] = [
       { year: "2024", text: "Angular v8 → v19 Migration", linkedCardId: "ent-paint" },
       {
         year: "2025",
-        text: "Spring Boot Batch Overhaul — 4x Throughput",
+        text: "Spring Boot Batch Overhaul — 5x Throughput",
         linkedCardId: "ent-throughput",
       },
       { year: "2025", text: "OAuth 2.0 + PKCE SSO Integration", linkedCardId: "ent-throughput" },
@@ -86,10 +94,10 @@ export const tabs: TabData[] = [
         id: "ent-throughput",
         type: "metric",
         size: "sm",
-        value: "4x",
+        value: "5x",
         label: "Throughput Improvement",
       },
-      { id: "ent-paint", type: "metric", size: "sm", value: "35%", label: "Faster First Paint" },
+      { id: "ent-paint", type: "metric", size: "sm", value: "36%", label: "Faster First Paint" },
       {
         id: "ent-tech",
         type: "tech",
@@ -164,14 +172,14 @@ export const tabs: TabData[] = [
         id: "devops-issues",
         type: "metric",
         size: "sm",
-        value: "17+",
+        value: "18+",
         label: "Critical Issues Caught Pre-Prod",
       },
       {
         id: "devops-saved",
         type: "metric",
         size: "sm",
-        value: "2-3 days",
+        value: "3-4 days",
         label: "Regression Saved Per Cycle",
       },
       {
@@ -189,12 +197,45 @@ export const tabs: TabData[] = [
       },
     ],
   },
+  {
+    id: "devtools",
+    label: "Dev Environment",
+    shortLabel: "Tools",
+    icon: FaCode,
+    timeline: [
+      { year: "2023", text: "VS Code + IntelliJ as daily enterprise drivers", linkedCardId: "dt-split" },
+      { year: "2024", text: "GitHub Copilot integrated into production workflow", linkedCardId: "dt-split" },
+      { year: "2025", text: "AI-first IDEs adopted for research & personal projects", linkedCardId: "dt-split" },
+      { year: "2026", text: "Claude Code + Codex as primary home/school environment", linkedCardId: "dt-split" },
+    ],
+    bento: [
+      { id: "dt-split", type: "dev-tools", size: "lg" },
+    ],
+  },
+];
+
+/* ── Dev Tools data (consumed by BentoGrid DevToolsCard) ── */
+export interface DevTool {
+  icon: IconType;
+  name: string;
+}
+
+export const workTools: DevTool[] = [
+  { icon: SiVscodium, name: "VS Code" },
+  { icon: SiGithubcopilot, name: "Copilot" },
+  { icon: SiIntellijidea, name: "IntelliJ" },
+];
+
+export const personalTools: DevTool[] = [
+  { icon: FaRocket, name: "Antigravity" },
+  { icon: FaBrain, name: "Claude Code" },
+  { icon: SiOpenai, name: "Codex" },
 ];
 
 /* ── Stat Bar ── */
 export const stats: StatItem[] = [
-  { target: 4, suffix: "x", label: "Throughput" },
-  { target: 35, suffix: "%", label: "Faster First Paint" },
-  { target: 17, prefix: "", suffix: "+", label: "Bugs Caught Pre-Prod" },
-  { target: 3, suffix: "", label: "Certifications" },
+  { target: 5, suffix: "x", label: "Throughput" },
+  { target: 36, suffix: "%", label: "Faster First Paint" },
+  { target: 18, prefix: "", suffix: "+", label: "Bugs Caught Pre-Prod" },
+  { target: 4, suffix: "", label: "Certifications" },
 ];
