@@ -199,10 +199,21 @@
   color: var(--color-primary-variant);
 }
 
+.cert-card__credential-id {
+  font-size: 0.7rem;
+  font-family: "SF Mono", "Fira Code", "Fira Mono", monospace;
+  color: var(--color-light);
+  opacity: 0.7;
+  letter-spacing: 0.03em;
+}
+
 .cert-card__location-detail {
   font-size: 0.72rem;
   color: var(--color-light);
   font-style: italic;
+  opacity: 0.75;
+  width: 100%;
+  margin-top: 0.1rem;
 }
 
 .cert-card__actions {
@@ -245,6 +256,33 @@
 
 .cert-card__btn-icon {
   font-size: 0.65rem;
+}
+
+/* ── Issuer accent colors ── */
+.cert-card[data-issuer="Anthropic"] .cert-card__medal {
+  background: rgba(100, 200, 180, 0.12);
+  border-color: rgba(100, 200, 180, 0.28);
+}
+
+.cert-card[data-issuer="Anthropic"] .cert-card__medal-icon {
+  color: #64c8b4;
+}
+
+.cert-card[data-issuer="Anthropic"] .cert-card__accent {
+  background: linear-gradient(180deg, #64c8b4, #3b9e8a);
+}
+
+.cert-card[data-issuer="ServiceNow"] .cert-card__medal {
+  background: rgba(10, 180, 90, 0.1);
+  border-color: rgba(10, 180, 90, 0.25);
+}
+
+.cert-card[data-issuer="ServiceNow"] .cert-card__medal-icon {
+  color: #0ab45a;
+}
+
+.cert-card[data-issuer="ServiceNow"] .cert-card__accent {
+  background: linear-gradient(180deg, #0ab45a, #078040);
 }
 
 /* ══════════════════════════════════════

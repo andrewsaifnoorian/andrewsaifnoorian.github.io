@@ -9,50 +9,55 @@ interface Cert {
   date: string;
   location: string;
   locationDetail: string;
+  credentialId: string;
   credentialUrl: string;
   linkedinPostUrl: string;
   description: string;
   skills: string[];
 }
 
-// TODO: Fill in the actual cert names, dates, and LinkedIn post/credential URLs
-// from your LinkedIn profile → Licenses & Certifications section.
 const certs: Cert[] = [
   {
     id: 1,
-    name: "Certification Name 1",
-    issuer: "Issuing Organization",
-    date: "Month 20XX",
+    name: "Introduction to Model Context Protocol",
+    issuer: "Anthropic",
+    date: "March 17, 2026",
     location: "Buffalo, NY",
-    locationDetail: "Earned while working in Buffalo",
-    credentialUrl: "#",
+    locationDetail: "Earned while at JPMorgan Chase in Buffalo",
+    credentialId: "he5xp2opte3x",
+    credentialUrl: "https://verify.skilljar.com/c/he5xp2opte3x",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
-    description: "Add a short description of what this certification covers and why you pursued it.",
-    skills: ["Skill A", "Skill B", "Skill C"],
+    description:
+      "Completed Anthropic's official course on the Model Context Protocol — the open standard enabling AI models to securely connect with external tools, APIs, data sources, and services. Covers MCP architecture, server/client integration patterns, and building Claude-powered agentic workflows.",
+    skills: ["Model Context Protocol (MCP)", "GitHub", "MCP Servers", "Anthropic Claude"],
   },
   {
     id: 2,
-    name: "Certification Name 2",
-    issuer: "Issuing Organization",
-    date: "Month 20XX",
+    name: "AI Fluency: Framework & Foundations",
+    issuer: "Anthropic",
+    date: "December 2025",
     location: "Buffalo, NY",
-    locationDetail: "Earned while working in Buffalo",
-    credentialUrl: "#",
+    locationDetail: "Earned while at JPMorgan Chase in Buffalo",
+    credentialId: "azmxudqvpxv3",
+    credentialUrl: "https://verify.skilljar.com/c/azmxudqvpxv3",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
-    description: "Add a short description of what this certification covers and why you pursued it.",
-    skills: ["Skill A", "Skill B", "Skill C"],
+    description:
+      "Foundational Anthropic course covering AI capabilities, mental models for working with large language models, and responsible deployment frameworks. Addresses prompt engineering, model behavior, practical AI integration patterns, and building AI fluency for professional workflows.",
+    skills: ["Artificial Intelligence", "Large Language Models", "Prompt Engineering", "Responsible AI"],
   },
   {
     id: 3,
-    name: "Certification Name 3",
-    issuer: "Issuing Organization",
-    date: "Month 20XX",
+    name: "Certified Application Developer",
+    issuer: "ServiceNow",
+    date: "September 6, 2025",
     location: "New Jersey",
     locationDetail: "Earned while based in New Jersey",
+    credentialId: "27423584",
     credentialUrl: "#",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
-    description: "Add a short description of what this certification covers and why you pursued it.",
-    skills: ["Skill A", "Skill B", "Skill C"],
+    description:
+      "Validated expertise in designing and building custom applications on the ServiceNow platform. Covers application scoping, data modeling, UI/UX development with Service Portal and UI Builder, business rules, client scripts, and platform security best practices.",
+    skills: ["ServiceNow", "Application Development", "Service Portal", "Platform Security"],
   },
 ];
 
@@ -61,6 +66,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const CertCard = ({ cert, index }: { cert: Cert; index: number }) => (
   <motion.article
     className="cert-card"
+    data-issuer={cert.issuer}
     initial={{ opacity: 0, y: 28 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, ease: EASE, delay: index * 0.12 }}
@@ -94,28 +100,38 @@ const CertCard = ({ cert, index }: { cert: Cert; index: number }) => (
         <FaMapMarkerAlt className="cert-card__info-icon" />
         {cert.location}
       </span>
+      <span className="cert-card__credential-id">ID: {cert.credentialId}</span>
       <span className="cert-card__location-detail">{cert.locationDetail}</span>
     </div>
 
     <div className="cert-card__actions">
-      <a
-        href={cert.linkedinPostUrl}
-        className="cert-card__btn cert-card__btn--primary"
-        target="_blank"
-        rel="noreferrer"
-      >
-        View on LinkedIn <FaExternalLinkAlt className="cert-card__btn-icon" />
-      </a>
-      {cert.credentialUrl !== "#" && (
+      {cert.credentialUrl !== "#" ? (
         <a
           href={cert.credentialUrl}
-          className="cert-card__btn"
+          className="cert-card__btn cert-card__btn--primary"
           target="_blank"
           rel="noreferrer"
         >
-          Credential <FaExternalLinkAlt className="cert-card__btn-icon" />
+          Verify Credential <FaExternalLinkAlt className="cert-card__btn-icon" />
+        </a>
+      ) : (
+        <a
+          href={cert.linkedinPostUrl}
+          className="cert-card__btn cert-card__btn--primary"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View on LinkedIn <FaExternalLinkAlt className="cert-card__btn-icon" />
         </a>
       )}
+      <a
+        href={cert.linkedinPostUrl}
+        className="cert-card__btn"
+        target="_blank"
+        rel="noreferrer"
+      >
+        LinkedIn Profile <FaExternalLinkAlt className="cert-card__btn-icon" />
+      </a>
     </div>
   </motion.article>
 );
@@ -131,7 +147,7 @@ const Certifications = () => (
       <p className="certs-eyebrow">Licenses &amp; Certifications</p>
       <h1 className="certs-headline">Credentials</h1>
       <p className="certs-subtext">
-        Professional certifications earned across career milestones in Buffalo and New Jersey.
+        Two Anthropic certifications earned at JPMorgan Chase in Buffalo, and a ServiceNow Certified Application Developer credential from New Jersey.
       </p>
       <a href="/" className="certs-back">
         ← Back to portfolio
