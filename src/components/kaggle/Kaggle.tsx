@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import useModalLock from "../../hooks/useModalLock";
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 import "./kaggle.css";
 import TiltCard from "../tilt-card/TiltCard";
@@ -392,17 +393,7 @@ const KaggleDetailModal = ({
 }) => {
   const isRank1 = competition.rank.startsWith("Rank 1");
 
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", handler);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+  useModalLock(onClose);
 
   return (
     <motion.div

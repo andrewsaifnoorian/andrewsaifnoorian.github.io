@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useModalLock from "../../hooks/useModalLock";
 import type { BentoCard } from "./servicesData";
 import { workTools, personalTools } from "./servicesData";
 import TiltCard from "../tilt-card/TiltCard";
@@ -60,15 +61,7 @@ const ShowcaseCardContent = ({ title, description }: { title: string; descriptio
 
 /* ── DevTools Modal ── */
 const DevToolsModal = ({ onClose }: { onClose: () => void }) => {
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", handler);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+  useModalLock(onClose);
 
   return (
     <motion.div

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import useModalLock from "../../hooks/useModalLock";
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 import "./project.css";
 import IMG1 from "../../assets/primedtNJ.webp";
@@ -325,17 +326,7 @@ const imageVariants = {
 
 // ── Detail modal ────────────────────────────────────────────────────────────
 const ProjectDetailModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", handler);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+  useModalLock(onClose);
 
   return (
     <motion.div

@@ -19,14 +19,12 @@ const MagneticButton = ({ children }: { children: ReactNode }) => {
   const sx = useSpring(x, springConfig);
   const sy = useSpring(y, springConfig);
 
-  if (!reducedMotion && !lowPerf && !isMobile) {
-    x.set(isHovered ? relX * STRENGTH : 0);
-    y.set(isHovered ? relY * STRENGTH : 0);
-  }
+  const disabled = reducedMotion || lowPerf || isMobile;
 
-  if (reducedMotion || lowPerf || isMobile) {
-    return <>{children}</>;
-  }
+  if (disabled) return <>{children}</>;
+
+  x.set(isHovered ? relX * STRENGTH : 0);
+  y.set(isHovered ? relY * STRENGTH : 0);
 
   return (
     <motion.div ref={ref} style={{ x: sx, y: sy, display: "inline-block" }}>

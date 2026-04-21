@@ -67,7 +67,6 @@ export interface TabData {
 
 export interface StatItem {
   target: number;
-  prefix?: string;
   suffix: string;
   label: string;
 }
@@ -236,6 +235,6 @@ export const personalTools: DevTool[] = [
 export const stats: StatItem[] = [
   { target: 5, suffix: "x", label: "Throughput" },
   { target: 36, suffix: "%", label: "Faster First Paint" },
-  { target: 18, prefix: "", suffix: "+", label: "Bugs Caught Pre-Prod" },
+  { target: 18, suffix: "+", label: "Bugs Caught Pre-Prod" },
   { target: 4, suffix: "", label: "Certifications" },
 ];

@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useModalLock from "../../hooks/useModalLock";
 
 interface ProjectData {
   id: number;
@@ -33,20 +33,7 @@ const modal = {
 };
 
 const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
-  useEffect(() => {
-    if (!project) return;
-
-    document.body.style.overflow = "hidden";
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handleKey);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKey);
-    };
-  }, [project, onClose]);
+  useModalLock(onClose, !!project);
 
   return (
     <AnimatePresence>
