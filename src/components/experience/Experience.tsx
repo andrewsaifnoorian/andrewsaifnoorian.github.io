@@ -36,19 +36,19 @@ type Skill = { Icon: ComponentType<{ className?: string }>; name: string; level:
 
 const aiCloudSkills: Skill[] = [
   { Icon: SiAnthropic, name: "Claude", level: "Expert" },
-  { Icon: SiOpenai, name: "ChatGPT", level: "Experienced" },
-  { Icon: SiGooglegemini, name: "Gemini", level: "Proficient" },
-  { Icon: SiAmazonwebservices, name: "AWS", level: "Experienced" },
-  { Icon: FaMicrosoft, name: "Azure", level: "Proficient" },
-  { Icon: SiGooglecloud, name: "GCP", level: "Proficient" },
-  { Icon: SiOracle, name: "Oracle", level: "Proficient" },
-  { Icon: SiDatabricks, name: "Databricks", level: "Proficient" },
+  { Icon: SiOpenai, name: "ChatGPT", level: "Expert" },
+  { Icon: SiGooglegemini, name: "Gemini", level: "Experienced" },
+  { Icon: SiAmazonwebservices, name: "AWS", level: "Expert" },
+  { Icon: FaMicrosoft, name: "Azure", level: "Experienced" },
+  { Icon: SiGooglecloud, name: "GCP", level: "Experienced" },
+  { Icon: SiOracle, name: "Oracle", level: "Experienced" },
+  { Icon: SiDatabricks, name: "Databricks", level: "Experienced" },
 ];
 
 const frontendSkills: Skill[] = [
   { Icon: SiReact, name: "React", level: "Expert" },
-  { Icon: SiAngular, name: "Angular", level: "Experienced" },
-  { Icon: FaCog, name: "ServiceNow", level: "Experienced" },
+  { Icon: SiAngular, name: "Angular", level: "Expert" },
+  { Icon: FaCog, name: "ServiceNow", level: "Expert" },
   { Icon: SiHtml5, name: "HTML", level: "Expert" },
   { Icon: SiCss3, name: "CSS", level: "Expert" },
   { Icon: SiJavascript, name: "JavaScript", level: "Expert" },
@@ -56,11 +56,11 @@ const frontendSkills: Skill[] = [
 
 const backendSkills: Skill[] = [
   { Icon: FaJava, name: "Java", level: "Expert" },
-  { Icon: SiApachemaven, name: "Maven", level: "Experienced" },
-  { Icon: SiPython, name: "Python", level: "Proficient" },
-  { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" },
+  { Icon: SiApachemaven, name: "Maven", level: "Expert" },
+  { Icon: SiPython, name: "Python", level: "Experienced" },
+  { Icon: SiNodedotjs, name: "Node.js", level: "Experienced" },
   { Icon: FaDatabase, name: "SQL", level: "Expert" },
-  { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" },
+  { Icon: SiPostgresql, name: "PostgreSQL", level: "Expert" },
 ];
 
 const LevelDots = ({ level }: { level: Level }) => {
