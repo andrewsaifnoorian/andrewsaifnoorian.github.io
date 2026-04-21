@@ -66,7 +66,9 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .experience_details:hover .experience_details-icon-wrap {

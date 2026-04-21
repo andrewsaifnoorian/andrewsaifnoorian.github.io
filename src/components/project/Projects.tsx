@@ -469,8 +469,9 @@ const ProjectIntroPanel = () => (
         Projects
       </h2>
       <p className="prj-intro-body">
-        Eleven projects spanning full-stack web applications, deep learning research, DevOps pipelines, and
-        client work. Each one built end-to-end, from architecture decisions to deployment.
+        Eleven projects spanning full-stack web applications, deep learning research, DevOps
+        pipelines, and client work. Each one built end-to-end, from architecture decisions to
+        deployment.
       </p>
       <div className="prj-intro-ctas">
         <a

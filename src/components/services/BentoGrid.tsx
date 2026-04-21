@@ -80,10 +80,16 @@ const DevToolsModal = ({ onClose }: { onClose: () => void }) => {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="dt-modal__close" onClick={onClose} aria-label="Close">×</button>
+        <button className="dt-modal__close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
 
         <p className="dt-modal__eyebrow">Development Environment</p>
-        <h2 className="dt-modal__headline">Two worlds.<br />One engineer.</h2>
+        <h2 className="dt-modal__headline">
+          Two worlds.
+          <br />
+          One engineer.
+        </h2>
         <p className="dt-modal__subtext">
           My toolkit shifts depending on context: enterprise-grade and battle-tested at work,
           cutting-edge AI-native at home.
@@ -94,8 +100,8 @@ const DevToolsModal = ({ onClose }: { onClose: () => void }) => {
             <span className="dt-modal__env-label">Professional</span>
             <h3 className="dt-modal__env-headline">Built for scale.</h3>
             <p className="dt-modal__env-copy">
-              At work I live in <strong>VS Code</strong> and <strong>IntelliJ IDEA</strong>,
-              the industry standard IDEs for full-stack development across React/TypeScript and
+              At work I live in <strong>VS Code</strong> and <strong>IntelliJ IDEA</strong>, the
+              industry standard IDEs for full-stack development across React/TypeScript and
               Java/Spring Boot. <strong>GitHub Copilot</strong> runs as an inline assistant,
               auto-completing boilerplate, generating test stubs, and surfacing docs without
               breaking flow.
@@ -118,9 +124,9 @@ const DevToolsModal = ({ onClose }: { onClose: () => void }) => {
             <p className="dt-modal__env-copy">
               At home and in grad school, I run top-of-the-line AI-native environments:
               <strong> Antigravity</strong>, <strong>Claude Code</strong>, and{" "}
-              <strong>Codex</strong>. These tools reason over entire codebases, execute
-              multi-step plans, and pull the latest data from the web in real time, no
-              context switching, no copy-paste, just intent-driven development.
+              <strong>Codex</strong>. These tools reason over entire codebases, execute multi-step
+              plans, and pull the latest data from the web in real time, no context switching, no
+              copy-paste, just intent-driven development.
             </p>
             <div className="dt-modal__tools">
               {personalTools.map(({ icon: Icon, name }) => (
@@ -251,7 +257,12 @@ const BentoGrid = ({ cards, highlightedId }: BentoGridProps) => {
           </motion.div>
         );
 
-        if (card.type === "dev-tools") return <div key={card.id} className="bento-card--full">{content}</div>;
+        if (card.type === "dev-tools")
+          return (
+            <div key={card.id} className="bento-card--full">
+              {content}
+            </div>
+          );
         return card.type === "showcase" ? (
           <TiltCard key={card.id}>{content}</TiltCard>
         ) : (

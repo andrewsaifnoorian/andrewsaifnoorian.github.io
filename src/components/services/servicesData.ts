@@ -202,14 +202,28 @@ export const tabs: TabData[] = [
     shortLabel: "Tools",
     icon: FaCode,
     timeline: [
-      { year: "2023", text: "VS Code + IntelliJ as daily enterprise drivers", linkedCardId: "dt-split" },
-      { year: "2024", text: "GitHub Copilot integrated into production workflow", linkedCardId: "dt-split" },
-      { year: "2025", text: "AI-first IDEs adopted for research & personal projects", linkedCardId: "dt-split" },
-      { year: "2026", text: "Claude Code + Codex as primary home/school environment", linkedCardId: "dt-split" },
+      {
+        year: "2023",
+        text: "VS Code + IntelliJ as daily enterprise drivers",
+        linkedCardId: "dt-split",
+      },
+      {
+        year: "2024",
+        text: "GitHub Copilot integrated into production workflow",
+        linkedCardId: "dt-split",
+      },
+      {
+        year: "2025",
+        text: "AI-first IDEs adopted for research & personal projects",
+        linkedCardId: "dt-split",
+      },
+      {
+        year: "2026",
+        text: "Claude Code + Codex as primary home/school environment",
+        linkedCardId: "dt-split",
+      },
     ],
-    bento: [
-      { id: "dt-split", type: "dev-tools", size: "lg" },
-    ],
+    bento: [{ id: "dt-split", type: "dev-tools", size: "lg" }],
   },
 ];
 

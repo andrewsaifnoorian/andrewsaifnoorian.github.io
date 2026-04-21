@@ -58,7 +58,9 @@
   padding: 0.45rem 1rem;
   border: 1px solid rgba(79, 172, 254, 0.25);
   border-radius: 999px;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
   margin-top: 0.5rem;
 }
 
@@ -88,7 +90,9 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .cert-card:hover {
@@ -233,7 +237,10 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--color-light);
   text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .cert-card__btn:hover {

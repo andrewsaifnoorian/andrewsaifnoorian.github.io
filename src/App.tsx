@@ -87,43 +87,43 @@ const AnimatedRoutes = () => {
 
   return (
     <>
-    <ScrollToTop />
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <motion.div {...pageTransition}>
-              <Home />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/resume"
-          element={
-            <motion.div {...pageTransition}>
-              <Resume />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/certifications"
-          element={
-            <motion.div {...pageTransition}>
-              <Certifications />
-            </motion.div>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <motion.div {...pageTransition}>
-              <NotFound />
-            </motion.div>
-          }
-        />
-      </Routes>
-    </AnimatePresence>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <motion.div {...pageTransition}>
+                <Home />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/resume"
+            element={
+              <motion.div {...pageTransition}>
+                <Resume />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/certifications"
+            element={
+              <motion.div {...pageTransition}>
+                <Certifications />
+              </motion.div>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <motion.div {...pageTransition}>
+                <NotFound />
+              </motion.div>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 };

@@ -192,13 +192,7 @@ const LAIDetailModal = ({ entry, onClose }: { entry: LAIEntry; onClose: () => vo
 };
 
 // ── Fallback card (mobile / low-perf) ────────────────────────────────────────
-const LAICard = ({
-  entry,
-  onExpand,
-}: {
-  entry: LAIEntry;
-  onExpand: (e: LAIEntry) => void;
-}) => (
+const LAICard = ({ entry, onExpand }: { entry: LAIEntry; onExpand: (e: LAIEntry) => void }) => (
   <article className="lai-card" onClick={() => onExpand(entry)}>
     <div className="lai-card-header">
       <p className="lai-card-subtitle">{entry.subtitle}</p>
@@ -440,10 +434,7 @@ const LAIShowcase = () => {
     const rect = outerRef.current.getBoundingClientRect();
     const totalHeight = outerRef.current.offsetHeight - window.innerHeight;
     const targetScroll =
-      window.scrollY +
-      rect.top +
-      (i / TOTAL_PANELS) * totalHeight +
-      totalHeight / TOTAL_PANELS / 2;
+      window.scrollY + rect.top + (i / TOTAL_PANELS) * totalHeight + totalHeight / TOTAL_PANELS / 2;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
     setTimeout(() => {
       suppressRef.current = false;

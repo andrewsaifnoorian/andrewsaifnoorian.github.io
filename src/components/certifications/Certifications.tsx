@@ -43,7 +43,12 @@ const certs: Cert[] = [
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
     description:
       "Foundational Anthropic course covering AI capabilities, mental models for working with large language models, and responsible deployment frameworks. Addresses prompt engineering, model behavior, practical AI integration patterns, and building AI fluency for professional workflows.",
-    skills: ["Artificial Intelligence", "Large Language Models", "Prompt Engineering", "Responsible AI"],
+    skills: [
+      "Artificial Intelligence",
+      "Large Language Models",
+      "Prompt Engineering",
+      "Responsible AI",
+    ],
   },
   {
     id: 3,
@@ -124,12 +129,7 @@ const CertCard = ({ cert, index }: { cert: Cert; index: number }) => (
           View on LinkedIn <FaExternalLinkAlt className="cert-card__btn-icon" />
         </a>
       )}
-      <a
-        href={cert.linkedinPostUrl}
-        className="cert-card__btn"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={cert.linkedinPostUrl} className="cert-card__btn" target="_blank" rel="noreferrer">
         LinkedIn Profile <FaExternalLinkAlt className="cert-card__btn-icon" />
       </a>
     </div>
@@ -147,7 +147,8 @@ const Certifications = () => (
       <p className="certs-eyebrow">Licenses &amp; Certifications</p>
       <h1 className="certs-headline">Credentials</h1>
       <p className="certs-subtext">
-        One Anthropic certification and a ServiceNow Certified Application Developer credential earned at M&T Bank in Buffalo, plus one Anthropic cert from JPMorgan Chase in Jersey City.
+        One Anthropic certification and a ServiceNow Certified Application Developer credential
+        earned at M&T Bank in Buffalo, plus one Anthropic cert from JPMorgan Chase in Jersey City.
       </p>
       <a href="/" className="certs-back">
         ← Back to portfolio
