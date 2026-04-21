@@ -1,17 +1,21 @@
 import { useState, useCallback } from "react";
 import "./nav.css";
-import { FaHome, FaBook, FaProjectDiagram } from "react-icons/fa";
+import { FaHome, FaBook, FaProjectDiagram, FaRobot, FaWrench } from "react-icons/fa";
 import { MdContactMail } from "react-icons/md";
+import { SiKaggle } from "react-icons/si";
 import MagneticButton from "../magnetic-button/MagneticButton";
 import useWindowScroll from "../../hooks/useWindowScroll";
 
-const sectionIds = ["about", "project", "experience", "contact"];
+const sectionIds = ["about", "local-ai", "kaggle", "project", "experience", "services", "contact"];
 
 const Nav = () => {
   const [activeSection, setActiveSection] = useState("about");
+  const [visible, setVisible] = useState(false);
 
   useWindowScroll(
     useCallback(() => {
+      setVisible(window.scrollY > 300);
+
       const scrollY = window.scrollY + window.innerHeight / 3;
 
       if (window.scrollY < 100) {
@@ -30,10 +34,20 @@ const Nav = () => {
   );
 
   return (
-    <nav>
+    <nav className={visible ? "nav--visible" : ""}>
       <MagneticButton>
         <a href="#about" className={activeSection === "about" ? "active" : ""}>
           <FaHome />
+        </a>
+      </MagneticButton>
+      <MagneticButton>
+        <a href="#local-ai" className={activeSection === "local-ai" ? "active" : ""}>
+          <FaRobot />
+        </a>
+      </MagneticButton>
+      <MagneticButton>
+        <a href="#kaggle" className={activeSection === "kaggle" ? "active" : ""}>
+          <SiKaggle />
         </a>
       </MagneticButton>
       <MagneticButton>
@@ -44,6 +58,11 @@ const Nav = () => {
       <MagneticButton>
         <a href="#experience" className={activeSection === "experience" ? "active" : ""}>
           <FaBook />
+        </a>
+      </MagneticButton>
+      <MagneticButton>
+        <a href="#services" className={activeSection === "services" ? "active" : ""}>
+          <FaWrench />
         </a>
       </MagneticButton>
       <MagneticButton>

@@ -24,17 +24,18 @@ import {
 } from "react-icons/si";
 import { FaMicrosoft, FaJava, FaDatabase, FaCog } from "react-icons/fa";
 
-type Level = "Experienced" | "Proficient";
+type Level = "Expert" | "Experienced" | "Proficient";
 
 const LEVEL_DOTS: Record<Level, number> = {
   Proficient: 3,
   Experienced: 4,
+  Expert: 5,
 };
 
 type Skill = { Icon: ComponentType<{ className?: string }>; name: string; level: Level };
 
 const aiCloudSkills: Skill[] = [
-  { Icon: SiAnthropic, name: "Claude", level: "Experienced" },
+  { Icon: SiAnthropic, name: "Claude", level: "Expert" },
   { Icon: SiOpenai, name: "ChatGPT", level: "Experienced" },
   { Icon: SiGooglegemini, name: "Gemini", level: "Proficient" },
   { Icon: SiAmazonwebservices, name: "AWS", level: "Experienced" },
@@ -45,20 +46,20 @@ const aiCloudSkills: Skill[] = [
 ];
 
 const frontendSkills: Skill[] = [
-  { Icon: SiReact, name: "React", level: "Experienced" },
+  { Icon: SiReact, name: "React", level: "Expert" },
   { Icon: SiAngular, name: "Angular", level: "Experienced" },
   { Icon: FaCog, name: "ServiceNow", level: "Experienced" },
-  { Icon: SiHtml5, name: "HTML", level: "Experienced" },
-  { Icon: SiCss3, name: "CSS", level: "Experienced" },
-  { Icon: SiJavascript, name: "JavaScript", level: "Experienced" },
+  { Icon: SiHtml5, name: "HTML", level: "Expert" },
+  { Icon: SiCss3, name: "CSS", level: "Expert" },
+  { Icon: SiJavascript, name: "JavaScript", level: "Expert" },
 ];
 
 const backendSkills: Skill[] = [
-  { Icon: FaJava, name: "Java", level: "Experienced" },
+  { Icon: FaJava, name: "Java", level: "Expert" },
   { Icon: SiApachemaven, name: "Maven", level: "Experienced" },
   { Icon: SiPython, name: "Python", level: "Proficient" },
   { Icon: SiNodedotjs, name: "Node.js", level: "Proficient" },
-  { Icon: FaDatabase, name: "SQL", level: "Experienced" },
+  { Icon: FaDatabase, name: "SQL", level: "Expert" },
   { Icon: SiPostgresql, name: "PostgreSQL", level: "Experienced" },
 ];
 
