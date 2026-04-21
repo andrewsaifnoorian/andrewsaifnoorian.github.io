@@ -147,7 +147,7 @@ const Certifications = () => (
       <p className="certs-eyebrow">Licenses &amp; Certifications</p>
       <h1 className="certs-headline">Credentials</h1>
       <p className="certs-subtext">
-        Two Anthropic certifications and a ServiceNow Certified Application Developer credential earned at M&T Bank in Buffalo, plus one Anthropic cert from JPMorgan Chase in Jersey City.
+        One Anthropic certification and a ServiceNow Certified Application Developer credential earned at M&T Bank in Buffalo, plus one Anthropic cert from JPMorgan Chase in Jersey City.
       </p>
       <a href="/" className="certs-back">
         ← Back to portfolio
