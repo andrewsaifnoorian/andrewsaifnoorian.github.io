@@ -653,4 +653,28 @@ body[data-perf-tier="minimal"] .lai-modal-backdrop {
   .lai-modal-approach li {
     border-bottom-color: rgba(0, 0, 0, 0.04);
   }
+
+  .lai-eyebrow {
+    color: var(--color-primary-variant);
+  }
+
+  .lai-details li::before {
+    color: var(--color-primary-variant);
+    opacity: 0.75;
+  }
+
+  .lai-layer-label {
+    color: rgba(29, 29, 31, 0.45);
+  }
+
+  .lai-number-value {
+    background: linear-gradient(
+      135deg,
+      hsla(var(--lai-accent-hue, 220), 75%, 38%, 1),
+      hsla(var(--lai-accent-hue, 220), 60%, 28%, 0.8)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }

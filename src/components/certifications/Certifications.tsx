@@ -22,8 +22,8 @@ const certs: Cert[] = [
     name: "Introduction to Model Context Protocol",
     issuer: "Anthropic",
     date: "March 17, 2026",
-    location: "Buffalo, NY",
-    locationDetail: "Earned while at JPMorgan Chase in Buffalo",
+    location: "Jersey City, NJ",
+    locationDetail: "Earned while at JPMorgan Chase in Jersey City",
     credentialId: "he5xp2opte3x",
     credentialUrl: "https://verify.skilljar.com/c/he5xp2opte3x",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
@@ -37,7 +37,7 @@ const certs: Cert[] = [
     issuer: "Anthropic",
     date: "December 2025",
     location: "Buffalo, NY",
-    locationDetail: "Earned while at JPMorgan Chase in Buffalo",
+    locationDetail: "Earned while at M&T Bank in Buffalo",
     credentialId: "azmxudqvpxv3",
     credentialUrl: "https://verify.skilljar.com/c/azmxudqvpxv3",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
@@ -50,8 +50,8 @@ const certs: Cert[] = [
     name: "Certified Application Developer",
     issuer: "ServiceNow",
     date: "September 6, 2025",
-    location: "New Jersey",
-    locationDetail: "Earned while based in New Jersey",
+    location: "Buffalo, NY",
+    locationDetail: "Earned while at M&T Bank in Buffalo",
     credentialId: "27423584",
     credentialUrl: "#",
     linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
@@ -147,7 +147,7 @@ const Certifications = () => (
       <p className="certs-eyebrow">Licenses &amp; Certifications</p>
       <h1 className="certs-headline">Credentials</h1>
       <p className="certs-subtext">
-        Two Anthropic certifications earned at JPMorgan Chase in Buffalo, and a ServiceNow Certified Application Developer credential from New Jersey.
+        Two Anthropic certifications and a ServiceNow Certified Application Developer credential earned at M&T Bank in Buffalo, plus one Anthropic cert from JPMorgan Chase in Jersey City.
       </p>
       <a href="/" className="certs-back">
         ← Back to portfolio
