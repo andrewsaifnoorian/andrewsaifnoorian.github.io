@@ -558,3 +558,99 @@ body[data-perf-tier="minimal"] .lai-modal-backdrop {
     gap: 1rem;
   }
 }
+
+/* ── Light Mode ─────────────────────────────────────── */
+@media (prefers-color-scheme: light) {
+  .lai-intro-heading {
+    background: linear-gradient(
+      160deg,
+      #1d1d1f,
+      hsla(var(--lai-accent-hue, 220), 70%, 35%, 0.9),
+      hsla(calc(var(--lai-accent-hue, 220) + 40), 60%, 30%, 0.8)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .lai-intro-body {
+    color: var(--color-light);
+  }
+
+  .lai-spec-strip span {
+    color: rgba(29, 29, 31, 0.55);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .lai-spec-strip span:hover {
+    color: rgba(29, 29, 31, 0.85);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .lai-scroll-hint {
+    color: rgba(29, 29, 31, 0.35);
+  }
+
+  .lai-number-label {
+    color: rgba(29, 29, 31, 0.3);
+  }
+
+  .lai-tags span {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(29, 29, 31, 0.55);
+  }
+
+  .lai-details {
+    border-top-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .lai-details li {
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .lai-dot {
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .lai-dot--active {
+    background: rgba(0, 0, 0, 0.65);
+  }
+
+  .lai-dot:hover:not(.lai-dot--active) {
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .lai-panel::before {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.07) 20%,
+      rgba(0, 0, 0, 0.07) 80%,
+      transparent 100%
+    );
+  }
+
+  .lai-card {
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .lai-card:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 32px rgba(37, 99, 235, 0.07);
+  }
+
+  .lai-modal {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .lai-modal-approach {
+    border-top-color: rgba(0, 0, 0, 0.07);
+  }
+
+  .lai-modal-approach li {
+    border-bottom-color: rgba(0, 0, 0, 0.04);
+  }
+}

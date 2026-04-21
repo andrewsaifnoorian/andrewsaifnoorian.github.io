@@ -90,7 +90,9 @@ const IconSkillCard = ({ Icon, name, level, index }: Skill & { index: number }) 
 
   return (
     <Tag className="experience_details" {...motionProps}>
-      <Icon className="experience_details-svg-icon" />
+      <div className="experience_details-icon-wrap">
+        <Icon className="experience_details-svg-icon" />
+      </div>
       <div>
         <h4>{name}</h4>
         <LevelDots level={level} />

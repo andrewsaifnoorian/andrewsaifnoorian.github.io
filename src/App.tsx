@@ -12,6 +12,7 @@ import Testimonials from "./components/testimonials/Testimonials";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/footer/Footer";
 import Resume from "./components/resume/Resume";
+import Certifications from "./components/certifications/Certifications";
 
 import CursorGlow from "./components/cursor-glow/CursorGlow";
 import BackToTop from "./components/back-to-top/BackToTop";
@@ -92,6 +93,14 @@ const AnimatedRoutes = () => {
           element={
             <motion.div {...pageTransition}>
               <Resume />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/certifications"
+          element={
+            <motion.div {...pageTransition}>
+              <Certifications />
             </motion.div>
           }
         />

@@ -106,12 +106,32 @@
   border-radius: 1rem;
   padding: 2rem;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .about_card:hover {
   background: transparent;
   border-color: var(--color-primary-variant);
   cursor: default;
+}
+
+.about_card--link {
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about_card--link:hover {
+  background: transparent;
+  border-color: var(--color-primary-variant);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(79, 172, 254, 0.1);
+  cursor: pointer;
 }
 
 .about_icon {

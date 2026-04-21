@@ -56,9 +56,27 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+.experience_details-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(79, 172, 254, 0.08);
+  border: 1px solid rgba(79, 172, 254, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.experience_details:hover .experience_details-icon-wrap {
+  background: rgba(79, 172, 254, 0.14);
+  border-color: rgba(79, 172, 254, 0.3);
+}
+
 .experience_details-svg-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
   color: var(--color-primary);
 }
@@ -102,6 +120,16 @@
 
   .experience_details:hover {
     background: rgba(0, 0, 0, 0.04);
+  }
+
+  .experience_details-icon-wrap {
+    background: rgba(37, 99, 235, 0.07);
+    border-color: rgba(37, 99, 235, 0.18);
+  }
+
+  .experience_details:hover .experience_details-icon-wrap {
+    background: rgba(37, 99, 235, 0.12);
+    border-color: rgba(37, 99, 235, 0.3);
   }
 }
 

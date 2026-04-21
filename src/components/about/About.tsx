@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import "./about.css";
 import Me from "../../assets/me.webp";
 import { FaAward, FaCertificate, FaFolder } from "react-icons/fa";
@@ -119,21 +120,35 @@ const About = () => {
           </div>
           <div className="about_content">
             <div className="about_cards">
-              <article className="about_card">
+              <a
+                className="about_card about_card--link"
+                href="https://www.linkedin.com/in/andrewsaifnoorian/#experience"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View experience on LinkedIn"
+              >
                 <FaAward className="about_icon" />
                 <h5>Experience</h5>
                 <CountingStat target={2} suffix="+" label="Years Working" />
-              </article>
-              <article className="about_card">
+              </a>
+              <Link
+                className="about_card about_card--link"
+                to="/certifications"
+                aria-label="View certifications"
+              >
                 <FaCertificate className="about_icon" />
                 <h5>Certificates</h5>
                 <CountingStat target={3} suffix="" label="" />
-              </article>
-              <article className="about_card">
+              </Link>
+              <a
+                className="about_card about_card--link"
+                href="#project"
+                aria-label="See my projects"
+              >
                 <FaFolder className="about_icon" />
                 <h5>Projects</h5>
                 <CountingStat target={10} suffix="+" label="projects completed" />
-              </article>
+              </a>
             </div>
             <WordReveal text="Full-stack software engineer focused on building secure, scalable applications using React + TypeScript, Java/Spring Boot, and AWS (Aurora/Postgres). Strong interest in neural networks and machine learning, currently preparing for the AWS Solutions Architect - Associate certification and completing Anthropic's Claude training courses on applied AI and model capability." />
             <div className="about_ctas">

@@ -11,10 +11,10 @@ import ScrambleText from "../scramble-text/ScrambleText";
 
 const peers = [
   {
-    avatar: AVTR1,
-    name: "Pawel Morysewicz",
-    role: "Colleague",
-    review: "Andrew is the best teammate I have ever worked with in and out of work.",
+    avatar: AVTR3,
+    name: "Tyler Noble",
+    role: "Peer",
+    review: "Andrew is next up in cyber. He is a great team player and has a strong work ethic.",
   },
   {
     avatar: AVTR2,
@@ -24,10 +24,10 @@ const peers = [
       "Working alongside Andrew has been great. His learning is exponential. He is always eager to learn and improve his skills.",
   },
   {
-    avatar: AVTR3,
-    name: "Tyler Noble",
-    role: "Peer",
-    review: "Andrew is next up in cyber. He is a great team player and has a strong work ethic.",
+    avatar: AVTR1,
+    name: "Pawel Morysewicz",
+    role: "Colleague",
+    review: "Andrew is the best teammate I have ever worked with in and out of work.",
   },
   {
     avatar: AVTR4,

@@ -187,9 +187,9 @@ section#kaggle {
 }
 
 .kgl-rank--gold {
-  color: #fff;
-  background: linear-gradient(135deg, rgba(17, 0, 252, 0.3), rgba(79, 172, 254, 0.3));
-  border-color: rgba(79, 172, 254, 0.4);
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.35);
 }
 
 .kgl-counter {
@@ -372,9 +372,9 @@ section#kaggle {
 }
 
 .kaggle_item-rank--gold {
-  color: #fff;
-  background: linear-gradient(135deg, rgba(17, 0, 252, 0.3), rgba(79, 172, 254, 0.3));
-  border-color: rgba(79, 172, 254, 0.4);
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.35);
 }
 
 .kaggle_item-title {
