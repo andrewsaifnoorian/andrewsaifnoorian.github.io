@@ -18,6 +18,26 @@ interface Cert {
 
 const certs: Cert[] = [
   {
+    id: 4,
+    name: "Model Context Protocol: Advanced Topics",
+    issuer: "Anthropic",
+    date: "April 23, 2026",
+    location: "Jersey City, NJ",
+    locationDetail: "Earned while at JPMorgan Chase in Jersey City",
+    credentialId: "pending",
+    credentialUrl: "#",
+    linkedinPostUrl: "https://www.linkedin.com/in/andrewsaifnoorian/",
+    description:
+      "Completed Anthropic's advanced-level course on the Model Context Protocol, building on foundational MCP knowledge to cover complex server architecture, multi-tool orchestration, authentication and security patterns, production deployment strategies, and building sophisticated Claude-powered agentic workflows with real-world external integrations.",
+    skills: [
+      "Model Context Protocol (MCP)",
+      "Agentic Workflows",
+      "MCP Server Architecture",
+      "Tool Orchestration",
+      "Anthropic Claude",
+    ],
+  },
+  {
     id: 1,
     name: "Introduction to Model Context Protocol",
     issuer: "Anthropic",
@@ -147,8 +167,9 @@ const Certifications = () => (
       <p className="certs-eyebrow">Licenses &amp; Certifications</p>
       <h1 className="certs-headline">Credentials</h1>
       <p className="certs-subtext">
-        One Anthropic certification and a ServiceNow Certified Application Developer credential
-        earned at M&T Bank in Buffalo, plus one Anthropic cert from JPMorgan Chase in Jersey City.
+        Two Anthropic MCP certifications earned at JPMorgan Chase in Jersey City, one Anthropic AI
+        Fluency credential and a ServiceNow Certified Application Developer credential earned at
+        M&T Bank in Buffalo.
       </p>
       <a href="/" className="certs-back">
         ← Back to portfolio
