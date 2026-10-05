@@ -1,171 +1,67 @@
-import { lazy, Suspense, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Nav from "./components/nav/Nav";
-import About from "./components/about/About";
-import Experience from "./components/experience/Experience";
-import Services from "./components/services/Services";
-import Doctorate from "./components/doctorate/Doctorate";
-import Projects from "./components/project/Projects";
-import Writing from "./components/writing/Writing";
-import Kaggle from "./components/kaggle/Kaggle";
-import LocalAI from "./components/local-ai/LocalAI";
-import Testimonials from "./components/testimonials/Testimonials";
-import Contact from "./components/contact/Contact";
-import Footer from "./components/footer/Footer";
-import CursorGlow from "./components/cursor-glow/CursorGlow";
-import BackToTop from "./components/back-to-top/BackToTop";
-import CommandPalette from "./components/command-palette/CommandPalette";
-import EasterEgg from "./components/easter-egg/EasterEgg";
-import NoiseOverlay from "./components/noise-overlay/NoiseOverlay";
-import useDynamicFavicon from "./hooks/useDynamicFavicon";
-import usePerformanceTier from "./hooks/usePerformanceTier";
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import CommandPalette from "./components/ui/CommandPalette";
+import Konami from "./components/ui/Konami";
+import { Toaster } from "./components/ui/toast";
+import Home from "./pages/Home";
 
-const Resume = lazy(() => import("./components/resume/Resume"));
-const Certifications = lazy(() => import("./components/certifications/Certifications"));
-const NotFound = lazy(() => import("./components/not-found/NotFound"));
+const CaseStudy = lazy(() => import("./pages/CaseStudy"));
+const Certifications = lazy(() => import("./pages/Certifications"));
+const Resume = lazy(() => import("./pages/Resume"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
+/** Scrolls to the hash target after navigation, or to the top on a new page. */
+const ScrollManager = () => {
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      return;
+    }
+    const id = decodeURIComponent(hash.slice(1));
+    let tries = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const attempt = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: tries === 0 ? "smooth" : "instant", block: "start" });
+      } else if (tries++ < 20) {
+        timer = setTimeout(attempt, 50);
+      }
+    };
+    attempt();
+    return () => clearTimeout(timer);
+  }, [pathname, hash]);
 
   return null;
 };
 
-const ScrollProgress = () => {
-  const barRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let raf = 0;
-    const handleScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const el = barRef.current;
-        if (!el) return;
-        const scrollTop = document.documentElement.scrollTop;
-        const scrollHeight =
-          document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        el.style.width = `${pct}%`;
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  return <div ref={barRef} className="scroll-progress" />;
-};
-
-const pageTransition = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -15 },
-  transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-};
-
-const Home = () => (
-  <>
-    <ScrollProgress />
-    <About />
-    <Doctorate />
-    <LocalAI />
-    <Kaggle />
-    <Projects />
-    <Writing />
-    <Nav />
-    <Experience />
-    <Services />
-    <Testimonials />
-    <Contact />
-    <Footer />
-  </>
-);
-
-const PageLoader = () => <div className="page-loader" aria-label="Loading page" />;
-
-const AnimatedRoutes = () => {
-  const location = useLocation();
-
-  return (
-    <>
-      <ScrollToTop />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <motion.div {...pageTransition}>
-                <Home />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/resume"
-            element={
-              <motion.div {...pageTransition}>
-                <Suspense fallback={<PageLoader />}>
-                  <Resume />
-                </Suspense>
-              </motion.div>
-            }
-          />
-          <Route
-            path="/certifications"
-            element={
-              <motion.div {...pageTransition}>
-                <Suspense fallback={<PageLoader />}>
-                  <Certifications />
-                </Suspense>
-              </motion.div>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <motion.div {...pageTransition}>
-                <Suspense fallback={<PageLoader />}>
-                  <NotFound />
-                </Suspense>
-              </motion.div>
-            }
-          />
+const App = () => (
+  <BrowserRouter>
+    <a href="#main" className="skip-link">
+      Skip to content
+    </a>
+    <ScrollManager />
+    <Header />
+    <main id="main" tabIndex={-1}>
+      <Suspense fallback={<div className="route-loading" aria-busy="true" />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/work/:slug" element={<CaseStudy />} />
+          <Route path="/certifications" element={<Certifications />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </AnimatePresence>
-    </>
-  );
-};
-
-const AppChrome = () => (
-  <>
-    <CursorGlow />
-    <BackToTop />
+      </Suspense>
+    </main>
+    <Footer />
     <CommandPalette />
-    <EasterEgg />
-    <NoiseOverlay />
-    <AnimatedRoutes />
-  </>
+    <Toaster />
+    <Konami />
+  </BrowserRouter>
 );
-
-const App = () => {
-  useDynamicFavicon();
-  const tier = usePerformanceTier();
-
-  useEffect(() => {
-    document.body.dataset.perfTier = tier;
-  }, [tier]);
-
-  return (
-    <BrowserRouter>
-      <AppChrome />
-    </BrowserRouter>
-  );
-};
 
 export default App;

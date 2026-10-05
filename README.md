@@ -1,88 +1,63 @@
-<div align="center">
-
 # andrewsaifnoorian.github.io
 
-**My personal portfolio — built to feel like an Apple product page.**
+Personal site of Andrew Saifnoorian: software engineer at JPMorganChase, M.S. in
+Artificial Intelligence (Johns Hopkins), and Doctor of Engineering researcher.
 
-[View Live](https://andrewsaifnoorian.github.io) &nbsp;&middot;&nbsp; [LinkedIn](https://www.linkedin.com/in/andrewsaifnoorian/)
+**Live:** https://andrewsaifnoorian.github.io
 
-</div>
+## Stack
 
----
+React 19, TypeScript, Vite 8, React Router 8. Plain CSS with design tokens (no
+CSS framework), self-hosted Geist and Geist Mono, `react-icons`. No animation
+library: motion is CSS plus one small canvas.
 
-## Highlights
+## Features
 
-| Feature | Details |
-|---------|---------|
-| **Scroll-Pinned Hero** | Sticky hero fades and scales out as you scroll, content slides over it |
-| **Horizontal Project Scroll** | Projects scroll horizontally on desktop, vertical grid on mobile |
-| **Counting Stats** | Numbers animate from 0 when scrolled into view |
-| **Word-by-Word Reveal** | Bio text reveals progressively as you scroll through it |
-| **Typewriter Hero** | Name types out letter by letter on load |
-| **Dark / Light Mode** | Toggle with smooth transitions across the entire site |
-| **Cursor Glow** | Subtle radial glow follows the mouse on desktop |
-| **Scroll Progress Bar** | Thin gradient bar at the top tracks your scroll position |
-| **Scroll-Tracking Nav** | Bottom nav highlights the active section automatically |
-| **Page Transitions** | Animated route transitions between home and resume |
+- **Case-study pages** for every project at `/work/<slug>`, each with its own
+  pre-rendered HTML, title, description and canonical URL.
+- **Command menu** (Ctrl/Cmd + K) to jump to any section, project or paper.
+- **Light and dark themes** that follow the system and remember a manual choice,
+  with no flash on load.
+- **Hero graph** drawn on canvas: three node types stand in for the graph,
+  vector and analytics sources of the G-RAG research, and a retrieval path lights
+  up every few seconds. Pauses off-screen and respects reduced motion.
+- **Accessible by default:** skip link, visible focus rings, native `<dialog>`
+  for modals, semantic landmarks, reduced-motion support.
 
----
-
-## Tech Stack
-
-```
-React 19          TypeScript          Vite 7
-Framer Motion 12  React Router 7      GitHub Pages
-```
-
-**Zero external animation libraries** — all scroll effects use Framer Motion's `useScroll` and `useTransform` hooks for GPU-accelerated, scroll-driven animations.
-
----
-
-## Quickstart
+## Development
 
 ```bash
-# install
 npm install
-
-# dev server
-npm run dev
-
-# type-check
-npx tsc --noEmit
-
-# build + deploy to GitHub Pages
-npm run deploy
+npm run dev        # local dev server
+npm run check      # typecheck + lint + tests + production build
+npm run format     # prettier
 ```
 
----
+Content lives in `src/data/*.ts`; components never hard-code copy. Adding a
+project means adding an entry to `src/data/projects.ts` (with a unique `slug`)
+and a `.webp` thumbnail in `src/assets/`. The build creates its page and adds it
+to the sitemap automatically.
 
-## Project Structure
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy.yml`: audit, format check,
+typecheck, lint, tests and build, then deploys `dist/` to GitHub Pages with OIDC.
+There is no manual deploy step.
+
+## Layout
 
 ```
 src/
-├── components/
-│   ├── about/          # Hero + bio + stats (scroll-pinned, counting, word reveal)
-│   ├── project/        # Horizontal scroll gallery with hover overlays
-│   ├── experience/     # Skills & tech stack
-│   ├── contact/        # Contact form via EmailJS
-│   ├── nav/            # Scroll-tracking bottom nav bar
-│   ├── testimonials/   # Swiper carousel
-│   ├── services/       # What I offer
-│   ├── resume/         # Resume page
-│   ├── animated-section/  # Reusable fade-in-on-scroll wrapper
-│   ├── cursor-glow/    # Mouse-following radial glow
-│   ├── theme-toggle/   # Dark/light mode switch
-│   ├── back-to-top/    # Floating scroll-to-top button
-│   └── footer/         # Links & socials
-├── assets/             # Images & textures
-├── App.tsx             # Routes & layout
-└── index.css           # Global styles & CSS variables
+  data/            content (projects, Kaggle, lab, research, writing, ...)
+  components/
+    layout/        header, footer
+    sections/      one component per home-page section
+    ui/            dialog, command menu, theme toggle, hero graph, ...
+  pages/           Home, CaseStudy, Certifications, Resume, NotFound
+  hooks/           theme, reveal-on-scroll, active section, document meta
+  styles/          global tokens and base styles
+scripts/
+  static-site.ts   build plugin: CSP, per-route HTML, 404 page, sitemap
 ```
 
----
-
-<div align="center">
-
-Built by **Andrew Saifnoorian**
-
-</div>
+See [SECURITY.md](SECURITY.md) for the hardening details.

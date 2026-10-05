@@ -1,0 +1,130 @@
+.cs {
+  padding-top: calc(var(--header-h) + 40px);
+}
+
+.cs__crumbs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.cs__header {
+  max-width: 820px;
+  margin-top: clamp(40px, 7vw, 80px);
+}
+
+.cs__category {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: hsl(var(--hue) 55% 68%);
+}
+
+:root[data-theme="light"] .cs__category {
+  color: hsl(var(--hue) 60% 32%);
+}
+
+.cs__title {
+  margin-top: 14px;
+  font-size: clamp(34px, 5.5vw, 60px);
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.cs__summary {
+  margin-top: 22px;
+  font-size: clamp(17px, 1.8vw, 19px);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.cs__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.cs__meta-label {
+  margin-bottom: 10px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.cs__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cs__figure {
+  margin-top: clamp(40px, 6vw, 64px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-sunken);
+}
+
+.cs__figure img {
+  width: 100%;
+  max-height: 640px;
+  object-fit: contain;
+}
+
+.cs__content {
+  max-width: 760px;
+  margin: clamp(48px, 7vw, 80px) auto 0;
+}
+
+.cs__pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: clamp(64px, 9vw, 112px);
+}
+
+.cs__pager-link {
+  display: grid;
+  gap: 8px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  transition:
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.cs__pager-link:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-hover);
+}
+
+.cs__pager-link .mono {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.cs__pager-link--next {
+  text-align: right;
+}
+
+.cs__pager-link--next .mono {
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .cs__pager {
+    grid-template-columns: 1fr;
+  }
+}

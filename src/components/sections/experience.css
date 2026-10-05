@@ -1,0 +1,156 @@
+.xp {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 72px);
+  align-items: start;
+}
+
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 20px minmax(0, 1fr);
+  gap: 0 12px;
+  padding-bottom: 22px;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: calc(52px + 12px + 9.5px);
+  top: 14px;
+  bottom: -6px;
+  width: 1px;
+  background: var(--border);
+}
+
+.timeline li:last-child::before {
+  display: none;
+}
+
+.timeline li.has-year:not(:first-child) {
+  padding-top: 14px;
+}
+
+.timeline__year {
+  padding-top: 1px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.timeline__dot {
+  justify-self: center;
+  margin-top: 7px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-subtle);
+  background: var(--bg);
+  position: relative;
+  z-index: 1;
+}
+
+.has-year .timeline__dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.timeline__title {
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.timeline__detail {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.timeline__track {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.timeline__track--industry {
+  color: var(--graph-a);
+}
+
+.timeline__track--research {
+  color: var(--graph-b);
+}
+
+.timeline__track--engineering {
+  color: var(--graph-c);
+}
+
+.xp__side {
+  display: grid;
+  gap: 40px;
+}
+
+.xp__heading {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: 16px;
+}
+
+.xp__heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.xp__all {
+  font-size: 13px;
+}
+
+.skills {
+  display: grid;
+  gap: 18px;
+}
+
+.skills__group dt {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.skills__tools {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.certs {
+  border-top: 1px solid var(--border);
+}
+
+.certs li {
+  display: grid;
+  gap: 2px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.certs__name {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.certs__meta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .xp {
+    grid-template-columns: 1fr;
+  }
+}
